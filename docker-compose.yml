@@ -18,7 +18,7 @@ services:
   db:
     image: mysql:latest
     ports:
-      - "3306:3306"
+      - "3307:3307"
     environment:
       - MYSQL_ROOT_PASSWORD=my-secret-pw
       - MYSQL_DATABASE=mydatabase
