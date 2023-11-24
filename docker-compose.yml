@@ -7,5 +7,23 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:8080"
+    depends_on:
+      - db
     environment:
-      - SPRING_PROFILES_ACTIVE=dev
+      - DATABASE_HOST=db
+      - DATABASE_USER=root
+      - DATABASE_PASSWORD=my-secret-pw
+      - DATABASE_NAME=mydatabase
+
+  db:
+    image: mysql:latest
+    ports:
+      - "3306:3306"
+    environment:
+      - MYSQL_ROOT_PASSWORD=my-secret-pw
+      - MYSQL_DATABASE=mydatabase
+    volumes:
+      - mysql_data:/var/lib/mysql
+
+volumes:
+  mysql_data:

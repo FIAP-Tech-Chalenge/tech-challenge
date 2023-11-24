@@ -1,6 +1,5 @@
-
 # Primeira etapa: Construir a aplicação
-FROM maven:3.9.5-eclipse-temurin-21 AS build
+FROM maven:3.8.3-openjdk-21-slim AS build
 
 WORKDIR /workspace
 
@@ -13,7 +12,7 @@ COPY src src
 RUN mvn clean package
 
 # Segunda etapa: Rodar a aplicação
-FROM eclipse-temurin:21-jdk
+FROM eclipse-temurin:21-jdk-slim
 
 LABEL maintainer="ricardo@ricardo.net"
 LABEL version="1.0"
