@@ -2,6 +2,7 @@ package com.fiap.tech.application.controllers;
 
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
+import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.input.IdentificaClienteInput;
 import com.fiap.tech.domain.useCase.IdentificarClienteUseCase;
 import com.fiap.tech.infra.adpter.repository.cliente.IdentificarClienteRepository;
@@ -26,7 +27,18 @@ public class ClienteController {
         IdentificarClienteUseCase useCase = new IdentificarClienteUseCase(new IdentificarClienteRepository(clienteRepository));
         useCase.execute(identificaClienteInput);
 
-        return ResponseEntity.ok(useCase.getIdentificaClienteOutput().getCliente());
+        OutputInterface outputInterface = useCase.getIdentificaClienteOutput();
+
+        if (outputInterface.getOutputStatus().getCode() == 201) {
+            return ResponseEntity.ok((Cliente) useCase.getIdentificaClienteOutput().getBody());
+        }
+
+        if (outputInterface.getOutputStatus().getCode() == 422) {
+            //aqui tem que pegar o body da validação para devolver o 422. Olhar no try/catch do use case
+            return ResponseEntity.unprocessableEntity(useCase.getIdentificaClienteOutput().getBody());
+        }
+
+        return ResponseEntity.internalServerError();
     }
 
 

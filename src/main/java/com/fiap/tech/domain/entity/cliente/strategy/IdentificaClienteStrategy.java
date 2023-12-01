@@ -1,6 +1,8 @@
 package com.fiap.tech.domain.entity.cliente.strategy;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
+import com.fiap.tech.domain.exception.cliente.EmailNaoPodeSerNuloException;
+import com.fiap.tech.domain.exception.cliente.NomeNaoPodeSerNuloException;
 
 import java.util.UUID;
 
@@ -9,11 +11,13 @@ public class IdentificaClienteStrategy {
     public Cliente validaEntidade(Cliente cliente) throws Exception{
         if (cliente.getCpf() != null) {
             if (cliente.getNome() == null) {
-                throw new Exception("Nome não pode ser nulo");
+                //adicionar mensagem personalizada: Nome não pode ser nulo
+                throw new NomeNaoPodeSerNuloException();
             }
 
             if (cliente.getEmail() == null) {
-                throw new Exception("Email não pode ser nulo");
+                //adicionar mensagem personalizada: Email não pode ser nulo
+                throw new EmailNaoPodeSerNuloException();
             }
 
             return new Cliente(cliente.getNome(), cliente.getCpf(), cliente.getEmail(), null);

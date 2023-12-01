@@ -10,7 +10,15 @@ import lombok.Setter;
 @Setter
 public class IdentificaClienteOutput {
     private Cliente cliente;
+    private OutputStatus outputStatus;
 
-    public IdentificaClienteOutput(Cliente clienteEntity) {
+    public IdentificaClienteOutput(Cliente clienteEntity, OutputStatus outputStatus) {
+        this.cliente = clienteEntity;
+        this.outputStatus = outputStatus;
+    }
+
+    @Override
+    public Object getBody() {
+        return this.cliente;
     }
 }
