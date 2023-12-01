@@ -14,5 +14,6 @@ class SalvarTest {
         assertEquals("John Doe", cliente.getNome());
         assertEquals("123456789", cliente.getCpf());
         assertEquals("john.doe@example.com", cliente.getEmail());
+        assertEquals(null, cliente.getUuid());
     }
 }

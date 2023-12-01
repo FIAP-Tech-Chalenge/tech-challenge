@@ -18,7 +18,8 @@ public class IdentificarClienteUseCase {
         Cliente cliente = new Cliente(
                 identificaClienteInput.getNome(),
                 identificaClienteInput.getCpf(),
-                identificaClienteInput.getEmail()
+                identificaClienteInput.getEmail(),
+                null
         );
         cliente = cliente.identificarCliente();
         Cliente clienteEntity = this.identificaCliente.identificarCliente(cliente);

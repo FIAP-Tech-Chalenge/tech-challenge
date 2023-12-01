@@ -16,11 +16,11 @@ public class IdentificaClienteStrategy {
                 throw new Exception("Email não pode ser nulo");
             }
 
-            return new Cliente(cliente.getNome(), cliente.getCpf(), cliente.getEmail());
+            return new Cliente(cliente.getNome(), cliente.getCpf(), cliente.getEmail(), null);
         }
 
         String uuid = UUID.randomUUID().toString();
-        Cliente clienteEntity = new Cliente(cliente.getNome(), cliente.getCpf(), cliente.getEmail());
+        Cliente clienteEntity = new Cliente(cliente.getNome(), cliente.getCpf(), cliente.getEmail(), uuid);
         clienteEntity.setUuid(uuid);
 
         return clienteEntity;
