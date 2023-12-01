@@ -2,18 +2,18 @@ package com.fiap.tech.domain.useCase;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
 import com.fiap.tech.domain.input.IdentificaClienteInput;
-import com.fiap.tech.domain.port.IdentificarCliente;
+import com.fiap.tech.domain.port.IdentificarClienteInterface;
 
 public class IdentificarClienteUseCase {
 
-    private final IdentificarCliente identificaCliente;
+    private final IdentificarClienteInterface identificaCliente;
 
-    public IdentificarClienteUseCase(IdentificarCliente identificaCliente) {
+    public IdentificarClienteUseCase(IdentificarClienteInterface identificaCliente) {
         this.identificaCliente = identificaCliente;
     }
 
     public void execute(IdentificaClienteInput identificaClienteInput){
-        Cliente clienteEntity = this.identificaCliente.salvar(
+        Cliente clienteEntity = this.identificaCliente.identificarCliente(
             new Cliente(
                 identificaClienteInput.getNome(),
                 identificaClienteInput.getCpf(),
