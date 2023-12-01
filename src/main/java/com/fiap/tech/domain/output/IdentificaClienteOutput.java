@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 public class IdentificaClienteOutput {
     private Cliente cliente;
-    IdentificaClienteOutput (Cliente cliente) {
-        this.cliente = cliente;
+
+    public IdentificaClienteOutput(Cliente clienteEntity) {
     }
 }
