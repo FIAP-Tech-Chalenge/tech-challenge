@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.input;
+package com.fiap.tech.domain.input.cliente;
 
 import lombok.Data;
 import lombok.Getter;

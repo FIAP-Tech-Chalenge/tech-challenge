@@ -3,8 +3,8 @@ package com.fiap.tech.application.controllers;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
 import com.fiap.tech.domain.genic.output.OutputInterface;
-import com.fiap.tech.domain.input.IdentificaClienteInput;
-import com.fiap.tech.domain.useCase.IdentificarClienteUseCase;
+import com.fiap.tech.domain.input.cliente.IdentificaClienteInput;
+import com.fiap.tech.domain.useCase.cliente.IdentificarClienteUseCase;
 import com.fiap.tech.infra.adpter.repository.cliente.IdentificarClienteRepository;
 import com.fiap.tech.infra.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;

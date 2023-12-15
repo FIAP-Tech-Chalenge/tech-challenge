@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.useCase;
+package com.fiap.tech.domain.useCase.cliente;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
 import com.fiap.tech.domain.exception.cliente.EmailNaoPodeSerNuloException;
@@ -6,9 +6,9 @@ import com.fiap.tech.domain.exception.cliente.NomeNaoPodeSerNuloException;
 import com.fiap.tech.domain.genic.output.OutputError;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.genic.output.OutputStatus;
-import com.fiap.tech.domain.input.IdentificaClienteInput;
-import com.fiap.tech.domain.output.IdentificaClienteOutput;
-import com.fiap.tech.domain.port.IdentificarClienteInterface;
+import com.fiap.tech.domain.input.cliente.IdentificaClienteInput;
+import com.fiap.tech.domain.output.Cliente.IdentificaClienteOutput;
+import com.fiap.tech.domain.port.cliente.IdentificarClienteInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

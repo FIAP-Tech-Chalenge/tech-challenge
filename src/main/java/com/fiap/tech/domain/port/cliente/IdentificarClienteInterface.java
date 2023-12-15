@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.port;
+package com.fiap.tech.domain.port.cliente;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
 

@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.output;
+package com.fiap.tech.domain.output.Cliente;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
 import com.fiap.tech.domain.genic.output.OutputInterface;
