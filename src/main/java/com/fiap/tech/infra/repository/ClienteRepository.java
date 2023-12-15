@@ -1,9 +1,11 @@
 package com.fiap.tech.infra.repository;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
+import com.fiap.tech.infra.model.ClienteModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-
-public interface ClienteRepository extends JpaRepository<Cliente, Long> {
+@Repository
+public interface ClienteRepository extends JpaRepository<ClienteModel, Long> {
 
 }

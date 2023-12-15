@@ -3,9 +3,10 @@ package com.fiap.tech.domain.entity.cliente;
 import com.fiap.tech.domain.entity.cliente.strategy.IdentificaClienteStrategy;
 import lombok.*;
 
-@Data
 @Getter
 @Setter
+@NoArgsConstructor
+
 
 public class Cliente {
 
