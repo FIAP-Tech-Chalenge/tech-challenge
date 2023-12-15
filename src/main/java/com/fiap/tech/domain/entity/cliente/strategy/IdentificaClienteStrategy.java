@@ -9,15 +9,15 @@ import java.util.UUID;
 public class IdentificaClienteStrategy {
 
     public Cliente validaEntidade(Cliente cliente) throws Exception{
-        if (cliente.getCpf() != null) {
-            if (cliente.getNome() == null) {
+        if (!cliente.getCpf().isEmpty()) {
+            if (cliente.getNome().isEmpty()) {
                 //adicionar mensagem personalizada: Nome não pode ser nulo
-                throw new NomeNaoPodeSerNuloException();
+                throw new NomeNaoPodeSerNuloException("Nome é obrigatório");
             }
 
-            if (cliente.getEmail() == null) {
+            if (cliente.getEmail().isEmpty()) {
                 //adicionar mensagem personalizada: Email não pode ser nulo
-                throw new EmailNaoPodeSerNuloException();
+                throw new EmailNaoPodeSerNuloException("Email é obrigatório");
             }
 
             return new Cliente(cliente.getNome(), cliente.getCpf(), cliente.getEmail(), null);

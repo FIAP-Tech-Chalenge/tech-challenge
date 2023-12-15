@@ -1,6 +1,7 @@
 package com.fiap.tech.domain.useCase;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
+import com.fiap.tech.domain.exception.cliente.EmailNaoPodeSerNuloException;
 import com.fiap.tech.domain.exception.cliente.NomeNaoPodeSerNuloException;
 import com.fiap.tech.domain.genic.output.OutputError;
 import com.fiap.tech.domain.genic.output.OutputInterface;
@@ -30,12 +31,12 @@ public class IdentificarClienteUseCase {
             Cliente clienteEntity = this.identificaCliente.identificarCliente(cliente);
             this.identificaClienteOutput = new IdentificaClienteOutput(
                 clienteEntity,
-                new OutputStatus(201, "Created")
+                new OutputStatus(201, "Created", "Cliente criado")
             );
-        } catch (NomeNaoPodeSerNuloException nomeNaoPodeSerNuloException) {
+        } catch (NomeNaoPodeSerNuloException | EmailNaoPodeSerNuloException validationException) {
             this.identificaClienteOutput = new OutputError(
-                nomeNaoPodeSerNuloException.getMessage(),//coloquei a mensagem de erro. Mas aqui é o body do 422 ['nome' => 'nome é obrigatório']
-                new OutputStatus(422, "Unprocessable Entity")
+                validationException.getMessage(),
+                new OutputStatus(422, "Unprocessable Entity", validationException.getMessage())
             );
         }
     }

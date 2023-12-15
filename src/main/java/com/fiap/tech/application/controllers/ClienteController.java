@@ -21,8 +21,10 @@ public class ClienteController {
     @Autowired
     ClienteRepository clienteRepository;
 
+    private final ClienteRepository clienteRepository;
+
     @PostMapping
-    public ResponseEntity<Cliente> identificaCliente(@RequestBody IdentificaClienteInput identificaClienteInput) throws Exception {
+    public ResponseEntity<?> identificaCliente(@RequestBody IdentificaClienteInput identificaClienteInput) throws Exception {
 
         IdentificarClienteUseCase useCase = new IdentificarClienteUseCase(new IdentificarClienteRepository(clienteRepository));
         useCase.execute(identificaClienteInput);
@@ -34,12 +36,10 @@ public class ClienteController {
         }
 
         if (outputInterface.getOutputStatus().getCode() == 422) {
-            //aqui tem que pegar o body da validação para devolver o 422. Olhar no try/catch do use case
-            return ResponseEntity.unprocessableEntity(useCase.getIdentificaClienteOutput().getBody());
+            return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(useCase.getIdentificaClienteOutput().getBody());
         }
 
-        return ResponseEntity.internalServerError();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(useCase.getIdentificaClienteOutput().getBody());
     }
-
 
 }
