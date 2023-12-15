@@ -4,5 +4,7 @@ import com.fiap.tech.domain.entity.cliente.Cliente;
 
 
 public interface IdentificarClienteInterface {
-    public Cliente identificarCliente (Cliente cliente);
+
+    Cliente buscaClientePorCpf(String cpf);
+    Cliente identificarCliente(Cliente cliente);
 }

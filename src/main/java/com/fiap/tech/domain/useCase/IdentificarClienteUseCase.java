@@ -21,18 +21,28 @@ public class IdentificarClienteUseCase {
 
     public void execute(IdentificaClienteInput identificaClienteInput) throws Exception {
         Cliente cliente = new Cliente(
-                identificaClienteInput.getNome(),
-                identificaClienteInput.getCpf(),
-                identificaClienteInput.getEmail(),
-                null
+            identificaClienteInput.getNome(),
+            identificaClienteInput.getCpf(),
+            identificaClienteInput.getEmail(),
+            null
         );
         try {
-            cliente = cliente.identificarCliente();
-            Cliente clienteEntity = this.identificaCliente.identificarCliente(cliente);
+            Cliente clienteBusca = this.identificaCliente.buscaClientePorCpf(cliente.getCpf());
+            if (clienteBusca == null) {
+                cliente = cliente.  identificarCliente();
+                Cliente clienteEntity = this.identificaCliente.identificarCliente(cliente);
+                this.identificaClienteOutput = new IdentificaClienteOutput(
+                    clienteEntity,
+                    new OutputStatus(201, "Created", "Cliente criado")
+                );
+                return;
+            }
+
             this.identificaClienteOutput = new IdentificaClienteOutput(
-                clienteEntity,
-                new OutputStatus(201, "Created", "Cliente criado")
+                clienteBusca,
+                new OutputStatus(200, "Ok", "Cliente encontrado")
             );
+
         } catch (NomeNaoPodeSerNuloException | EmailNaoPodeSerNuloException validationException) {
             this.identificaClienteOutput = new OutputError(
                 validationException.getMessage(),

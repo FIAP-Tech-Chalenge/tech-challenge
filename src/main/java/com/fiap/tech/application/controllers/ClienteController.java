@@ -32,7 +32,11 @@ public class ClienteController {
         OutputInterface outputInterface = useCase.getIdentificaClienteOutput();
 
         if (outputInterface.getOutputStatus().getCode() == 201) {
-            return ResponseEntity.ok((Cliente) useCase.getIdentificaClienteOutput().getBody());
+            return ResponseEntity.status(HttpStatus.CREATED).body((Cliente) useCase.getIdentificaClienteOutput().getBody());
+        }
+
+        if (outputInterface.getOutputStatus().getCode() == 200) {
+            return ResponseEntity.status(HttpStatus.OK).body((Cliente) useCase.getIdentificaClienteOutput().getBody());
         }
 
         if (outputInterface.getOutputStatus().getCode() == 422) {
