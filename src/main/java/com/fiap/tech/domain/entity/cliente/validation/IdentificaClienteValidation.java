@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.entity.cliente.strategy;
+package com.fiap.tech.domain.entity.cliente.validation;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
 import com.fiap.tech.domain.exception.cliente.EmailNaoPodeSerNuloException;
@@ -6,7 +6,7 @@ import com.fiap.tech.domain.exception.cliente.NomeNaoPodeSerNuloException;
 
 import java.util.UUID;
 
-public class IdentificaClienteStrategy {
+public class IdentificaClienteValidation {
 
     public Cliente validaEntidade(Cliente cliente) throws Exception{
         if (!cliente.getCpf().isEmpty()) {

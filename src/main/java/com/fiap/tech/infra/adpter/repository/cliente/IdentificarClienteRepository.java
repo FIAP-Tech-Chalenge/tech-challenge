@@ -25,6 +25,6 @@ public class IdentificarClienteRepository implements IdentificarClienteInterface
             new ClienteModel(cliente.getNome(), cliente.getCpf(), cliente.getEmail(), cliente.getUuid())
         );
 
-        return new Cliente(cliente.getNome(), cliente.getCpf(), cliente.getEmail(), cliente.getUuid());
+        return cliente;
     }
 }

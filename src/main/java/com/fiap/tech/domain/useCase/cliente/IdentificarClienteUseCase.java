@@ -7,7 +7,7 @@ import com.fiap.tech.domain.genic.output.OutputError;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.genic.output.OutputStatus;
 import com.fiap.tech.domain.input.cliente.IdentificaClienteInput;
-import com.fiap.tech.domain.output.Cliente.IdentificaClienteOutput;
+import com.fiap.tech.domain.output.cliente.IdentificaClienteOutput;
 import com.fiap.tech.domain.port.cliente.IdentificarClienteInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

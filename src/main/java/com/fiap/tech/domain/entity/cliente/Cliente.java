@@ -1,6 +1,6 @@
 package com.fiap.tech.domain.entity.cliente;
 
-import com.fiap.tech.domain.entity.cliente.strategy.IdentificaClienteStrategy;
+import com.fiap.tech.domain.entity.cliente.validation.IdentificaClienteValidation;
 import lombok.*;
 
 @Getter
@@ -24,6 +24,6 @@ public class Cliente {
 
 
     public Cliente identificarCliente() throws Exception {
-        return new IdentificaClienteStrategy().validaEntidade(this);
+        return new IdentificaClienteValidation().validaEntidade(this);
     }
 }
