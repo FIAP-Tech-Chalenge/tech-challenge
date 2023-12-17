@@ -17,8 +17,8 @@ public class CriaProdutoOutput implements OutputInterface {
     private Produto produto;
     private OutputStatus outputStatus;
 
-    public CriaProdutoOutput(Produto clienteEntity, OutputStatus outputStatus) {
-        this.produto = clienteEntity;
+    public CriaProdutoOutput(Produto produtoEntity, OutputStatus outputStatus) {
+        this.produto = produtoEntity;
         this.outputStatus = outputStatus;
     }
 

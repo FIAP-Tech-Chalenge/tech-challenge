@@ -15,9 +15,9 @@ public class ProdutoModel {
     @GeneratedValue(strategy = GenerationType.UUID)
     private String uuid;
     private String nome;
-    private float valor;
+    private Float valor;
 
-    public ProdutoModel(String nome, float valor, String uuid) {
+    public ProdutoModel(String nome, Float valor, String uuid) {
         this.nome = nome;
         this.valor = valor;
         this.uuid = uuid;
