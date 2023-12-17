@@ -3,6 +3,8 @@ package com.fiap.tech.domain.entity.cliente;
 import com.fiap.tech.domain.entity.cliente.validation.IdentificaClienteValidation;
 import lombok.*;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -24,6 +26,10 @@ public class Cliente {
 
 
     public Cliente identificarCliente() throws Exception {
-        return new IdentificaClienteValidation().validaEntidade(this);
+        Cliente cliente = new IdentificaClienteValidation().validaEntidade(this);
+        String uuid = UUID.randomUUID().toString();
+        cliente.setUuid(uuid);
+
+        return cliente;
     }
 }

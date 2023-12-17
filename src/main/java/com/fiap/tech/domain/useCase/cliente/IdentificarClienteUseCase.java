@@ -1,6 +1,7 @@
 package com.fiap.tech.domain.useCase.cliente;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
+import com.fiap.tech.domain.exception.valueObject.CpfInvalidoValueObjectException;
 import com.fiap.tech.domain.exception.cliente.EmailNaoPodeSerNuloException;
 import com.fiap.tech.domain.exception.cliente.NomeNaoPodeSerNuloException;
 import com.fiap.tech.domain.genic.output.OutputError;
@@ -29,7 +30,7 @@ public class IdentificarClienteUseCase {
         try {
             Cliente clienteBusca = this.identificaCliente.buscaClientePorCpf(cliente.getCpf());
             if (clienteBusca == null) {
-                cliente = cliente.  identificarCliente();
+                cliente = cliente.identificarCliente();
                 Cliente clienteEntity = this.identificaCliente.identificarCliente(cliente);
                 this.identificaClienteOutput = new IdentificaClienteOutput(
                     clienteEntity,
@@ -43,7 +44,7 @@ public class IdentificarClienteUseCase {
                 new OutputStatus(200, "Ok", "Cliente encontrado")
             );
 
-        } catch (NomeNaoPodeSerNuloException | EmailNaoPodeSerNuloException validationException) {
+        } catch (NomeNaoPodeSerNuloException | EmailNaoPodeSerNuloException | CpfInvalidoValueObjectException validationException) {
             this.identificaClienteOutput = new OutputError(
                 validationException.getMessage(),
                 new OutputStatus(422, "Unprocessable Entity", validationException.getMessage())
