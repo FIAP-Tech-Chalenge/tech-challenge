@@ -27,7 +27,6 @@ public class Produto {
     }
 
     public Produto criaProduto() throws NomeNaoPodeSerVazioException, ValorDoProdutoMenorQueZeroException {
-        this.setUuid(getUuid());
         return new CriaProdutoValidation().validaEntidade(this);
     }
 

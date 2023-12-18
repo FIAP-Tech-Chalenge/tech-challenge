@@ -13,6 +13,6 @@ public interface ProdutoRepository extends JpaRepository<ProdutoModel, UUID> {
     ProdutoModel findByUuid(UUID uuid);
     void delete(ProdutoModel entity);
     List<ProdutoModel> findAll();
-
+    ProdutoModel save(ProdutoModel produtoModel);
 
 }

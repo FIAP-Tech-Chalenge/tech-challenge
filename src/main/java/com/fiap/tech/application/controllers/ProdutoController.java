@@ -4,13 +4,11 @@ package com.fiap.tech.application.controllers;
 import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.input.produto.CriarProdutoInput;
-import com.fiap.tech.domain.useCase.produto.BuscaProdutoPorUuidUseCase;
-import com.fiap.tech.domain.useCase.produto.BuscaTodosProdutosUseCase;
-import com.fiap.tech.domain.useCase.produto.CriaProdutoUseCase;
-import com.fiap.tech.domain.useCase.produto.DeletaProdutoUseCase;
+import com.fiap.tech.domain.useCase.produto.*;
 import com.fiap.tech.infra.adpter.repository.produto.BuscarProdutosPorUuidRepository;
 import com.fiap.tech.infra.adpter.repository.produto.CriaProtutoRepository;
 import com.fiap.tech.infra.adpter.repository.produto.DeletaProdutoRepository;
+import com.fiap.tech.infra.adpter.repository.produto.EditaProdutoRepository;
 import com.fiap.tech.infra.model.ProdutoModel;
 import com.fiap.tech.infra.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
@@ -58,5 +56,14 @@ public class ProdutoController {
         BuscaTodosProdutosUseCase useCase = new BuscaTodosProdutosUseCase(produtoRepository);
         List<ProdutoModel> produtos = useCase.execute();
         return ResponseEntity.ok(produtos);
+    }
+
+    @PutMapping("/{uuid}")
+    public ResponseEntity<?> editaProduto(@PathVariable UUID uuid, @RequestBody ProdutoModel produtoModel) {
+        produtoModel.setUuid(uuid);
+        EditaProdutoUseCase useCase = new EditaProdutoUseCase(new EditaProdutoRepository(produtoRepository));
+        useCase.execute(produtoModel);
+        OutputInterface outputInterface = useCase.getEditaProdutoOutput();
+        return new GenericResponse().response(outputInterface);
     }
 }
