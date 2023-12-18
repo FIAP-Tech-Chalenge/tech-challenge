@@ -18,6 +18,10 @@ public class GenericResponse {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(outputInterface.getBody());
         }
 
+        if (outputInterface.getOutputStatus().getCode() == 404) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(outputInterface.getBody());
+        }
+
         return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(outputInterface.getBody());
     }
 }

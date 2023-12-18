@@ -11,7 +11,7 @@ import com.fiap.tech.infra.model.ProdutoModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Optional;
+import java.util.UUID;
 
 @Getter
 @RequiredArgsConstructor
@@ -21,11 +21,11 @@ public class DeletaProdutoUseCase {
     @Getter
     private OutputInterface deletaProdutoOutput;
 
-    public void execute(String uuid) {
+    public void execute(UUID uuid) {
         try {
-            Optional<ProdutoModel> produtoEncontrado = this.deletaProduto.encontraProdutoPorUuid(uuid);
+            ProdutoModel produtoEncontrado = this.deletaProduto.encontraProdutoPorUuid(uuid);
 
-            if (!produtoEncontrado.isPresent()) {
+            if (produtoEncontrado == null) {
                 throw new ProdutoNaoEncontradoException("Produto com UUID " + uuid + " não encontrado.");
             }
 

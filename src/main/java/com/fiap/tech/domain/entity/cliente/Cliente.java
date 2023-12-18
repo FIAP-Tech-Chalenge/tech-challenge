@@ -8,8 +8,6 @@ import java.util.UUID;
 @Getter
 @Setter
 @NoArgsConstructor
-
-
 public class Cliente {
 
     private String uuid;
@@ -23,13 +21,9 @@ public class Cliente {
         this.email = email;
         this.uuid = uuid;
     }
-
-
     public Cliente identificarCliente() throws Exception {
         Cliente cliente = new IdentificaClienteValidation().validaEntidade(this);
-        String uuid = UUID.randomUUID().toString();
-        cliente.setUuid(uuid);
-
+        this.setUuid(getUuid());
         return cliente;
     }
 }

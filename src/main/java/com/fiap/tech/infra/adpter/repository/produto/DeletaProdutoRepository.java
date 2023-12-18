@@ -6,7 +6,7 @@ import com.fiap.tech.infra.model.ProdutoModel;
 import com.fiap.tech.infra.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 
-import java.util.Optional;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public class DeletaProdutoRepository implements DeletarProdutoInterface {
@@ -14,16 +14,16 @@ public class DeletaProdutoRepository implements DeletarProdutoInterface {
     private final ProdutoRepository produtoRepository;
 
     @Override
-    public void deletaProduto(String uuid) throws ProdutoNaoEncontradoException {
-        Optional<ProdutoModel> produto = this.produtoRepository.findByUuid(uuid);
-        if (!produto.isPresent()) {
+    public void deletaProduto(UUID uuid) throws ProdutoNaoEncontradoException {
+        ProdutoModel produtoModel = this.produtoRepository.findByUuid(uuid);
+        if (produtoModel == null) {
             throw new ProdutoNaoEncontradoException("Produto with UUID " + uuid + " not found.");
         }
-        this.produtoRepository.delete(produto.get());
+        this.produtoRepository.delete(produtoModel);
     }
 
     @Override
-    public Optional<ProdutoModel> encontraProdutoPorUuid(String uuid) {
+    public ProdutoModel encontraProdutoPorUuid(UUID uuid) {
         return this.produtoRepository.findByUuid(uuid);
     }
 }

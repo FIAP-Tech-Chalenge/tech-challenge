@@ -19,10 +19,10 @@ public class CriaProdutoUseCase {
     private final CriarProdutoInterface criaProduto;
     private OutputInterface criaProdutoOutput;
 
-    public void execute(CriarProdutoInput criarProdutoInput) throws Exception {
+    public void execute(CriarProdutoInput criarProdutoInput){
         try {
             Produto produto;
-            produto = new Produto(criarProdutoInput.nome(), criarProdutoInput.valor(), criarProdutoInput.uuid()).criaProduto();
+            produto = new Produto(criarProdutoInput.uuid(), criarProdutoInput.nome(), criarProdutoInput.valor()).criaProduto();
             this.criaProduto.criaProduto(produto);
             this.criaProdutoOutput = new CriaProdutoOutput(
                 produto,

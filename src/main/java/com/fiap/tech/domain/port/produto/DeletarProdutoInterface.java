@@ -3,12 +3,12 @@ package com.fiap.tech.domain.port.produto;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 import com.fiap.tech.infra.model.ProdutoModel;
 
-import java.util.Optional;
+import java.util.UUID;
 
 public interface DeletarProdutoInterface {
 
-    void deletaProduto(String uuid) throws ProdutoNaoEncontradoException;
+    void deletaProduto(UUID uuid) throws ProdutoNaoEncontradoException;
 
-    Optional<ProdutoModel> encontraProdutoPorUuid(String uuid);
+    ProdutoModel encontraProdutoPorUuid(UUID uuid);
 
 }
