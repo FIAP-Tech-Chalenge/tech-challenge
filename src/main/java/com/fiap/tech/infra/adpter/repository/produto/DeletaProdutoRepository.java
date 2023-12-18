@@ -23,7 +23,7 @@ public class DeletaProdutoRepository implements DeletarProdutoInterface {
     }
 
     @Override
-    public ProdutoModel encontraProdutoPorUuid(UUID uuid) {
+    public ProdutoModel encontraProdutoPorUuidDeleta(UUID uuid) {
         return this.produtoRepository.findByUuid(uuid);
     }
 }

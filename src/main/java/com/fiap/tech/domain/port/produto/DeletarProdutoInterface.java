@@ -9,6 +9,6 @@ public interface DeletarProdutoInterface {
 
     void deletaProduto(UUID uuid) throws ProdutoNaoEncontradoException;
 
-    ProdutoModel encontraProdutoPorUuid(UUID uuid);
+    ProdutoModel encontraProdutoPorUuidDeleta(UUID uuid);
 
 }
