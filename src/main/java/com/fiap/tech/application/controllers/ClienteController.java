@@ -23,7 +23,7 @@ public class ClienteController {
     private final ClienteRepository clienteRepository;
 
     @PostMapping
-    public ResponseEntity<?> identificaCliente(@RequestBody IdentificaClienteInput identificaClienteInput) throws Exception {
+    public ResponseEntity<Object> identificaCliente(@RequestBody IdentificaClienteInput identificaClienteInput) throws Exception {
 
         IdentificarClienteUseCase useCase = new IdentificarClienteUseCase(new IdentificarClienteRepository(clienteRepository));
         useCase.execute(identificaClienteInput);
