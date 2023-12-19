@@ -8,21 +8,23 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Data
 @RequiredArgsConstructor
 @Getter
 @Setter
-public class BuscaProdutoOutput implements OutputInterface {
-    private Produto produto;
+public class BuscaTodosProdutoOutput implements OutputInterface {
+    private List<Produto> listProdutos;
     private OutputStatus outputStatus;
 
-    public BuscaProdutoOutput(Produto produtoEntity, OutputStatus outputStatus) {
-        this.produto = produtoEntity;
+    public BuscaTodosProdutoOutput(List<Produto> listProdutos, OutputStatus outputStatus) {
+        this.listProdutos = listProdutos;
         this.outputStatus = outputStatus;
     }
 
     @Override
     public Object getBody() {
-        return this.produto;
+        return this.listProdutos;
     }
 }

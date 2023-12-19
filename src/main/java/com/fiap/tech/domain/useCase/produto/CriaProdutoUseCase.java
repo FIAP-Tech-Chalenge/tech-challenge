@@ -16,14 +16,14 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CriaProdutoUseCase {
 
-    private final CriarProdutoInterface criaProduto;
+    private final CriarProdutoInterface criaProdutoRepository;
     private OutputInterface criaProdutoOutput;
 
     public void execute(CriarProdutoInput criarProdutoInput){
         try {
             Produto produto;
-            produto = new Produto(criarProdutoInput.uuid(), criarProdutoInput.nome(), criarProdutoInput.valor()).criaProduto();
-            this.criaProduto.criaProduto(produto);
+            produto = new Produto(criarProdutoInput.nome(), criarProdutoInput.valor()).criaProduto();
+            this.criaProdutoRepository.criaProduto(produto);
             this.criaProdutoOutput = new CriaProdutoOutput(
                 produto,
                 new OutputStatus(201, "Created", "Produto criado")

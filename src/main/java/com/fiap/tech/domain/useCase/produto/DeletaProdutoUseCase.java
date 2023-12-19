@@ -1,11 +1,13 @@
 package com.fiap.tech.domain.useCase.produto;
 
 
+import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 import com.fiap.tech.domain.genic.output.OutputError;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.genic.output.OutputStatus;
 import com.fiap.tech.domain.output.produto.DeletaProdutoOutput;
+import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
 import com.fiap.tech.domain.port.produto.DeletarProdutoInterface;
 import com.fiap.tech.infra.model.ProdutoModel;
 import lombok.Getter;
@@ -18,20 +20,19 @@ import java.util.UUID;
 public class DeletaProdutoUseCase {
 
     private final DeletarProdutoInterface deletaProduto;
+    private final BuscaProdutoInterface produtoInterface;
     private OutputInterface deletaProdutoOutput;
 
     public void execute(UUID uuid) {
         try {
-            ProdutoModel produtoEncontrado = this.deletaProduto.encontraProdutoPorUuidDeleta(uuid);
+            Produto produtoEntity = this.produtoInterface.encontraProdutoPorUuid(uuid);
 
-            if (produtoEncontrado == null) {
-                throw new ProdutoNaoEncontradoException("Produto com UUID " + uuid + " não encontrado.");
-            }
-
-            this.deletaProduto.deletaProduto(uuid);
+            this.deletaProduto.deletaProduto(produtoEntity.getUuid());
             this.deletaProdutoOutput = new DeletaProdutoOutput(
-                    new OutputStatus(200, "OK", "Produto deletado com sucesso")
+                    produtoEntity,
+                    new OutputStatus(204, "No content", "Produto deletado com sucesso")
             );
+            System.out.println("teste");
         } catch (ProdutoNaoEncontradoException e) {
             this.deletaProdutoOutput = new OutputError(
                     e.getMessage(),

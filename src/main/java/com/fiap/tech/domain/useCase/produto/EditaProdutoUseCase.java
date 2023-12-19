@@ -1,33 +1,35 @@
 package com.fiap.tech.domain.useCase.produto;
 
+import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 import com.fiap.tech.domain.genic.output.OutputError;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.genic.output.OutputStatus;
+import com.fiap.tech.domain.input.produto.EditaProdutoInput;
 import com.fiap.tech.domain.output.produto.EditaProdutoOutput;
+import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
 import com.fiap.tech.domain.port.produto.EditaProdutoInterface;
-import com.fiap.tech.infra.model.ProdutoModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+
+import java.util.UUID;
 
 @Getter
 @RequiredArgsConstructor
 public class EditaProdutoUseCase {
 
     private final EditaProdutoInterface editaProduto;
+    private final BuscaProdutoInterface produtoInterface;
     private OutputInterface editaProdutoOutput;
 
-    public void execute(ProdutoModel produtoModel) {
+    public void execute(EditaProdutoInput editaProdutoInput, UUID uuid) {
         try {
-            ProdutoModel produtoExistente = this.editaProduto.encontraProdutoPorUuid(produtoModel.getUuid());
+            Produto produtoEntity = this.produtoInterface.encontraProdutoPorUuid(uuid);
+            produtoEntity.atualizaProduto(editaProdutoInput);
 
-            if (produtoExistente == null) {
-                throw new ProdutoNaoEncontradoException("Produto com UUID " + produtoModel.getUuid() + " não encontrado.");
-            }
-
-            ProdutoModel produtoEditado = this.editaProduto.editaProduto(produtoModel);
+            this.editaProduto.editaProduto(produtoEntity, uuid);
             this.editaProdutoOutput = new EditaProdutoOutput(
-                    produtoEditado,
+                    produtoEntity,
                     new OutputStatus(200, "OK", "Produto editado com sucesso")
             );
         } catch (ProdutoNaoEncontradoException e) {

@@ -14,7 +14,8 @@ public class CriaProtutoRepository implements CriarProdutoInterface {
 
     @Override
     public Produto criaProduto(Produto produto) {
-        this.produtoRepository.save(new ProdutoModel(produto.getUuid(),produto.getNome(), produto.getValor()));
+        ProdutoModel produtoModel = this.produtoRepository.save(new ProdutoModel(produto.getUuid(),produto.getNome(), produto.getValor()));
+        produto.setUuid(produtoModel.getUuid());
         return produto;
     }
 }

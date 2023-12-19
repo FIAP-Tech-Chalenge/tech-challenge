@@ -1,6 +1,5 @@
 package com.fiap.tech.domain.output.produto;
 
-import com.fiap.tech.domain.entity.cliente.Cliente;
 import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.genic.output.OutputStatus;

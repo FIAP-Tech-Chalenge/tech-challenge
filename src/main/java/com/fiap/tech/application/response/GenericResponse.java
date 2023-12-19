@@ -14,6 +14,10 @@ public class GenericResponse {
             return ResponseEntity.status(HttpStatus.OK).body(outputInterface.getBody());
         }
 
+        if (outputInterface.getOutputStatus().getCode() == 204) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).body(outputInterface.getBody());
+        }
+
         if (outputInterface.getOutputStatus().getCode() == 422) {
             return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(outputInterface.getBody());
         }

@@ -1,5 +1,6 @@
 package com.fiap.tech.infra.adpter.repository.produto;
 
+import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 import com.fiap.tech.domain.port.produto.EditaProdutoInterface;
 import com.fiap.tech.infra.model.ProdutoModel;
@@ -14,17 +15,12 @@ public class EditaProdutoRepository implements EditaProdutoInterface {
 
     private final ProdutoRepository produtoRepository;
 
-    @Override
-    public ProdutoModel encontraProdutoPorUuid(UUID uuid) {
-        return this.produtoRepository.findByUuid(uuid);
-    }
-
-    public ProdutoModel editaProduto(ProdutoModel produtoModel) throws ProdutoNaoEncontradoException {
-        ProdutoModel produtoExistente = this.produtoRepository.findByUuid(produtoModel.getUuid());
+    public void editaProduto(Produto produto, UUID uuid) throws ProdutoNaoEncontradoException {
+        ProdutoModel produtoExistente = this.produtoRepository.findByUuid(uuid);
         if (produtoExistente == null) {
-            throw new ProdutoNaoEncontradoException("Produto with UUID " + produtoModel.getUuid() + " not found.");
+            throw new ProdutoNaoEncontradoException("Produto with UUID " + uuid + " not found.");
         }
-        return produtoRepository.save(produtoModel);
+        produtoRepository.save(new ProdutoModel(produto.getUuid(), produto.getNome(), produto.getValor()));
     }
 
 }

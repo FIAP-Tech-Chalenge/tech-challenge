@@ -1,6 +1,7 @@
 package com.fiap.tech.domain.useCase.produto;
 
 
+import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 import com.fiap.tech.domain.genic.output.OutputError;
 import com.fiap.tech.domain.genic.output.OutputInterface;
@@ -22,14 +23,10 @@ public class BuscaProdutoPorUuidUseCase {
 
     public void execute(UUID uuid) {
         try {
-            ProdutoModel produtoEncontrado = this.buscaProduto.encontraProdutoPorUuid(uuid);
-
-            if (produtoEncontrado == null) {
-                throw new ProdutoNaoEncontradoException("Produto com UUID " + uuid + " não encontrado.");
-            }
+            Produto produtoEntity = this.buscaProduto.encontraProdutoPorUuid(uuid);
 
             this.buscaProdutoOutput = new BuscaProdutoOutput(
-                    produtoEncontrado,
+                    produtoEntity,
                     new OutputStatus(200, "OK", "Produto encontrado com sucesso")
             );
 
