@@ -8,7 +8,6 @@ import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.genic.output.OutputStatus;
 import com.fiap.tech.domain.output.produto.BuscaProdutoOutput;
 import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
-import com.fiap.tech.infra.model.ProdutoModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

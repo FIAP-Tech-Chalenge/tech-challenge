@@ -1,10 +1,12 @@
 package com.fiap.tech.infra.model;
 
+import com.fiap.tech.domain.entity.produto.Categoria;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -18,11 +20,20 @@ public class ProdutoModel {
     private UUID uuid;
     private String nome;
     private Float valor;
+    private String descricao;
+    @Enumerated(EnumType.STRING)
+    private Categoria categoria;
+    private Integer quantidade;
+    private Date dataCriacao;
 
-    public ProdutoModel(UUID uuid, String nome, Float valor) {
+    public ProdutoModel(UUID uuid, String nome, Float valor, String descricao, Categoria categoria, Integer quantidade, Date dataCriacao) {
         this.uuid = uuid;
         this.nome = nome;
         this.valor = valor;
+        this.descricao = descricao;
+        this.categoria = categoria;
+        this.quantidade = quantidade;
+        this.dataCriacao = dataCriacao;
     }
 
 }

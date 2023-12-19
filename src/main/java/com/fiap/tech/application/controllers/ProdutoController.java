@@ -2,7 +2,7 @@ package com.fiap.tech.application.controllers;
 
 
 import com.fiap.tech.application.response.GenericResponse;
-import com.fiap.tech.domain.entity.produto.Produto;
+import com.fiap.tech.domain.entity.produto.Categoria;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.input.produto.CriarProdutoInput;
 import com.fiap.tech.domain.input.produto.EditaProdutoInput;
@@ -11,13 +11,11 @@ import com.fiap.tech.infra.adpter.repository.produto.BuscarProdutoRepository;
 import com.fiap.tech.infra.adpter.repository.produto.CriaProtutoRepository;
 import com.fiap.tech.infra.adpter.repository.produto.DeletaProdutoRepository;
 import com.fiap.tech.infra.adpter.repository.produto.EditaProdutoRepository;
-import com.fiap.tech.infra.model.ProdutoModel;
 import com.fiap.tech.infra.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -29,7 +27,7 @@ public class ProdutoController {
     private final ProdutoRepository produtoRepository;
 
     @PostMapping
-    public ResponseEntity<?> criaProduto(@RequestBody CriarProdutoInput criarProdutoInput){
+    public ResponseEntity<?> criaProduto(@RequestBody CriarProdutoInput criarProdutoInput) {
 
         CriaProdutoUseCase useCase = new CriaProdutoUseCase(new CriaProtutoRepository(produtoRepository));
         useCase.execute(criarProdutoInput);
@@ -39,13 +37,13 @@ public class ProdutoController {
 
     @DeleteMapping("/{uuid}")
     public ResponseEntity<?> deletaProduto(@PathVariable UUID uuid) {
-            DeletaProdutoUseCase useCase = new DeletaProdutoUseCase(
+        DeletaProdutoUseCase useCase = new DeletaProdutoUseCase(
                 new DeletaProdutoRepository(produtoRepository),
                 new BuscarProdutoRepository(produtoRepository)
-            );
-            useCase.execute(uuid);
-            OutputInterface outputInterface = useCase.getDeletaProdutoOutput();
-            return new GenericResponse().response(outputInterface);
+        );
+        useCase.execute(uuid);
+        OutputInterface outputInterface = useCase.getDeletaProdutoOutput();
+        return new GenericResponse().response(outputInterface);
     }
 
     @GetMapping("/{uuid}")
@@ -67,11 +65,19 @@ public class ProdutoController {
     @PutMapping("/{uuid}")
     public ResponseEntity<?> editaProduto(@PathVariable UUID uuid, @RequestBody EditaProdutoInput produtoInput) {
         EditaProdutoUseCase useCase = new EditaProdutoUseCase(
-            new EditaProdutoRepository(produtoRepository),
-            new BuscarProdutoRepository(produtoRepository)
+                new EditaProdutoRepository(produtoRepository),
+                new BuscarProdutoRepository(produtoRepository)
         );
         useCase.execute(produtoInput, uuid);
         OutputInterface outputInterface = useCase.getEditaProdutoOutput();
+        return new GenericResponse().response(outputInterface);
+    }
+
+    @GetMapping("/categoria/{categoria}")
+    public ResponseEntity<?> getProdutoPorCategoria(@PathVariable Categoria categoria) {
+        BuscaProdutoPorCategoriaUseCase useCase = new BuscaProdutoPorCategoriaUseCase(new BuscarProdutoRepository(produtoRepository));
+        useCase.execute(categoria);
+        OutputInterface outputInterface = useCase.getBuscaProdutoOutput();
         return new GenericResponse().response(outputInterface);
     }
 }

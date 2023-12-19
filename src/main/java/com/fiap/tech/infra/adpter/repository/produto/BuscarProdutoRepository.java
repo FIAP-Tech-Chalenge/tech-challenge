@@ -1,5 +1,6 @@
 package com.fiap.tech.infra.adpter.repository.produto;
 
+import com.fiap.tech.domain.entity.produto.Categoria;
 import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
@@ -22,7 +23,7 @@ public class BuscarProdutoRepository implements BuscaProdutoInterface {
         if (produtoModel == null) {
             throw new ProdutoNaoEncontradoException("Produto não encontrado");
         }
-        Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor());
+        Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade(), produtoModel.getDataCriacao());
         produtoEntity.setUuid(produtoModel.getUuid());
         return produtoEntity;
     }
@@ -33,11 +34,26 @@ public class BuscarProdutoRepository implements BuscaProdutoInterface {
         List<Produto> produtosEntities = new ArrayList<>();
 
         for (ProdutoModel produtoModel : produtosModels) {
-            Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor());
+            Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade(), produtoModel.getDataCriacao());
             produtoEntity.setUuid(produtoModel.getUuid());
             produtosEntities.add(produtoEntity);
         }
 
         return produtosEntities;
+    }
+
+    @Override
+    public List<Produto> encontraProdutoPorCategoria(Categoria categoria) throws ProdutoNaoEncontradoException {
+        List<ProdutoModel> produtosModel = this.produtoRepository.findByCategoria(categoria);
+        if (produtosModel.isEmpty()) {
+            throw new ProdutoNaoEncontradoException("Produto não encontrado");
+        }
+        List<Produto> produtosEntity = new ArrayList<>();
+        for (ProdutoModel produtoModel : produtosModel) {
+            Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade(), produtoModel.getDataCriacao());
+            produtoEntity.setUuid(produtoModel.getUuid());
+            produtosEntity.add(produtoEntity);
+        }
+        return produtosEntity;
     }
 }

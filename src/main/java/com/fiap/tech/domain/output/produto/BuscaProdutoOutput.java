@@ -8,16 +8,19 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Data
 @RequiredArgsConstructor
 @Getter
 @Setter
 public class BuscaProdutoOutput implements OutputInterface {
+
     private Produto produto;
     private OutputStatus outputStatus;
 
-    public BuscaProdutoOutput(Produto produtoEntity, OutputStatus outputStatus) {
-        this.produto = produtoEntity;
+    public BuscaProdutoOutput(Produto produto, OutputStatus outputStatus) {
+        this.produto = produto;
         this.outputStatus = outputStatus;
     }
 

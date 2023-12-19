@@ -22,7 +22,7 @@ public class CriaProdutoUseCase {
     public void execute(CriarProdutoInput criarProdutoInput){
         try {
             Produto produto;
-            produto = new Produto(criarProdutoInput.nome(), criarProdutoInput.valor()).criaProduto();
+            produto = new Produto(criarProdutoInput.nome(), criarProdutoInput.valor(),criarProdutoInput.descricao(), criarProdutoInput.categoria(), criarProdutoInput.quantidade(), criarProdutoInput.dataCriacao()).criaProduto();
             this.criaProdutoRepository.criaProduto(produto);
             this.criaProdutoOutput = new CriaProdutoOutput(
                 produto,

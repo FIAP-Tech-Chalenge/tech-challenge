@@ -1,5 +1,6 @@
 package com.fiap.tech.infra.repository;
 
+import com.fiap.tech.domain.entity.produto.Categoria;
 import com.fiap.tech.infra.model.ProdutoModel;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
@@ -14,5 +15,7 @@ public interface ProdutoRepository extends JpaRepository<ProdutoModel, UUID> {
     void delete(ProdutoModel entity);
     List<ProdutoModel> findAll();
     ProdutoModel save(ProdutoModel produtoModel);
+
+    List<ProdutoModel> findByCategoria(Categoria categoria);
 
 }

@@ -1,7 +1,9 @@
 package com.fiap.tech.domain.input.produto;
 
 
-import java.util.UUID;
+import com.fiap.tech.domain.entity.produto.Categoria;
 
-public record CriarProdutoInput(String nome, Float valor) {
+import java.util.Date;
+
+public record CriarProdutoInput(String nome, Float valor, String descricao, Categoria categoria, Integer quantidade, Date dataCriacao) {
 }
