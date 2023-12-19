@@ -27,7 +27,7 @@ public class ProdutoController {
     private final ProdutoRepository produtoRepository;
 
     @PostMapping
-    public ResponseEntity<?> criaProduto(@RequestBody CriarProdutoInput criarProdutoInput) {
+    public ResponseEntity<Object> criaProduto(@RequestBody CriarProdutoInput criarProdutoInput) {
 
         CriaProdutoUseCase useCase = new CriaProdutoUseCase(new CriaProtutoRepository(produtoRepository));
         useCase.execute(criarProdutoInput);
@@ -36,7 +36,7 @@ public class ProdutoController {
     }
 
     @DeleteMapping("/{uuid}")
-    public ResponseEntity<?> deletaProduto(@PathVariable UUID uuid) {
+    public ResponseEntity<Object> deletaProduto(@PathVariable UUID uuid) {
         DeletaProdutoUseCase useCase = new DeletaProdutoUseCase(
                 new DeletaProdutoRepository(produtoRepository),
                 new BuscarProdutoRepository(produtoRepository)
@@ -47,7 +47,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/{uuid}")
-    public ResponseEntity<?> getProduto(@PathVariable UUID uuid) {
+    public ResponseEntity<Object> getProduto(@PathVariable UUID uuid) {
         BuscaProdutoPorUuidUseCase useCase = new BuscaProdutoPorUuidUseCase(new BuscarProdutoRepository(produtoRepository));
         useCase.execute(uuid);
         OutputInterface outputInterface = useCase.getBuscaProdutoOutput();
@@ -55,7 +55,7 @@ public class ProdutoController {
     }
 
     @GetMapping
-    public ResponseEntity<?> getAllProdutos() {
+    public ResponseEntity<Object> getAllProdutos() {
         BuscaTodosProdutosUseCase useCase = new BuscaTodosProdutosUseCase(new BuscarProdutoRepository(produtoRepository));
         useCase.execute();
         OutputInterface outputInterface = useCase.getBuscaProdutoOutput();
@@ -63,7 +63,7 @@ public class ProdutoController {
     }
 
     @PutMapping("/{uuid}")
-    public ResponseEntity<?> editaProduto(@PathVariable UUID uuid, @RequestBody EditaProdutoInput produtoInput) {
+    public ResponseEntity<Object> editaProduto(@PathVariable UUID uuid, @RequestBody EditaProdutoInput produtoInput) {
         EditaProdutoUseCase useCase = new EditaProdutoUseCase(
                 new EditaProdutoRepository(produtoRepository),
                 new BuscarProdutoRepository(produtoRepository)
@@ -74,7 +74,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<?> getProdutoPorCategoria(@PathVariable Categoria categoria) {
+    public ResponseEntity<Object> getProdutoPorCategoria(@PathVariable Categoria categoria) {
         BuscaProdutoPorCategoriaUseCase useCase = new BuscaProdutoPorCategoriaUseCase(new BuscarProdutoRepository(produtoRepository));
         useCase.execute(categoria);
         OutputInterface outputInterface = useCase.getBuscaProdutoOutput();

@@ -29,7 +29,6 @@ public class Produto {
 
 
     public Produto(String nome, Float valor, String descricao, Categoria categoria, Integer quantidade, Date dataCriacao) {
-        this.uuid = uuid;
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;

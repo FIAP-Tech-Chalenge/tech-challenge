@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 public class GenericResponse {
-    public ResponseEntity<?> response(OutputInterface outputInterface) {
+    public ResponseEntity<Object> response(OutputInterface outputInterface) {
         if (outputInterface.getOutputStatus().getCode() == 201) {
             return ResponseEntity.status(HttpStatus.CREATED).body(outputInterface.getBody());
         }
