@@ -15,12 +15,12 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BuscaTodosProdutosUseCase {
 
-    private final BuscaProdutoInterface produtoRepository;
+    private final BuscaProdutoInterface buscaProdutoInterface;
     private OutputInterface buscaProdutoOutput;
 
     public void execute() {
         try {
-            List<Produto> listProdutos = this.produtoRepository.findAll();
+            List<Produto> listProdutos = this.buscaProdutoInterface.findAll();
 
             buscaProdutoOutput = new BuscaTodosProdutoOutput(
                 listProdutos,

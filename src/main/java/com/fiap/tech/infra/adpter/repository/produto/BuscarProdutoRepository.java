@@ -34,7 +34,11 @@ public class BuscarProdutoRepository implements BuscaProdutoInterface {
         List<Produto> produtosEntities = new ArrayList<>();
 
         for (ProdutoModel produtoModel : produtosModels) {
-            Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade());
+            Produto produtoEntity = new Produto(produtoModel.getNome(),
+                    produtoModel.getValor(),
+                    produtoModel.getDescricao(),
+                    produtoModel.getCategoria(),
+                    produtoModel.getQuantidade());
             produtoEntity.setUuid(produtoModel.getUuid());
             produtosEntities.add(produtoEntity);
         }

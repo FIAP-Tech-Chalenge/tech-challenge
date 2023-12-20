@@ -3,14 +3,17 @@ package com.fiap.tech.application.controllers;
 import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.input.pedido.CriarPedidoInput;
+import com.fiap.tech.domain.useCase.pedido.BuscaTodosPedidosUseCase;
 import com.fiap.tech.domain.useCase.pedido.CriaPedidoUseCase;
 import com.fiap.tech.infra.adpter.repository.cliente.ClienteEntityRepository;
+import com.fiap.tech.infra.adpter.repository.pedido.BuscarPedidoRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.CriaPedidoRepository;
 import com.fiap.tech.infra.repository.ClienteRepository;
 import com.fiap.tech.infra.repository.PedidoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -32,21 +35,21 @@ public class PedidoController {
         return new GenericResponse().response(outputInterface);
     }
 
-    /*@GetMapping
+    @GetMapping
     public ResponseEntity<Object> getAllPedidos(){
         BuscaTodosPedidosUseCase useCase = new BuscaTodosPedidosUseCase(new BuscarPedidoRepository(pedidoRepository));
         useCase.execute();
-        OutputInterface outputInterface = useCase.getBuscaPedidoOutput();
+        OutputInterface outputInterface = useCase.getBuscaProdutoOutput();
         return new GenericResponse().response(outputInterface);
     }
 
-    @GetMapping("/{uuid}")
-    public ResponseEntity<Object> getPedido(@PathVariable UUID uuid){
-        BuscaPedidoPorUuidUseCase useCase = new BuscaProdutoPorUuidUseCase(new BuscarPedidoRepository(pedidoRepository));
-        useCase.execute(uuid);
-        OutputInterface outputInterface = new useCase.getBuscaPedidoOutput();
-        return new GenericResponse().response(outputInterface);
-    }*/
+//    @GetMapping("/{uuid}")
+//    public ResponseEntity<Object> getPedido(@PathVariable UUID uuid){
+//        BuscaPedidoPorUuidUseCase useCase = new BuscaProdutoPorUuidUseCase(new BuscarPedidoRepository(pedidoRepository));
+//        useCase.execute(uuid);
+//        OutputInterface outputInterface = new useCase.getBuscaPedidoOutput();
+//        return new GenericResponse().response(outputInterface);
+//    }
 }
 
 

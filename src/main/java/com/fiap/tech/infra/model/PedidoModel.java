@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -26,4 +27,7 @@ public class PedidoModel {
     private StatusPedido status;
     private Float valorTotal;
 
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "pedido_id")
+    private List<ProdutoModel> produtos;
 }

@@ -23,7 +23,13 @@ public class Pedido {
             this.clienteUuid = clienteUuid;
         }
 
-        public void verificaItensDoPedido() throws PedidoVazioException {
+    public Pedido(UUID clienteId, StatusPedido status, List<com.fiap.tech.domain.entity.produto.Produto> produtos, Float valorTotal) {
+        this.clienteUuid = clienteId;
+        this.status = status;
+        this.total = valorTotal;
+    }
+
+    public void verificaItensDoPedido() throws PedidoVazioException {
             if (itens.isEmpty()) {
                 throw new PedidoVazioException("Pedido vazio");
             }
