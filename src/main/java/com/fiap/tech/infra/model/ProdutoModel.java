@@ -24,16 +24,14 @@ public class ProdutoModel {
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
     private Integer quantidade;
-    private Date dataCriacao;
 
-    public ProdutoModel(UUID uuid, String nome, Float valor, String descricao, Categoria categoria, Integer quantidade, Date dataCriacao) {
+    public ProdutoModel(UUID uuid, String nome, Float valor, String descricao, Categoria categoria, Integer quantidade) {
         this.uuid = uuid;
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;
         this.categoria = categoria;
         this.quantidade = quantidade;
-        this.dataCriacao = dataCriacao;
     }
 
 }

@@ -25,16 +25,14 @@ public class Produto {
     @Enumerated(EnumType.STRING)
     private Categoria categoria;
     private Integer quantidade;
-    private Date dataCriacao;
 
 
-    public Produto(String nome, Float valor, String descricao, Categoria categoria, Integer quantidade, Date dataCriacao) {
+    public Produto(String nome, Float valor, String descricao, Categoria categoria, Integer quantidade) {
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;
         this.categoria = categoria;
         this.quantidade = quantidade;
-        this.dataCriacao = dataCriacao;
     }
 
     public Produto criaProduto() throws NomeNaoPodeSerVazioException, ValorDoProdutoMenorQueZeroException {
@@ -47,7 +45,6 @@ public class Produto {
         this.setDescricao(editaProdutoInput.descricao());
         this.setCategoria(editaProdutoInput.categoria());
         this.setQuantidade(editaProdutoInput.quantidade());
-        this.setDataCriacao(editaProdutoInput.dataCriacao());
         new CriaProdutoValidation().validaEntidade(this);
     }
 }

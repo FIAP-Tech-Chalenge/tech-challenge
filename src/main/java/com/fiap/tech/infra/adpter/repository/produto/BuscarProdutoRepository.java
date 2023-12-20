@@ -23,7 +23,7 @@ public class BuscarProdutoRepository implements BuscaProdutoInterface {
         if (produtoModel == null) {
             throw new ProdutoNaoEncontradoException("Produto não encontrado");
         }
-        Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade(), produtoModel.getDataCriacao());
+        Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade());
         produtoEntity.setUuid(produtoModel.getUuid());
         return produtoEntity;
     }
@@ -34,7 +34,7 @@ public class BuscarProdutoRepository implements BuscaProdutoInterface {
         List<Produto> produtosEntities = new ArrayList<>();
 
         for (ProdutoModel produtoModel : produtosModels) {
-            Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade(), produtoModel.getDataCriacao());
+            Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade());
             produtoEntity.setUuid(produtoModel.getUuid());
             produtosEntities.add(produtoEntity);
         }
@@ -50,7 +50,7 @@ public class BuscarProdutoRepository implements BuscaProdutoInterface {
         }
         List<Produto> produtosEntity = new ArrayList<>();
         for (ProdutoModel produtoModel : produtosModel) {
-            Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade(), produtoModel.getDataCriacao());
+            Produto produtoEntity = new Produto(produtoModel.getNome(), produtoModel.getValor(), produtoModel.getDescricao(), produtoModel.getCategoria(), produtoModel.getQuantidade());
             produtoEntity.setUuid(produtoModel.getUuid());
             produtosEntity.add(produtoEntity);
         }

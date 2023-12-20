@@ -16,7 +16,7 @@ public class CriaProtutoRepository implements CriarProdutoInterface {
     public Produto criaProduto(Produto produto) {
         ProdutoModel produtoModel = this.produtoRepository.save(new ProdutoModel(produto.getUuid(),produto.getNome(),
                 produto.getValor(), produto.getDescricao(), produto.getCategoria(),
-                produto.getQuantidade(), produto.getDataCriacao()));
+                produto.getQuantidade()));
         produto.setUuid(produtoModel.getUuid());
         return produto;
     }
