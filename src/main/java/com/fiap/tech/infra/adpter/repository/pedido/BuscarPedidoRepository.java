@@ -10,28 +10,12 @@ import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 @RequiredArgsConstructor
 public class BuscarPedidoRepository implements BuscaPedidoInterface {
 
     private final PedidoRepository pedidoRepository;
-
-//    @Override
-//    public Pedido buscaPedidoPorUuid(UUID uuid) throws PedidoNaoEncontradoException {
-//        PedidoModel pedidoModel = pedidoRepository.findByUuid(uuid);
-//        if (pedidoModel == null) {
-//            throw new PedidoNaoEncontradoException("Pedido não encontrado");
-//        }
-//        List<Produto> produtos = getProdutos(pedidoModel.getProdutos());
-//        Pedido pedidoEntity = new Pedido(
-//                pedidoModel.getClienteId(),
-//                pedidoModel.getStatus(),
-//                produtos,
-//                pedidoModel.getValorTotal());
-//        pedidoEntity.setUuid(pedidoModel.getUuid()
-//        );
-//        return pedidoEntity;
-//    }
 
     @Override
     public List<Pedido> findAll() {
@@ -50,6 +34,23 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
         }
 
         return pedidosEntities;
+    }
+
+    @Override
+    public Pedido encontraPedidoPorUuid(UUID uuid) {
+        PedidoModel pedidoModel = pedidoRepository.findByUuid(uuid);
+        if (pedidoModel == null) {
+            return null;
+        }
+        List<Produto> produtos = getProdutos(pedidoModel.getProdutos());
+        Pedido pedidoEntity = new Pedido(
+                pedidoModel.getClienteId(),
+                pedidoModel.getStatus(),
+                produtos,
+                pedidoModel.getValorTotal()
+        );
+        pedidoEntity.setUuid(pedidoModel.getUuid());
+        return pedidoEntity;
     }
 
     private List<Produto> getProdutos(List<ProdutoModel> produtoModels) {

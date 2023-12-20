@@ -3,6 +3,7 @@ package com.fiap.tech.application.controllers;
 import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.input.pedido.CriarPedidoInput;
+import com.fiap.tech.domain.useCase.pedido.BuscaPedidoPorUuidUseCase;
 import com.fiap.tech.domain.useCase.pedido.BuscaTodosPedidosUseCase;
 import com.fiap.tech.domain.useCase.pedido.CriaPedidoUseCase;
 import com.fiap.tech.infra.adpter.repository.cliente.ClienteEntityRepository;
@@ -14,6 +15,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 
 @RestController
 @RequiredArgsConstructor
@@ -24,7 +27,7 @@ public class PedidoController {
     private final ClienteRepository clienteRepository;
 
     @PostMapping
-    ResponseEntity<Object> criarProduto(@RequestBody CriarPedidoInput criarProdutoInput) throws Exception{
+    ResponseEntity<Object> criarProduto(@RequestBody CriarPedidoInput criarProdutoInput){
 
         CriaPedidoUseCase useCase = new CriaPedidoUseCase(
             new CriaPedidoRepository(pedidoRepository),
@@ -43,13 +46,13 @@ public class PedidoController {
         return new GenericResponse().response(outputInterface);
     }
 
-//    @GetMapping("/{uuid}")
-//    public ResponseEntity<Object> getPedido(@PathVariable UUID uuid){
-//        BuscaPedidoPorUuidUseCase useCase = new BuscaProdutoPorUuidUseCase(new BuscarPedidoRepository(pedidoRepository));
-//        useCase.execute(uuid);
-//        OutputInterface outputInterface = new useCase.getBuscaPedidoOutput();
-//        return new GenericResponse().response(outputInterface);
-//    }
+    @GetMapping("/{uuid}")
+    public ResponseEntity<Object> getPedido(@PathVariable UUID uuid){
+        BuscaPedidoPorUuidUseCase useCase = new BuscaPedidoPorUuidUseCase(new BuscarPedidoRepository(pedidoRepository));
+        useCase.execute(uuid);
+        OutputInterface outputInterface = useCase.getBuscaPedidoOutput();
+        return new GenericResponse().response(outputInterface);
+    }
 }
 
 
