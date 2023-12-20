@@ -21,10 +21,10 @@ public class IdentificarClienteRepository implements IdentificarClienteInterface
 
     @Override
     public Cliente identificarCliente(Cliente cliente) {
-        this.clienteRepository.save(
+        ClienteModel clienteModel =this.clienteRepository.save(
             new ClienteModel(cliente.getNome(), cliente.getCpf(), cliente.getEmail(), cliente.getUuid())
         );
-
+        cliente.setUuid(clienteModel.getUuid());
         return cliente;
     }
 }

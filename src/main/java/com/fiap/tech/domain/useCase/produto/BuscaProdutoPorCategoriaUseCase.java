@@ -1,7 +1,7 @@
 package com.fiap.tech.domain.useCase.produto;
 
 
-import com.fiap.tech.domain.enums.pedido.CategoriaProtudo;
+import com.fiap.tech.domain.entity.produto.CategoriaProtudo;
 import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.produto.CategoriaDeProdutoInvalidaException;

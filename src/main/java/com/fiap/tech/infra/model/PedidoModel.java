@@ -1,12 +1,13 @@
 package com.fiap.tech.infra.model;
 
-import com.fiap.tech.domain.entity.pedido.StatusPedido;
+import com.fiap.tech.domain.enums.pedido.StatusPedido;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Getter
@@ -19,11 +20,10 @@ public class PedidoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID uuid;
-    private Long clienteId;
-    private String dataCriacao;
+    private UUID clienteId;
+    private Date dataCriacao;
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
-    private String itens;
-    private double valorTotal;
+    private Float valorTotal;
 
 }

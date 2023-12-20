@@ -49,6 +49,11 @@ public class IdentificarClienteUseCase {
                 validationException.getMessage(),
                 new OutputStatus(422, "Unprocessable Entity", validationException.getMessage())
             );
+        } catch (Exception e) {
+            this.identificaClienteOutput = new OutputError(
+                e.getMessage(),
+                new OutputStatus(500, "Internal Error", e.getMessage())
+            );
         }
     }
 }

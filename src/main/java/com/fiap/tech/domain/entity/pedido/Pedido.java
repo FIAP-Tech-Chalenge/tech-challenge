@@ -1,26 +1,47 @@
 package com.fiap.tech.domain.entity.pedido;
 
+import com.fiap.tech.domain.enums.pedido.StatusPedido;
+import com.fiap.tech.domain.exception.pedido.PedidoVazioException;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
-
+@Getter
+@Setter
 public class Pedido {
         private UUID uuid;
-        private Long clienteId;
-        private String dataCriacao;
+        private final UUID clienteUuid;
         @Enumerated(EnumType.STRING)
         private StatusPedido status;
-        private String itens;
-        private double valorTotal;
+        private List<Produto> itens;
+        private Float total;
 
-        public Pedido(UUID uuid, Long clienteId, String dataCriacao, StatusPedido status, String itens, double valorTotal) {
-            this.uuid = uuid;
-            this.clienteId = clienteId;
-            this.dataCriacao = dataCriacao;
-            this.status = status;
-            this.itens = itens;
-            this.valorTotal = valorTotal;
+        public Pedido(UUID clienteUuid) {
+            this.clienteUuid = clienteUuid;
+        }
+
+        public void verificaItensDoPedido() throws PedidoVazioException {
+            if (itens.isEmpty()) {
+                throw new PedidoVazioException("Pedido vazio");
+            }
+        }
+
+        public void gerarCombo()
+        {
+
+        }
+
+        public float valorTotalDoPeido()
+        {
+            float total = (float) 0;
+            for (Produto produto : itens) {
+                total += (float)produto.getValor();
+            }
+
+            return total;
         }
 
 }
