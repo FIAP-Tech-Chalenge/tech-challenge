@@ -2,7 +2,7 @@ package com.fiap.tech.application.controllers;
 
 
 import com.fiap.tech.application.response.GenericResponse;
-import com.fiap.tech.domain.entity.produto.Categoria;
+import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.input.produto.CriarProdutoInput;
 import com.fiap.tech.domain.input.produto.EditaProdutoInput;
@@ -74,7 +74,7 @@ public class ProdutoController {
     }
 
     @GetMapping("/categoria/{categoria}")
-    public ResponseEntity<Object> getProdutoPorCategoria(@PathVariable Categoria categoria) {
+    public ResponseEntity<Object> getProdutoPorCategoria(String categoria) {
         BuscaProdutoPorCategoriaUseCase useCase = new BuscaProdutoPorCategoriaUseCase(new BuscarProdutoRepository(produtoRepository));
         useCase.execute(categoria);
         OutputInterface outputInterface = useCase.getBuscaProdutoOutput();

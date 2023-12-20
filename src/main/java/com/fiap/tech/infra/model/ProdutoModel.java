@@ -1,6 +1,6 @@
 package com.fiap.tech.infra.model;
 
-import com.fiap.tech.domain.entity.produto.Categoria;
+import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,10 +22,10 @@ public class ProdutoModel {
     private Float valor;
     private String descricao;
     @Enumerated(EnumType.STRING)
-    private Categoria categoria;
+    private CategoriaEnum categoria;
     private Integer quantidade;
 
-    public ProdutoModel(UUID uuid, String nome, Float valor, String descricao, Categoria categoria, Integer quantidade) {
+    public ProdutoModel(UUID uuid, String nome, Float valor, String descricao, CategoriaEnum categoria, Integer quantidade) {
         this.uuid = uuid;
         this.nome = nome;
         this.valor = valor;

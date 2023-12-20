@@ -1,6 +1,6 @@
 package com.fiap.tech.domain.port.produto;
 
-import com.fiap.tech.domain.entity.produto.Categoria;
+import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 
@@ -12,5 +12,5 @@ public interface BuscaProdutoInterface {
 
     List<Produto> findAll();
 
-    List<Produto> encontraProdutoPorCategoria(Categoria categoria) throws ProdutoNaoEncontradoException;
+    List<Produto> encontraProdutoPorCategoria(CategoriaEnum categoria) throws ProdutoNaoEncontradoException;
 }

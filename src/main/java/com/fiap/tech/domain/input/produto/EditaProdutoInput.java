@@ -1,8 +1,8 @@
 package com.fiap.tech.domain.input.produto;
 
-import com.fiap.tech.domain.entity.produto.Categoria;
+import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 
 import java.util.Date;
 
-public record EditaProdutoInput(String nome, Float valor, String descricao, Categoria categoria, Integer quantidade, Date dataCriacao) {
+public record EditaProdutoInput(String nome, Float valor, String descricao, CategoriaEnum categoria, Integer quantidade, Date dataCriacao) {
 }

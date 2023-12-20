@@ -1,6 +1,6 @@
 package com.fiap.tech.infra.adpter.repository.produto;
 
-import com.fiap.tech.domain.entity.produto.Categoria;
+import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
@@ -43,7 +43,7 @@ public class BuscarProdutoRepository implements BuscaProdutoInterface {
     }
 
     @Override
-    public List<Produto> encontraProdutoPorCategoria(Categoria categoria) throws ProdutoNaoEncontradoException {
+    public List<Produto> encontraProdutoPorCategoria(CategoriaEnum categoria) throws ProdutoNaoEncontradoException {
         List<ProdutoModel> produtosModel = this.produtoRepository.findByCategoria(categoria);
         if (produtosModel.isEmpty()) {
             throw new ProdutoNaoEncontradoException("Produto não encontrado");

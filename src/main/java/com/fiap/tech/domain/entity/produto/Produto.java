@@ -1,6 +1,7 @@
 package com.fiap.tech.domain.entity.produto;
 
 import com.fiap.tech.domain.entity.produto.validations.CriaProdutoValidation;
+import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 import com.fiap.tech.domain.exception.produto.NomeNaoPodeSerVazioException;
 import com.fiap.tech.domain.exception.produto.ValorDoProdutoMenorQueZeroException;
 import com.fiap.tech.domain.input.produto.EditaProdutoInput;
@@ -23,11 +24,11 @@ public class Produto {
     private Float valor;
     private String descricao;
     @Enumerated(EnumType.STRING)
-    private Categoria categoria;
+    private CategoriaEnum categoria;
     private Integer quantidade;
 
 
-    public Produto(String nome, Float valor, String descricao, Categoria categoria, Integer quantidade) {
+    public Produto(String nome, Float valor, String descricao, CategoriaEnum categoria, Integer quantidade) {
         this.nome = nome;
         this.valor = valor;
         this.descricao = descricao;
