@@ -14,11 +14,18 @@ public class CriaProtutoRepository implements CriarProdutoInterface {
 
     @Override
     public Produto criaProduto(Produto produto) {
-        ProdutoModel produtoModel = this.produtoRepository.save(new ProdutoModel(produto.getUuid(),produto.getNome(),
-                produto.getValor(), produto.getDescricao(), produto.getCategoria(),
-                produto.getQuantidade()));
+        ProdutoModel produtoModel = this.produtoRepository.save(
+            new ProdutoModel(
+                produto.getUuid(),
+                produto.getNome(),
+                produto.getValor(),
+                produto.getDescricao(),
+                produto.getCategoria(),
+                produto.getQuantidade()
+            )
+        );
         produto.setUuid(produtoModel.getUuid());
         return produto;
     }
-}
 
+}

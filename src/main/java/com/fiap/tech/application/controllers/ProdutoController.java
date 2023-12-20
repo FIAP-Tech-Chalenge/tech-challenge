@@ -20,7 +20,7 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/produtos")
+@RequestMapping("/produto")
 public class ProdutoController {
 
 

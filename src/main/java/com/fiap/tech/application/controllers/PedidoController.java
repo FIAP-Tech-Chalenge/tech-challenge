@@ -39,3 +39,14 @@ public class PedidoController {
         OutputInterface outputInterface = useCase.getBuscaPedidoOutput();
         return new GenericResponse().response(outputInterface);
     }
+
+    @GetMapping("/{uuid}")
+    public ResponseEntity<Object> getPedido(@PathVariable UUID uuid){
+        BuscaPedidoPorUuidUseCase useCase = new BuscaProdutoPorUuidUseCase(new BuscarPedidoRepository(pedidoRepository));
+        useCase.execute(uuid);
+        OutputInterface outputInterface = new useCase.getBuscaPedidoOutput();
+        return new GenericResponse().response(outputInterface);
+    }*/
+}
+
+
