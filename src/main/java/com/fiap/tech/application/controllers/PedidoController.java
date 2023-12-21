@@ -9,8 +9,10 @@ import com.fiap.tech.domain.useCase.pedido.CriaPedidoUseCase;
 import com.fiap.tech.infra.adpter.repository.cliente.ClienteEntityRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.BuscarPedidoRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.CriaPedidoRepository;
+import com.fiap.tech.infra.adpter.repository.produto.BuscarProdutoRepository;
 import com.fiap.tech.infra.repository.ClienteRepository;
 import com.fiap.tech.infra.repository.PedidoRepository;
+import com.fiap.tech.infra.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,15 @@ public class PedidoController {
 
     private final PedidoRepository pedidoRepository;
     private final ClienteRepository clienteRepository;
+    private final ProdutoRepository produtoRepository;
 
     @PostMapping
     ResponseEntity<Object> criarProduto(@RequestBody CriarPedidoInput criarProdutoInput){
 
         CriaPedidoUseCase useCase = new CriaPedidoUseCase(
             new CriaPedidoRepository(pedidoRepository),
-            new ClienteEntityRepository(clienteRepository)
+            new ClienteEntityRepository(clienteRepository),
+            new BuscarProdutoRepository(produtoRepository)
         );
         useCase.execute(criarProdutoInput);
         OutputInterface outputInterface = useCase.getCriaPedidoOutput();

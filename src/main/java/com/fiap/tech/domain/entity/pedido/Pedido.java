@@ -2,11 +2,13 @@ package com.fiap.tech.domain.entity.pedido;
 
 import com.fiap.tech.domain.enums.pedido.StatusPedido;
 import com.fiap.tech.domain.exception.pedido.PedidoVazioException;
+import com.fiap.tech.domain.exception.pedido.ProdutoDoPedidoSemQuantidadeException;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 @Getter
@@ -29,25 +31,36 @@ public class Pedido {
         this.total = valorTotal;
     }
 
-    public void verificaItensDoPedido() throws PedidoVazioException {
-            if (itens.isEmpty()) {
-                throw new PedidoVazioException("Pedido vazio");
+    public void addProduto(Produto produto) {
+        itens.add(produto);
+    }
+
+    public void verificaItensDoPedido() throws PedidoVazioException, ProdutoDoPedidoSemQuantidadeException {
+        Iterator<Produto> iterator = itens.iterator();
+        while (iterator.hasNext()) {
+            Produto produto = iterator.next();
+            if (produto.getQuantidade() < 1) {
+                throw new ProdutoDoPedidoSemQuantidadeException("Produto com quantidade inválida");
             }
         }
+        if (itens.isEmpty()) {
+            throw new PedidoVazioException("Pedido vazio");
+        }
+    }
 
-        public void gerarCombo()
-        {
+    public void gerarCombo()
+    {
 
+    }
+
+    public float valorTotalDoPeido()
+    {
+        float total = (float) 0;
+        for (Produto produto : itens) {
+            total += produto.getValor() * produto.getQuantidade();
         }
 
-        public float valorTotalDoPeido()
-        {
-            float total = (float) 0;
-            for (Produto produto : itens) {
-                total += (float)produto.getValor();
-            }
-
-            return total;
-        }
+        return total;
+    }
 
 }

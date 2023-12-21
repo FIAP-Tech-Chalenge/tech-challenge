@@ -6,6 +6,8 @@ import com.fiap.tech.domain.entity.pedido.Produto;
 import com.fiap.tech.domain.enums.pedido.StatusPedido;
 import com.fiap.tech.domain.exception.pedido.ClienteNaoEncontradoException;
 import com.fiap.tech.domain.exception.pedido.PedidoVazioException;
+import com.fiap.tech.domain.exception.pedido.ProdutoDoPedidoSemQuantidadeException;
+import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 import com.fiap.tech.domain.genic.output.OutputError;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.genic.output.OutputStatus;
@@ -14,6 +16,7 @@ import com.fiap.tech.domain.input.pedido.ProdutoPedidoInput;
 import com.fiap.tech.domain.output.pedido.CriaPedidoOutput;
 import com.fiap.tech.domain.port.cliente.ClienteInterface;
 import com.fiap.tech.domain.port.pedido.PedidoInterface;
+import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -26,16 +29,25 @@ public class CriaPedidoUseCase {
 
     private final PedidoInterface pedidoInterface;
     private final ClienteInterface clienteInterface;
+    private final BuscaProdutoInterface produtoInterface;
     private OutputInterface criaPedidoOutput;
 
     public void execute(CriarPedidoInput criarPedidoInput) {
         try {
             Cliente clienteEntity = clienteInterface.buscaClientePorUuid(criarPedidoInput.clienteUuid());
             Pedido pedidoEntity = new Pedido(clienteEntity.getUuid());
-            pedidoEntity.setItens(this.covertListaPedidosInput(criarPedidoInput.produtoList()));
-            pedidoEntity.verificaItensDoPedido();
             pedidoEntity.setStatus(StatusPedido.RECEBIDO);
+            pedidoEntity.setItens(new ArrayList<>());
 
+            for ( ProdutoPedidoInput produto : criarPedidoInput.produtoList()) {
+                var prod = produtoInterface.encontraProdutoPorUuid(produto.uuid());
+                Produto produtoEntity = new Produto(prod.getUuid(), produto.quantidade());
+                produtoEntity.setValor(prod.getValor());
+                produtoEntity.setCategoria(prod.getCategoria());
+                pedidoEntity.addProduto(produtoEntity);
+            }
+
+            pedidoEntity.verificaItensDoPedido();
             pedidoEntity = pedidoInterface.criaPedido(pedidoEntity);
 
 
@@ -49,7 +61,12 @@ public class CriaPedidoUseCase {
                 e.getMessage(),
                 new OutputStatus(400, "Bad Request", e.getMessage())
             );
-        } catch (ClienteNaoEncontradoException e) {
+        } catch (ProdutoDoPedidoSemQuantidadeException e) {
+            this.criaPedidoOutput = new OutputError(
+                e.getMessage(),
+                new OutputStatus(422, "Unprocessable Entity", e.getMessage())
+            );
+        } catch (ClienteNaoEncontradoException | ProdutoNaoEncontradoException e) {
             this.criaPedidoOutput = new OutputError(
                 e.getMessage(),
                 new OutputStatus(404, "Not Found", e.getMessage())
@@ -62,7 +79,7 @@ public class CriaPedidoUseCase {
         }
     }
 
-    private List<Produto> covertListaPedidosInput(List<ProdutoPedidoInput> produtoPedidoInputs) {
+    /*private List<Produto> covertListaPedidosInput(List<ProdutoPedidoInput> produtoPedidoInputs) {
         List<Produto> produtos = new ArrayList<>();
 
         for (ProdutoPedidoInput produtoInput : produtoPedidoInputs) {
@@ -70,5 +87,5 @@ public class CriaPedidoUseCase {
         }
 
         return produtos;
-    }
+    }*/
 }

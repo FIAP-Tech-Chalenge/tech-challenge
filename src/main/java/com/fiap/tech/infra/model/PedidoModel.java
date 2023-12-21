@@ -20,6 +20,7 @@ import java.util.UUID;
 public class PedidoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
+    @Column(name = "uuid", updatable = false, nullable = false)
     private UUID uuid;
     private UUID clienteId;
     private Date dataCriacao;
@@ -28,6 +29,6 @@ public class PedidoModel {
     private Float valorTotal;
 
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "pedido_id")
+    @JoinColumn(name = "pedido_uuid")
     private List<ProdutoModel> produtos;
 }

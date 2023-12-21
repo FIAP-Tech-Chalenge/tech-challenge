@@ -40,11 +40,12 @@ public class CriaPedidoRepository implements PedidoInterface {
         List<Produto> produtos = new ArrayList<>();
         for (ProdutoModel produtoModel : produtoModels) {
             Produto produto = new Produto(
-                    produtoModel.getNome(),
-                    produtoModel.getValor(),
-                    produtoModel.getDescricao(),
-                    produtoModel.getCategoria(),
-                    produtoModel.getQuantidade());
+                produtoModel.getNome(),
+                produtoModel.getValor(),
+                produtoModel.getDescricao(),
+                produtoModel.getCategoria(),
+                produtoModel.getQuantidade()
+            );
             produto.setUuid(produtoModel.getUuid());
             produtos.add(produto);
         }
@@ -55,12 +56,20 @@ public class CriaPedidoRepository implements PedidoInterface {
     public Pedido criaPedido(Pedido pedido) {
         PedidoModel pedidoModel = new PedidoModel();
         pedidoModel.setUuid(pedido.getUuid());
-        pedido.valorTotalDoPeido();
+        pedidoModel.setValorTotal(pedido.valorTotalDoPeido());
         pedidoModel.setClienteId(pedido.getClienteUuid());
         pedidoModel.setStatus(pedido.getStatus());
         pedidoModel.setDataCriacao(new Date());
 
+        List<ProdutoModel> produtosDoPedido = new ArrayList<>();
+        for (com.fiap.tech.domain.entity.pedido.Produto produto: pedido.getItens()) {
+            ProdutoModel produtoModel = new ProdutoModel();
+            produtoModel.setUuid(produto.getUuid());
+            produtoModel.setQuantidade(produto.getQuantidade());
+            produtosDoPedido.add(produtoModel);
+        }
         pedidoModel = pedidoRepository.save(pedidoModel);
+
 
         pedido.setUuid(pedidoModel.getUuid());
         pedido.setTotal(pedidoModel.getValorTotal());
