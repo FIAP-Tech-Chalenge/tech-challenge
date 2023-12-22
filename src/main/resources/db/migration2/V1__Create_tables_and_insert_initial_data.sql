@@ -1,8 +1,8 @@
 CREATE TABLE IF NOT EXISTS clientes (
-                          uuid VARCHAR(36) PRIMARY KEY,
-                          nome VARCHAR(255) NOT NULL,
-                          cpf VARCHAR(14) NOT NULL,
-                          email VARCHAR(255) NOT NULL
+                                        uuid UUID PRIMARY KEY,
+                                        nome VARCHAR(255) NOT NULL,
+                                        cpf VARCHAR(14) NOT NULL,
+                                        email VARCHAR(255) NOT NULL
 );
 
 INSERT INTO clientes (uuid, nome, cpf, email) VALUES
@@ -13,13 +13,13 @@ INSERT INTO clientes (uuid, nome, cpf, email) VALUES
                                                   ('123e4567-e89b-12d3-a456-426614174004', 'Cliente 5', '28482722956', 'cliente5@email.com');
 
 CREATE TABLE IF NOT EXISTS produtos (
-                          uuid VARCHAR(36) PRIMARY KEY,
-                          nome VARCHAR(255) NOT NULL,
-                          valor DECIMAL(10, 2) NOT NULL,
-                          descricao TEXT NOT NULL,
-                          categoria VARCHAR(255) NOT NULL,
-                          quantidade INT NOT NULL
-);
+                                        uuid UUID PRIMARY KEY,
+                                        nome VARCHAR(255) NOT NULL,
+    valor DECIMAL(10, 2) NOT NULL,
+    descricao TEXT NOT NULL,
+    categoria VARCHAR(255) NOT NULL,
+    quantidade INT NOT NULL
+    );
 
 INSERT INTO produtos (uuid, nome, valor, descricao, categoria, quantidade) VALUES
                                                                                ('123e4567-e89b-12d3-a456-426614174005', 'Produto 1', 10, 'Descricao 1', 'LANCHE', 100),
@@ -29,12 +29,12 @@ INSERT INTO produtos (uuid, nome, valor, descricao, categoria, quantidade) VALUE
                                                                                ('123e4567-e89b-12d3-a456-426614174009', 'Produto 5', 50, 'Descricao 5', 'SOBREMESA', 100);
 
 CREATE TABLE IF NOT EXISTS pedidos (
-                         uuid VARCHAR(36) PRIMARY KEY,
-                         clienteid VARCHAR(36) NOT NULL,
-                         dataCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                         status VARCHAR(255) NOT NULL,
-                         valorTotal DECIMAL(10, 2) NOT NULL,
-                         FOREIGN KEY (clienteid) REFERENCES clientes(uuid)
+                                       uuid UUID PRIMARY KEY,
+                                       clienteid UUID NOT NULL,
+                                       dataCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                                       status VARCHAR(255) NOT NULL,
+                                       valorTotal DECIMAL(10, 2) NOT NULL,
+                                       FOREIGN KEY (clienteid) REFERENCES clientes(uuid)
 );
 
 INSERT INTO pedidos (uuid, clienteid, status, valorTotal, dataCriacao) VALUES
@@ -47,14 +47,14 @@ INSERT INTO pedidos (uuid, clienteid, status, valorTotal, dataCriacao) VALUES
 CREATE SEQUENCE IF NOT EXISTS pedido_produtos_seq START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE IF NOT EXISTS pedido_produtos (
-                                 id BIGINT DEFAULT nextval('pedido_produtos_seq') PRIMARY KEY,
-                                 pedido_uuid VARCHAR(36) NOT NULL,
-                                 produto_uuid VARCHAR(36) NOT NULL,
-                                 valor DECIMAL(10, 2) NOT NULL,
-                                 quantidade INT NOT NULL,
-                                 categoria VARCHAR(255) NOT NULL,
-                                 FOREIGN KEY (pedido_uuid) REFERENCES pedidos(uuid),
-                                 FOREIGN KEY (produto_uuid) REFERENCES produtos(uuid)
+                                                id BIGINT DEFAULT nextval('pedido_produtos_seq') PRIMARY KEY,
+                                                pedido_uuid UUID NOT NULL,
+                                                produto_uuid UUID NOT NULL,
+                                                valor DECIMAL(10, 2) NOT NULL,
+                                                quantidade INT NOT NULL,
+                                                categoria VARCHAR(255) NOT NULL,
+                                                FOREIGN KEY (pedido_uuid) REFERENCES pedidos(uuid),
+                                                FOREIGN KEY (produto_uuid) REFERENCES produtos(uuid)
 );
 
 

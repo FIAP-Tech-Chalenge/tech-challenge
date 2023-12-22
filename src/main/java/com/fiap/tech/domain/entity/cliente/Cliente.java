@@ -10,12 +10,12 @@ import java.util.UUID;
 @NoArgsConstructor
 public class Cliente {
 
-    private String uuid;
+    private UUID uuid;
     private String nome;
     private String cpf;
     private String email;
 
-    public Cliente(String nome, String cpf, String email, String uuid) {
+    public Cliente(String nome, String cpf, String email, UUID uuid) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;

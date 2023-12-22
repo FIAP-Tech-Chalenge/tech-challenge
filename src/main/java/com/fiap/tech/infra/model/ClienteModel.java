@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.UUID;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -13,12 +15,12 @@ import lombok.Setter;
 public class ClienteModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    private String uuid;
+    private UUID uuid;
     private String nome;
     private String cpf;
     private String email;
 
-    public ClienteModel(String nome, String cpf, String email, String uuid) {
+    public ClienteModel(String nome, String cpf, String email, UUID uuid) {
         this.nome = nome;
         this.cpf = cpf;
         this.email = email;

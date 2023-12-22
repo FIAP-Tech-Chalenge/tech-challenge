@@ -15,7 +15,7 @@ public class ClienteEntityRepository implements ClienteInterface {
 
     @Override
     public Cliente buscaClientePorUuid(UUID uuid) throws ClienteNaoEncontradoException {
-        ClienteModel clienteModel = clienteRepository.findByUuid(uuid.toString());
+        ClienteModel clienteModel = clienteRepository.findByUuid(uuid);
         if (clienteModel == null) {
             throw new ClienteNaoEncontradoException("Cliente não encontrado");
         }
@@ -23,7 +23,7 @@ public class ClienteEntityRepository implements ClienteInterface {
             clienteModel.getNome(),
             clienteModel.getCpf(),
             clienteModel.getEmail(),
-            UUID.fromString(clienteModel.getUuid())
+            clienteModel.getUuid()
         );
     }
 }
