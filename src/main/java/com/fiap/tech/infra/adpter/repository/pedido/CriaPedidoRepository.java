@@ -7,6 +7,7 @@ import com.fiap.tech.domain.port.pedido.PedidoInterface;
 import com.fiap.tech.infra.model.PedidoModel;
 import com.fiap.tech.infra.model.ProdutoModel;
 import com.fiap.tech.infra.repository.PedidoRepository;
+import com.fiap.tech.infra.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ import java.util.UUID;
 public class CriaPedidoRepository implements PedidoInterface {
 
     private final PedidoRepository pedidoRepository;
+    private final ProdutoRepository produtoRepository;
 
     @Override
     public Pedido buscaPedido(UUID uuid) throws PedidoNaoEncontradoException {
@@ -62,14 +64,15 @@ public class CriaPedidoRepository implements PedidoInterface {
         pedidoModel.setDataCriacao(new Date());
 
         List<ProdutoModel> produtosDoPedido = new ArrayList<>();
-        for (com.fiap.tech.domain.entity.pedido.Produto produto: pedido.getItens()) {
-            ProdutoModel produtoModel = new ProdutoModel();
-            produtoModel.setUuid(produto.getUuid());
-            produtoModel.setQuantidade(produto.getQuantidade());
-            produtosDoPedido.add(produtoModel);
+        for (com.fiap.tech.domain.entity.pedido.Produto produto: pedido.getProdutos()) {
+            ProdutoModel produtoModel = produtoRepository.findByUuid(produto.getUuid());
+            if (produtoModel != null) {
+                produtoModel.setQuantidade(produto.getQuantidade());
+                produtosDoPedido.add(produtoModel);
+            }
         }
+        pedidoModel.setProdutos(produtosDoPedido);
         pedidoModel = pedidoRepository.save(pedidoModel);
-
 
         pedido.setUuid(pedidoModel.getUuid());
         pedido.setTotal(pedidoModel.getValorTotal());

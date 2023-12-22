@@ -33,7 +33,7 @@ public class PedidoController {
     ResponseEntity<Object> criarProduto(@RequestBody CriarPedidoInput criarProdutoInput){
 
         CriaPedidoUseCase useCase = new CriaPedidoUseCase(
-            new CriaPedidoRepository(pedidoRepository),
+            new CriaPedidoRepository(pedidoRepository, produtoRepository),
             new ClienteEntityRepository(clienteRepository),
             new BuscarProdutoRepository(produtoRepository)
         );

@@ -16,19 +16,28 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name ="pedido")
+@Table(name ="pedidos")
 public class PedidoModel {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @Column(name = "uuid", updatable = false, nullable = false)
     private UUID uuid;
+    @Column(name = "clienteid")
     private UUID clienteId;
+    @Column(name = "datacriacao")
     private Date dataCriacao;
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
+    @Column(name = "valortotal")
     private Float valorTotal;
 
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "pedido_uuid")
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(
+            name = "pedido_produtos",
+            joinColumns = @JoinColumn(name = "pedido_uuid"),
+            inverseJoinColumns = @JoinColumn(name = "produto_uuid")
+    )
     private List<ProdutoModel> produtos;
+
 }
+

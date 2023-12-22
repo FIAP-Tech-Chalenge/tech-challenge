@@ -21,7 +21,6 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import java.util.ArrayList;
-import java.util.List;
 
 @Getter
 @RequiredArgsConstructor
@@ -37,7 +36,7 @@ public class CriaPedidoUseCase {
             Cliente clienteEntity = clienteInterface.buscaClientePorUuid(criarPedidoInput.clienteUuid());
             Pedido pedidoEntity = new Pedido(clienteEntity.getUuid());
             pedidoEntity.setStatus(StatusPedido.RECEBIDO);
-            pedidoEntity.setItens(new ArrayList<>());
+            pedidoEntity.setProdutos(new ArrayList<>());
 
             for ( ProdutoPedidoInput produto : criarPedidoInput.produtoList()) {
                 var prod = produtoInterface.encontraProdutoPorUuid(produto.uuid());
