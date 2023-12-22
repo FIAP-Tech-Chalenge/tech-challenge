@@ -40,7 +40,7 @@ public class CriaPedidoUseCase {
 
             for ( ProdutoPedidoInput produto : criarPedidoInput.produtoList()) {
                 var prod = produtoInterface.encontraProdutoPorUuid(produto.uuid());
-                Produto produtoEntity = new Produto(prod.getUuid(), produto.quantidade());
+                Produto produtoEntity = new Produto(prod.getUuid(), produto.quantidade(), prod.getCategoria());
                 produtoEntity.setValor(prod.getValor());
                 produtoEntity.setCategoria(prod.getCategoria());
                 pedidoEntity.addProduto(produtoEntity);

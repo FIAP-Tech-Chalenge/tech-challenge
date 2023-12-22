@@ -44,19 +44,22 @@ INSERT INTO pedidos (uuid, clienteid, status, valorTotal, dataCriacao) VALUES
                                                                            ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174003', 'RECEBIDO', 200, '2022-12-21 00:00:00'),
                                                                            ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174004', 'RECEBIDO', 250, '2022-12-21 00:00:00');
 
+CREATE SEQUENCE pedido_produtos_seq START WITH 1 INCREMENT BY 1;
+
 CREATE TABLE pedido_produtos (
-                                 id BIGINT PRIMARY KEY,
+                                 id BIGINT DEFAULT NEXT VALUE FOR pedido_produtos_seq PRIMARY KEY,
                                  pedido_uuid VARCHAR(36) NOT NULL,
                                  produto_uuid VARCHAR(36) NOT NULL,
                                  valor DECIMAL(10, 2) NOT NULL,
                                  quantidade INT NOT NULL,
+                                 categoria VARCHAR(255) NOT NULL,
                                  FOREIGN KEY (pedido_uuid) REFERENCES pedidos(uuid),
                                  FOREIGN KEY (produto_uuid) REFERENCES produtos(uuid)
 );
 
-INSERT INTO pedido_produtos (id, pedido_uuid, produto_uuid, valor, quantidade) VALUES
-                                                                                    (1, '123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005', 10, 1),
-                                                                                    (2, '123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006', 20, 1),
-                                                                                    (3, '123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007', 30, 1),
-                                                                                    (4, '123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008', 40, 1),
-                                                                                    (5, '123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009', 50, 1);
+INSERT INTO pedido_produtos (id, pedido_uuid, produto_uuid, valor, quantidade, categoria) VALUES
+                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005', 10, 1, 'LANCHE'),
+                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006', 20, 1, 'BEBIDA'),
+                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007', 30, 1, 'ACOMPANHAMENTO'),
+                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008', 40, 1, 'SOBREMESA'),
+                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009', 50, 1, 'SOBREMESA');

@@ -35,7 +35,7 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
             List<PedidoProdutoModel> pedidosDoProduto = pedidoProdutoRepository.findPedidoProdutoModelsByPedidoUuid(pedidoModel.getUuid());
             List<Produto> produtosList = new ArrayList<>();
             for (PedidoProdutoModel pedidoProdutoModel : pedidosDoProduto) {
-                Produto produtoEntity = new Produto(pedidoProdutoModel.getPedidoUuid(), pedidoProdutoModel.getQuantidade());
+                Produto produtoEntity = new Produto(pedidoProdutoModel.getPedidoUuid(), pedidoProdutoModel.getQuantidade(), pedidoProdutoModel.getCategoria());
                 produtoEntity.setValor(pedidoProdutoModel.getValor());
                 produtosList.add(produtoEntity);
             }
