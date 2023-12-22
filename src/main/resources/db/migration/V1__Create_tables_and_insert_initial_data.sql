@@ -22,11 +22,11 @@ CREATE TABLE produtos (
 );
 
 INSERT INTO produtos (uuid, nome, valor, descricao, categoria, quantidade) VALUES
-                                                                               ('123e4567-e89b-12d3-a456-426614174005', 'Produto 1', 10, 'Descricao 1', 'LANCHE', 5),
-                                                                               ('123e4567-e89b-12d3-a456-426614174006', 'Produto 2', 20, 'Descricao 2', 'BEBIDA', 10),
-                                                                               ('123e4567-e89b-12d3-a456-426614174007', 'Produto 3', 30, 'Descricao 3', 'ACOMPANHAMENTO', 15),
-                                                                               ('123e4567-e89b-12d3-a456-426614174008', 'Produto 4', 40, 'Descricao 4', 'SOBREMESA', 20),
-                                                                               ('123e4567-e89b-12d3-a456-426614174009', 'Produto 5', 50, 'Descricao 5', 'SOBREMESA', 25);
+                                                                               ('123e4567-e89b-12d3-a456-426614174005', 'Produto 1', 10, 'Descricao 1', 'LANCHE', 100),
+                                                                               ('123e4567-e89b-12d3-a456-426614174006', 'Produto 2', 20, 'Descricao 2', 'BEBIDA', 100),
+                                                                               ('123e4567-e89b-12d3-a456-426614174007', 'Produto 3', 30, 'Descricao 3', 'ACOMPANHAMENTO', 100),
+                                                                               ('123e4567-e89b-12d3-a456-426614174008', 'Produto 4', 40, 'Descricao 4', 'SOBREMESA', 100),
+                                                                               ('123e4567-e89b-12d3-a456-426614174009', 'Produto 5', 50, 'Descricao 5', 'SOBREMESA', 100);
 
 CREATE TABLE pedidos (
                          uuid VARCHAR(36) PRIMARY KEY,
@@ -38,11 +38,11 @@ CREATE TABLE pedidos (
 );
 
 INSERT INTO pedidos (uuid, clienteid, status, valorTotal, dataCriacao) VALUES
-                                                                           ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174000', 'RECEBIDO', 50, '2022-12-21 00:00:00'),
-                                                                           ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174001', 'RECEBIDO', 100, '2022-12-21 00:00:00'),
-                                                                           ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 150, '2022-12-21 00:00:00'),
-                                                                           ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174003', 'RECEBIDO', 200, '2022-12-21 00:00:00'),
-                                                                           ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174004', 'RECEBIDO', 250, '2022-12-21 00:00:00');
+                                                                           ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174000', 'RECEBIDO', 10, '2022-12-21 00:00:00'),
+                                                                           ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174001', 'RECEBIDO', 20, '2022-12-21 00:00:00'),
+                                                                           ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 30, '2022-12-21 00:00:00'),
+                                                                           ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174003', 'RECEBIDO', 40, '2022-12-21 00:00:00'),
+                                                                           ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174004', 'RECEBIDO', 50, '2022-12-21 00:00:00');
 
 CREATE SEQUENCE pedido_produtos_seq START WITH 1 INCREMENT BY 1;
 
