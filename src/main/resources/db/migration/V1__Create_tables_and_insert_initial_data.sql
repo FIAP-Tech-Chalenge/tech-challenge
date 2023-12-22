@@ -47,14 +47,16 @@ INSERT INTO pedidos (uuid, clienteid, status, valorTotal, dataCriacao) VALUES
 CREATE TABLE pedido_produtos (
                                  pedido_uuid VARCHAR(36) NOT NULL,
                                  produto_uuid VARCHAR(36) NOT NULL,
+                                 valor DECIMAL(10, 2) NOT NULL,
+                                 quantidade INT NOT NULL,
                                  PRIMARY KEY (pedido_uuid, produto_uuid),
                                  FOREIGN KEY (pedido_uuid) REFERENCES pedidos(uuid),
                                  FOREIGN KEY (produto_uuid) REFERENCES produtos(uuid)
 );
 
-INSERT INTO pedido_produtos (pedido_uuid, produto_uuid) VALUES
-                                                            ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005'),
-                                                            ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006'),
-                                                            ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007'),
-                                                            ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008'),
-                                                            ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009');
+INSERT INTO pedido_produtos (pedido_uuid, produto_uuid, valor, quantidade) VALUES
+                                                            ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005', 10, 1),
+                                                            ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006', 20, 1),
+                                                            ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007', 30, 1),
+                                                            ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008', 40, 1),
+                                                            ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009', 50, 1);
