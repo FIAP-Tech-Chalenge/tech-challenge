@@ -25,12 +25,7 @@ public class PedidoProdutoModel {
     @Enumerated(EnumType.STRING)
     private CategoriaEnum categoria;
     private UUID produtoUuid;
-
-//    @JoinColumn(name = "pedido_uuid", table = "pedidos", referencedColumnName = "uuid")
     private UUID pedidoUuid;
-/*
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "produto_uuid")
-    private List<ProdutoModel> produtos;*/
+
 
 }

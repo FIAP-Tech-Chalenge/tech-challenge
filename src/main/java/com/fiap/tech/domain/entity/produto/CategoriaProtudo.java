@@ -3,7 +3,6 @@ package com.fiap.tech.domain.entity.produto;
 import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 import com.fiap.tech.domain.exception.produto.CategoriaDeProdutoInvalidaException;
 
-import java.util.List;
 
 public record CategoriaProtudo(String categoriaEnum) {
 

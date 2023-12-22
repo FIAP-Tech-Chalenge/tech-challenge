@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.Date;
-import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -31,14 +30,5 @@ public class PedidoModel {
     @Column(name = "valortotal")
     private Float valorTotal;
 
-    /*@OneToMany(fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "pedido_produtos",
-            joinColumns = @JoinColumn(name = "pedido_uuid"),
-            inverseJoinColumns = @JoinColumn(name = "produto_uuid")
-    )*/
-    //@OneToMany(mappedBy = "pedidos", cascade = CascadeType.ALL, orphanRemoval = true)
-//    @OneToMany(mappedBy = "pedido_produtos", cascade = CascadeType.ALL)
-//    private List<PedidoProdutoModel> pedidoProdutos;
 }
 

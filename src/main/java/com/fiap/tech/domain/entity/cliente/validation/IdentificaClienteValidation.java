@@ -5,7 +5,6 @@ import com.fiap.tech.domain.exception.cliente.EmailNaoPodeSerNuloException;
 import com.fiap.tech.domain.exception.cliente.NomeNaoPodeSerNuloException;
 import com.fiap.tech.domain.valuesObject.CpfValueObject;
 
-import java.util.UUID;
 
 public class IdentificaClienteValidation {
 

@@ -1,5 +1,5 @@
 CREATE TABLE clientes (
-                          uuid VARCHAR(36) PRIMARY KEY,
+                          uuid UUID PRIMARY KEY,
                           nome VARCHAR(255) NOT NULL,
                           cpf VARCHAR(14) NOT NULL,
                           email VARCHAR(255) NOT NULL
@@ -13,9 +13,9 @@ INSERT INTO clientes (uuid, nome, cpf, email) VALUES
                                                   ('123e4567-e89b-12d3-a456-426614174004', 'Cliente 5', '28482722956', 'cliente5@email.com');
 
 CREATE TABLE produtos (
-                          uuid VARCHAR(36) PRIMARY KEY,
+                          uuid UUID PRIMARY KEY,
                           nome VARCHAR(255) NOT NULL,
-                          valor DECIMAL(10, 2) NOT NULL,
+                          valor NUMERIC(10, 2) NOT NULL,
                           descricao TEXT NOT NULL,
                           categoria VARCHAR(255) NOT NULL,
                           quantidade INT NOT NULL
@@ -29,11 +29,11 @@ INSERT INTO produtos (uuid, nome, valor, descricao, categoria, quantidade) VALUE
                                                                                ('123e4567-e89b-12d3-a456-426614174009', 'Produto 5', 50, 'Descricao 5', 'SOBREMESA', 100);
 
 CREATE TABLE pedidos (
-                         uuid VARCHAR(36) PRIMARY KEY,
-                         clienteid VARCHAR(36) NOT NULL,
-                         dataCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+                         uuid UUID PRIMARY KEY,
+                         clienteid UUID NOT NULL,
+                         dataCriacao TIMESTAMP NOT NULL DEFAULT NOW(),
                          status VARCHAR(255) NOT NULL,
-                         valorTotal DECIMAL(10, 2) NOT NULL,
+                         valorTotal NUMERIC(10, 2) NOT NULL,
                          FOREIGN KEY (clienteid) REFERENCES clientes(uuid)
 );
 
@@ -47,10 +47,10 @@ INSERT INTO pedidos (uuid, clienteid, status, valorTotal, dataCriacao) VALUES
 CREATE SEQUENCE pedido_produtos_seq START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE pedido_produtos (
-                                 id BIGINT DEFAULT NEXT VALUE FOR pedido_produtos_seq PRIMARY KEY,
-                                 pedido_uuid VARCHAR(36) NOT NULL,
-                                 produto_uuid VARCHAR(36) NOT NULL,
-                                 valor DECIMAL(10, 2) NOT NULL,
+                                 id BIGINT DEFAULT nextval('pedido_produtos_seq') PRIMARY KEY,
+                                 pedido_uuid UUID NOT NULL,
+                                 produto_uuid UUID NOT NULL,
+                                 valor NUMERIC(10, 2) NOT NULL,
                                  quantidade INT NOT NULL,
                                  categoria VARCHAR(255) NOT NULL,
                                  FOREIGN KEY (pedido_uuid) REFERENCES pedidos(uuid),
@@ -58,8 +58,8 @@ CREATE TABLE pedido_produtos (
 );
 
 INSERT INTO pedido_produtos (id, pedido_uuid, produto_uuid, valor, quantidade, categoria) VALUES
-                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005', 10, 1, 'LANCHE'),
-                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006', 20, 1, 'BEBIDA'),
-                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007', 30, 1, 'ACOMPANHAMENTO'),
-                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008', 40, 1, 'SOBREMESA'),
-                                                                                              (NEXT VALUE FOR pedido_produtos_seq, '123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009', 50, 1, 'SOBREMESA');
+                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005', 10, 1, 'LANCHE'),
+                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006', 20, 1, 'BEBIDA'),
+                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007', 30, 1, 'ACOMPANHAMENTO'),
+                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008', 40, 1, 'SOBREMESA'),
+                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009', 50, 1, 'SOBREMESA');

@@ -1,29 +1,29 @@
 version: '3.8'
-
 services:
-  java-app:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "8080:8080"
-    depends_on:
-      - db
+  postgres:
+    image: postgres:latest
     environment:
-      - DATABASE_HOST=db
-      - DATABASE_USER=root
-      - DATABASE_PASSWORD=my-secret-pw
-      - DATABASE_NAME=mydatabase
-
-  db:
-    image: mysql:latest
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: my-secret-pw
+      POSTGRES_DB: mydatabase
     ports:
-      - "3310:3310"
-    environment:
-      - MYSQL_ROOT_PASSWORD=my-secret-pw
-      - MYSQL_DATABASE=mydatabase
+      - "5432:5432"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - postgres-data:/var/lib/postgresql/data
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: SuperSecret
+    ports:
+      - "8090:8090"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+
 
 volumes:
-  mysql_data:
+  postgres-data:
+  pgadmin-data:

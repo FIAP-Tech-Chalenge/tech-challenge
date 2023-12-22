@@ -9,7 +9,6 @@ import com.fiap.tech.domain.genic.output.OutputStatus;
 import com.fiap.tech.domain.output.produto.DeletaProdutoOutput;
 import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
 import com.fiap.tech.domain.port.produto.DeletarProdutoInterface;
-import com.fiap.tech.infra.model.ProdutoModel;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -32,7 +31,6 @@ public class DeletaProdutoUseCase {
                     produtoEntity,
                     new OutputStatus(204, "No content", "Produto deletado com sucesso")
             );
-            System.out.println("teste");
         } catch (ProdutoNaoEncontradoException e) {
             this.deletaProdutoOutput = new OutputError(
                     e.getMessage(),

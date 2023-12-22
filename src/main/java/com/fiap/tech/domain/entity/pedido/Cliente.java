@@ -1,7 +1,5 @@
 package com.fiap.tech.domain.entity.pedido;
 
-import com.fiap.tech.domain.entity.cliente.validation.IdentificaClienteValidation;
-import com.fiap.tech.domain.exception.pedido.PedidoNaoPertenceAoClienteException;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
