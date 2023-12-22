@@ -1,10 +1,11 @@
 package com.fiap.tech.infra.adpter.repository.pedido;
 
 import com.fiap.tech.domain.entity.pedido.Pedido;
-import com.fiap.tech.domain.entity.produto.Produto;
+import com.fiap.tech.domain.entity.pedido.Produto;
 import com.fiap.tech.domain.port.pedido.BuscaPedidoInterface;
 import com.fiap.tech.infra.model.PedidoModel;
-import com.fiap.tech.infra.model.ProdutoModel;
+import com.fiap.tech.infra.model.PedidoProdutoModel;
+import com.fiap.tech.infra.repository.PedidoProdutoRepository;
 import com.fiap.tech.infra.repository.PedidoRepository;
 import lombok.RequiredArgsConstructor;
 
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class BuscarPedidoRepository implements BuscaPedidoInterface {
 
     private final PedidoRepository pedidoRepository;
+    private final PedidoProdutoRepository pedidoProdutoRepository;
 
     @Override
     public List<Pedido> findAll() {
@@ -24,22 +26,30 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
         List<Pedido> pedidosEntities = new ArrayList<>();
 
         for (PedidoModel pedidoModel : pedidosModels) {
-            List<Produto> produtos = getProdutos(pedidoModel.getProdutos());
             Pedido pedidoEntity = new Pedido(
                     pedidoModel.getClienteId(),
                     pedidoModel.getStatus(),
-                    produtos,
-                    pedidoModel.getValorTotal());
+                    pedidoModel.getValorTotal()
+            );
+
+            List<PedidoProdutoModel> pedidosDoProduto = pedidoProdutoRepository.findPedidoProdutoModelsByPedidoUuid(pedidoModel.getUuid());
+            List<Produto> produtosList = new ArrayList<>();
+            for (PedidoProdutoModel pedidoProdutoModel : pedidosDoProduto) {
+                Produto produtoEntity = new Produto(pedidoProdutoModel.getPedidoUuid(), pedidoProdutoModel.getQuantidade());
+                produtoEntity.setValor(pedidoProdutoModel.getValor());
+                produtosList.add(produtoEntity);
+            }
+            pedidoEntity.setProdutos(produtosList);
+
             pedidoEntity.setUuid(pedidoModel.getUuid());
             pedidosEntities.add(pedidoEntity);
         }
-
         return pedidosEntities;
     }
 
     @Override
     public Pedido encontraPedidoPorUuid(UUID uuid) {
-        PedidoModel pedidoModel = pedidoRepository.findByUuid(uuid);
+        /*PedidoModel pedidoModel = pedidoRepository.findByUuid(uuid);
         if (pedidoModel == null) {
             return null;
         }
@@ -50,23 +60,8 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
                 produtos,
                 pedidoModel.getValorTotal()
         );
-        pedidoEntity.setUuid(pedidoModel.getUuid());
-        return pedidoEntity;
-    }
+        pedidoEntity.setUuid(pedidoModel.getUuid());*/
 
-    private List<Produto> getProdutos(List<ProdutoModel> produtoModels) {
-        List<Produto> produtos = new ArrayList<>();
-        for (ProdutoModel produtoModel : produtoModels) {
-            Produto produto = new Produto(
-                    produtoModel.getNome(),
-                    produtoModel.getValor(),
-                    produtoModel.getDescricao(),
-                    produtoModel.getCategoria(),
-                    produtoModel.getQuantidade()
-            );
-            produto.setUuid(produtoModel.getUuid());
-            produtos.add(produto);
-        }
-        return produtos;
+        return new Pedido(uuid);
     }
 }

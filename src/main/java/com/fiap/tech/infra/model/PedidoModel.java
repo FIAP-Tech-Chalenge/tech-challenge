@@ -31,13 +31,14 @@ public class PedidoModel {
     @Column(name = "valortotal")
     private Float valorTotal;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+    /*@OneToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "pedido_produtos",
             joinColumns = @JoinColumn(name = "pedido_uuid"),
             inverseJoinColumns = @JoinColumn(name = "produto_uuid")
-    )
-    private List<ProdutoModel> produtos;
-
+    )*/
+    //@OneToMany(mappedBy = "pedidos", cascade = CascadeType.ALL, orphanRemoval = true)
+//    @OneToMany(mappedBy = "pedido_produtos", cascade = CascadeType.ALL)
+//    private List<PedidoProdutoModel> pedidoProdutos;
 }
 

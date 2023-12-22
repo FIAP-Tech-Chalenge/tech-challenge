@@ -18,12 +18,6 @@ public class Pedido {
         private final UUID clienteUuid;
         @Enumerated(EnumType.STRING)
         private StatusPedido status;
-        @ManyToMany
-        @JoinTable(
-                name = "pedido_produtos",
-                joinColumns = @JoinColumn(name = "pedido_uuid"),
-                inverseJoinColumns = @JoinColumn(name = "produto_uuid")
-        )
         private List<Produto> produtos;
         private Float total;
 
@@ -32,7 +26,7 @@ public class Pedido {
             this.produtos = new ArrayList<>();
         }
 
-    public Pedido(UUID clienteId, StatusPedido status, List<com.fiap.tech.domain.entity.produto.Produto> produtos, Float valorTotal) {
+    public Pedido(UUID clienteId, StatusPedido status, Float valorTotal) {
         this.clienteUuid = clienteId;
         this.status = status;
         this.total = valorTotal;

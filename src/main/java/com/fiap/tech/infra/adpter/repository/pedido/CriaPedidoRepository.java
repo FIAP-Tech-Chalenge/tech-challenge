@@ -5,7 +5,9 @@ import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.pedido.PedidoNaoEncontradoException;
 import com.fiap.tech.domain.port.pedido.PedidoInterface;
 import com.fiap.tech.infra.model.PedidoModel;
+import com.fiap.tech.infra.model.PedidoProdutoModel;
 import com.fiap.tech.infra.model.ProdutoModel;
+import com.fiap.tech.infra.repository.PedidoProdutoRepository;
 import com.fiap.tech.infra.repository.PedidoRepository;
 import com.fiap.tech.infra.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,22 +22,23 @@ public class CriaPedidoRepository implements PedidoInterface {
 
     private final PedidoRepository pedidoRepository;
     private final ProdutoRepository produtoRepository;
+    private final PedidoProdutoRepository pedidoProdutoRepository;
 
     @Override
     public Pedido buscaPedido(UUID uuid) throws PedidoNaoEncontradoException {
-        PedidoModel pedidoModel = pedidoRepository.findByUuid(uuid);
+        /*PedidoModel pedidoModel = pedidoRepository.findByUuid(uuid);
         if (pedidoModel == null) {
             throw new PedidoNaoEncontradoException("Pedido não encontrado");
         }
-        List<Produto> produtos = getProdutos(pedidoModel.getProdutos());
+        List<Produto> produtos = getProdutos(pedidoModel.getPedidoProduto());
         Pedido pedidoEntity = new Pedido(
                 pedidoModel.getClienteId(),
                 pedidoModel.getStatus(),
                 produtos,
                 pedidoModel.getValorTotal());
         pedidoEntity.setUuid(pedidoModel.getUuid()
-        );
-        return pedidoEntity;
+        );*/
+        return new Pedido(uuid);
     }
 
     private List<Produto> getProdutos(List<ProdutoModel> produtoModels) {
@@ -62,17 +65,22 @@ public class CriaPedidoRepository implements PedidoInterface {
         pedidoModel.setClienteId(pedido.getClienteUuid());
         pedidoModel.setStatus(pedido.getStatus());
         pedidoModel.setDataCriacao(new Date());
+        pedidoModel = pedidoRepository.save(pedidoModel);
+        pedido.setUuid(pedidoModel.getUuid());
 
-        List<ProdutoModel> produtosDoPedido = new ArrayList<>();
         for (com.fiap.tech.domain.entity.pedido.Produto produto: pedido.getProdutos()) {
             ProdutoModel produtoModel = produtoRepository.findByUuid(produto.getUuid());
             if (produtoModel != null) {
                 produtoModel.setQuantidade(produto.getQuantidade());
-                produtosDoPedido.add(produtoModel);
+
+                PedidoProdutoModel pedidoProduto = new PedidoProdutoModel();
+                pedidoProduto.setPedidoUuid(pedido.getUuid());
+                pedidoProduto.setProdutoUuid(produto.getUuid());
+                pedidoProduto.setQuantidade(produto.getQuantidade());
+                pedidoProduto.setValor(produto.getValor());
+                pedidoProdutoRepository.save(pedidoProduto);
             }
         }
-        pedidoModel.setProdutos(produtosDoPedido);
-        pedidoModel = pedidoRepository.save(pedidoModel);
 
         pedido.setUuid(pedidoModel.getUuid());
         pedido.setTotal(pedidoModel.getValorTotal());

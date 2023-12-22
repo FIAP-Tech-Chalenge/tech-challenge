@@ -19,8 +19,7 @@ public class Produto {
     private final Integer quantidade;
     private Float valor;
     private CategoriaEnum categoria;
-    @ManyToMany(mappedBy = "produtos")
-    private List<PedidoModel> pedidos;
+    private List<PedidoModel> pedidos = null;
 
     public Produto(UUID uuid, Integer quantidade) {
         this.uuid = uuid;
