@@ -1,12 +1,13 @@
 package com.fiap.tech.application.controllers;
 
 import com.fiap.tech.application.response.GenericResponse;
-import com.fiap.tech.application.services.CheckoutService;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.input.pedido.CriarPedidoInput;
+import com.fiap.tech.domain.useCase.checkout.ProcessaCheckoutUseCase;
 import com.fiap.tech.domain.useCase.pedido.BuscaPedidoPorUuidUseCase;
 import com.fiap.tech.domain.useCase.pedido.BuscaTodosPedidosUseCase;
 import com.fiap.tech.domain.useCase.pedido.CriaPedidoUseCase;
+import com.fiap.tech.infra.adpter.repository.checkout.CheckoutQueueAdapter;
 import com.fiap.tech.infra.adpter.repository.cliente.ClienteEntityRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.BuscarPedidoRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.CriaPedidoRepository;
@@ -31,7 +32,6 @@ public class PedidoController {
     private final ClienteRepository clienteRepository;
     private final ProdutoRepository produtoRepository;
     private final PedidoProdutoRepository pedidoProdutoRepository;
-    private final CheckoutService checkoutService;
 
     @PostMapping
     ResponseEntity<Object> criarProduto(@RequestBody CriarPedidoInput criarProdutoInput){
@@ -64,8 +64,10 @@ public class PedidoController {
 
     @PostMapping("/{uuid}/checkout")
     public ResponseEntity<Object> processarCheckout(@PathVariable UUID uuid) {
-        checkoutService.processarCheckout(uuid);
-        return ResponseEntity.ok().body("Checkout processado com sucesso.");
+        ProcessaCheckoutUseCase processaCheckoutUseCase = new ProcessaCheckoutUseCase(new BuscarPedidoRepository(pedidoRepository, pedidoProdutoRepository),new CheckoutQueueAdapter());
+        processaCheckoutUseCase.execute(uuid);
+        OutputInterface outputInterface = processaCheckoutUseCase.getCheckoutOutput();
+        return new GenericResponse().response(outputInterface);
     }
 }
 

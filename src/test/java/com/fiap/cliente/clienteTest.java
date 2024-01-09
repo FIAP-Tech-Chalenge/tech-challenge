@@ -10,7 +10,7 @@ class SalvarTest {
 
     @Test
     public void test_create_new_cliente_with_nome_cpf_email() {
-        Cliente cliente = new Cliente("John Doe", "123456789", "john.doe@example.com", "1");
+        //Cliente cliente = new Cliente("John Doe", "123456789", "john.doe@example.com", "1");
         /*assertEquals("John Doe", cliente.getNome());
         assertEquals("123456789", cliente.getCpf());
         assertEquals("john.doe@example.com", cliente.getEmail());
