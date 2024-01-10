@@ -32,17 +32,18 @@ CREATE TABLE IF NOT EXISTS pedidos (
                                        uuid UUID PRIMARY KEY,
                                        clienteid UUID NOT NULL,
                                        dataCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-                                       status VARCHAR(255) NOT NULL,
+                                       statusPedido VARCHAR(255) NOT NULL,
+                                       statusPagamento VARCHAR(255) NOT NULL,
                                        valorTotal DECIMAL(10, 2) NOT NULL,
                                        FOREIGN KEY (clienteid) REFERENCES clientes(uuid)
 );
 
-INSERT INTO pedidos (uuid, clienteid, status, valorTotal, dataCriacao) VALUES
-                                                                           ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174000', 'RECEBIDO', 10, '2022-12-21 00:00:00'),
-                                                                           ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174001', 'RECEBIDO', 20, '2022-12-21 00:00:00'),
-                                                                           ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 30, '2022-12-21 00:00:00'),
-                                                                           ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174003', 'RECEBIDO', 40, '2022-12-21 00:00:00'),
-                                                                           ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174004', 'RECEBIDO', 50, '2022-12-21 00:00:00');
+INSERT INTO pedidos (uuid, clienteid, statusPedido, statusPagamento, valorTotal, dataCriacao) VALUES
+                                                                                                  ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174000', 'RECEBIDO', 'NAO_PAGO', 10, '2022-12-21 00:00:00'),
+                                                                                                  ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174001', 'RECEBIDO', 'NAO_PAGO', 20, '2022-12-21 00:00:00'),
+                                                                                                  ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 'NAO_PAGO', 30, '2022-12-21 00:00:00'),
+                                                                                                  ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174003', 'RECEBIDO', 'NAO_PAGO', 40, '2022-12-21 00:00:00'),
+                                                                                                  ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174004', 'RECEBIDO', 'NAO_PAGO', 50, '2022-12-21 00:00:00');
 
 CREATE SEQUENCE IF NOT EXISTS pedido_produtos_seq START WITH 1 INCREMENT BY 1;
 
