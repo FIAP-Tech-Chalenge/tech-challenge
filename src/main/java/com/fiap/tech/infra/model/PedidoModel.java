@@ -27,8 +27,10 @@ public class PedidoModel {
     @Column(name = "datacriacao")
     private Date dataCriacao;
     @Enumerated(EnumType.STRING)
+    @Column(name = "statuspedido")
     private StatusPedido statusPedido;
     @Enumerated(EnumType.STRING)
+    @Column(name = "statuspagamento")
     private StatusPagamento statusPagamento;
     @Column(name = "valortotal")
     private Float valorTotal;
