@@ -6,6 +6,7 @@ import com.fiap.tech.domain.exception.checkout.PedidoNaoEncontradoException;
 import com.fiap.tech.domain.genic.output.OutputError;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.genic.output.OutputStatus;
+import com.fiap.tech.domain.output.pedido.CheckOutOutput;
 import com.fiap.tech.domain.port.checkout.CheckoutProcessorInterface;
 import com.fiap.tech.infra.adpter.repository.pedido.BuscarPedidoRepository;
 import lombok.Getter;
@@ -25,6 +26,10 @@ public class ProcessaCheckoutUseCase {
             }
 
             checkoutProcessor.processarCheckout(pedido);
+            checkoutOutput = new CheckOutOutput(
+                pedido,
+                new OutputStatus(200, "Ok", "Checkout realizado com sucesso")
+            );
         } catch (PedidoNaoEncontradoException pedidoNaoEncontradoException) {
             this.checkoutOutput = new OutputError(
                 pedidoNaoEncontradoException.getMessage(),
