@@ -27,7 +27,8 @@ public class CriaPedidoRepository implements PedidoInterface {
         pedidoModel.setUuid(pedido.getUuid());
         pedidoModel.setValorTotal(pedido.valorTotalDoPeido());
         pedidoModel.setClienteId(pedido.getClienteUuid());
-        pedidoModel.setStatus(pedido.getStatus());
+        pedidoModel.setStatusPedido(pedido.getStatusPedido());
+        pedidoModel.setStatusPagamento(pedido.getStatusPagamento());
         pedidoModel.setDataCriacao(new Date());
         pedidoModel = pedidoRepository.save(pedidoModel);
         pedido.setUuid(pedidoModel.getUuid());

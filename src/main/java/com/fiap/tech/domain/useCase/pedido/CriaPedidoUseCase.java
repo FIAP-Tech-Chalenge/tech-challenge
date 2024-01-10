@@ -3,6 +3,7 @@ package com.fiap.tech.domain.useCase.pedido;
 import com.fiap.tech.domain.entity.pedido.Cliente;
 import com.fiap.tech.domain.entity.pedido.Pedido;
 import com.fiap.tech.domain.entity.pedido.Produto;
+import com.fiap.tech.domain.enums.pedido.StatusPagamento;
 import com.fiap.tech.domain.enums.pedido.StatusPedido;
 import com.fiap.tech.domain.exception.pedido.ClienteNaoEncontradoException;
 import com.fiap.tech.domain.exception.pedido.PedidoVazioException;
@@ -35,7 +36,8 @@ public class CriaPedidoUseCase {
         try {
             Cliente clienteEntity = clienteInterface.buscaClientePorUuid(criarPedidoInput.clienteUuid());
             Pedido pedidoEntity = new Pedido(clienteEntity.getUuid());
-            pedidoEntity.setStatus(StatusPedido.RECEBIDO);
+            pedidoEntity.setStatusPedido(StatusPedido.RECEBIDO);
+            pedidoEntity.setStatusPagamento(StatusPagamento.NAO_PAGO);
             pedidoEntity.setProdutos(new ArrayList<>());
 
             for ( ProdutoPedidoInput produto : criarPedidoInput.produtoList()) {

@@ -28,7 +28,8 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
         for (PedidoModel pedidoModel : pedidosModels) {
             Pedido pedidoEntity = new Pedido(
                     pedidoModel.getClienteId(),
-                    pedidoModel.getStatus(),
+                    pedidoModel.getStatusPedido(),
+                    pedidoModel.getStatusPagamento(),
                     pedidoModel.getValorTotal()
             );
 
@@ -62,7 +63,8 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
         }
         Pedido pedidoEntity = new Pedido(
                 pedidoModel.getClienteId(),
-                pedidoModel.getStatus(),
+                pedidoModel.getStatusPedido(),
+                pedidoModel.getStatusPagamento(),
                 pedidoModel.getValorTotal()
         );
         pedidoEntity.setProdutos(produtosList);

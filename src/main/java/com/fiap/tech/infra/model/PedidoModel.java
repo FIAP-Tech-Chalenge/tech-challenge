@@ -1,5 +1,6 @@
 package com.fiap.tech.infra.model;
 
+import com.fiap.tech.domain.enums.pedido.StatusPagamento;
 import com.fiap.tech.domain.enums.pedido.StatusPedido;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -26,7 +27,9 @@ public class PedidoModel {
     @Column(name = "datacriacao")
     private Date dataCriacao;
     @Enumerated(EnumType.STRING)
-    private StatusPedido status;
+    private StatusPedido statusPedido;
+    @Enumerated(EnumType.STRING)
+    private StatusPagamento statusPagamento;
     @Column(name = "valortotal")
     private Float valorTotal;
 

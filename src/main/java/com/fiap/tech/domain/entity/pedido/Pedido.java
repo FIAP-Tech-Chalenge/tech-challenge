@@ -1,5 +1,6 @@
 package com.fiap.tech.domain.entity.pedido;
 
+import com.fiap.tech.domain.enums.pedido.StatusPagamento;
 import com.fiap.tech.domain.enums.pedido.StatusPedido;
 import com.fiap.tech.domain.exception.pedido.PedidoVazioException;
 import com.fiap.tech.domain.exception.pedido.ProdutoDoPedidoSemQuantidadeException;
@@ -17,7 +18,9 @@ public class Pedido {
         private UUID uuid;
         private final UUID clienteUuid;
         @Enumerated(EnumType.STRING)
-        private StatusPedido status;
+        private StatusPedido statusPedido;
+        @Enumerated(EnumType.STRING)
+        private StatusPagamento statusPagamento;
         private List<Produto> produtos;
         private Float total;
 
@@ -26,9 +29,10 @@ public class Pedido {
             this.produtos = new ArrayList<>();
         }
 
-    public Pedido(UUID clienteId, StatusPedido status, Float valorTotal) {
+    public Pedido(UUID clienteId, StatusPedido statusPedido, StatusPagamento statusPagamento, Float valorTotal) {
         this.clienteUuid = clienteId;
-        this.status = status;
+        this.statusPedido = statusPedido;
+        this.statusPagamento = statusPagamento;
         this.total = valorTotal;
     }
 
