@@ -66,7 +66,7 @@ public class PedidoController {
     public ResponseEntity<Object> processarCheckout(@PathVariable UUID uuid) {
         ProcessaCheckoutUseCase processaCheckoutUseCase = new ProcessaCheckoutUseCase(
             new BuscarPedidoRepository(pedidoRepository, pedidoProdutoRepository),
-            new CheckoutAdapter()
+            new CheckoutAdapter(pedidoRepository)
         );
         processaCheckoutUseCase.execute(uuid);
         OutputInterface outputInterface = processaCheckoutUseCase.getCheckoutOutput();

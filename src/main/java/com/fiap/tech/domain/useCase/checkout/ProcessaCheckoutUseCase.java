@@ -1,6 +1,8 @@
 package com.fiap.tech.domain.useCase.checkout;
 
 import java.util.UUID;
+
+import com.fiap.tech.domain.entity.pedido.Checkout;
 import com.fiap.tech.domain.entity.pedido.Pedido;
 import com.fiap.tech.domain.exception.checkout.PedidoNaoEncontradoException;
 import com.fiap.tech.domain.genic.output.OutputError;
@@ -25,9 +27,9 @@ public class ProcessaCheckoutUseCase {
                 throw new PedidoNaoEncontradoException("Pedido não encontrado");
             }
 
-            checkoutProcessor.processarCheckout(pedido);
+            Checkout checkout = checkoutProcessor.processarCheckout(pedido);
             checkoutOutput = new CheckOutOutput(
-                pedido,
+                checkout,
                 new OutputStatus(200, "Ok", "Checkout realizado com sucesso")
             );
         } catch (PedidoNaoEncontradoException pedidoNaoEncontradoException) {
