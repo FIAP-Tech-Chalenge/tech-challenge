@@ -30,6 +30,7 @@ INSERT INTO produtos (uuid, nome, valor, descricao, categoria, quantidade) VALUE
 
 CREATE TABLE IF NOT EXISTS pedidos (
                                        uuid VARCHAR(36) PRIMARY KEY,
+                                       numeroPedido BIGINT,
                                        clienteid VARCHAR(36) NOT NULL,
                                        dataCriacao TIMESTAMP NOT NULL DEFAULT NOW(),
                                        statusPedido VARCHAR(255) NOT NULL,
@@ -38,12 +39,12 @@ CREATE TABLE IF NOT EXISTS pedidos (
                                        FOREIGN KEY (clienteid) REFERENCES clientes(uuid)
 );
 
-INSERT INTO pedidos (uuid, clienteid, statusPedido, statusPagamento, valorTotal, dataCriacao) VALUES
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174000', 'RECEBIDO', 'NAO_PAGO', 10, '2022-12-21 00:00:00'),
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174001', 'RECEBIDO', 'NAO_PAGO', 20, '2022-12-21 00:00:00'),
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 'NAO_PAGO', 30, '2022-12-21 00:00:00'),
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174003', 'RECEBIDO', 'NAO_PAGO', 40, '2022-12-21 00:00:00'),
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174004', 'RECEBIDO', 'NAO_PAGO', 50, '2022-12-21 00:00:00');
+INSERT INTO pedidos (uuid, numeroPedido, clienteid, statusPedido, statusPagamento, valorTotal, dataCriacao) VALUES
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174010', 1, '123e4567-e89b-12d3-a456-426614174000', 'RECEBIDO', 'NAO_PAGO', 10, '2022-12-21 00:00:00'),
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174011', 2, '123e4567-e89b-12d3-a456-426614174001', 'RECEBIDO', 'NAO_PAGO', 20, '2022-12-21 00:00:00'),
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174012', 3, '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 'NAO_PAGO', 30, '2022-12-21 00:00:00'),
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174013', 4, '123e4567-e89b-12d3-a456-426614174003', 'RECEBIDO', 'NAO_PAGO', 40, '2022-12-21 00:00:00'),
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174014', 5, '123e4567-e89b-12d3-a456-426614174004', 'RECEBIDO', 'NAO_PAGO', 50, '2022-12-21 00:00:00');
 
 CREATE TABLE IF NOT EXISTS pedido_produtos (
                                                id BIGINT AUTO_INCREMENT PRIMARY KEY,
@@ -52,13 +53,14 @@ CREATE TABLE IF NOT EXISTS pedido_produtos (
                                                valor NUMERIC(10, 2) NOT NULL,
                                                quantidade INT NOT NULL,
                                                categoria VARCHAR(255) NOT NULL,
+                                               numeroPedido BIGINT,
                                                FOREIGN KEY (pedido_uuid) REFERENCES pedidos(uuid),
                                                FOREIGN KEY (produto_uuid) REFERENCES produtos(uuid)
 );
 
-INSERT INTO pedido_produtos (pedido_uuid, produto_uuid, valor, quantidade, categoria) VALUES
-                                                                                          ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005', 10, 1, 'LANCHE'),
-                                                                                          ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006', 20, 1, 'BEBIDA'),
-                                                                                          ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007', 30, 1, 'ACOMPANHAMENTO'),
-                                                                                          ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008', 40, 1, 'SOBREMESA'),
-                                                                                          ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009', 50, 1, 'SOBREMESA');
+INSERT INTO pedido_produtos (pedido_uuid, produto_uuid, valor, quantidade, categoria, numeroPedido) VALUES
+                                                                                                        ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005', 10, 1, 'LANCHE', 1),
+                                                                                                        ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006', 20, 1, 'BEBIDA', 2),
+                                                                                                        ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007', 30, 1, 'ACOMPANHAMENTO', 3),
+                                                                                                        ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008', 40, 1, 'SOBREMESA', 4),
+                                                                                                        ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009', 50, 1, 'SOBREMESA', 5);

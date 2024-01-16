@@ -17,8 +17,7 @@ import java.util.UUID;
 @Table(name ="pedido_produtos")
 public class PedidoProdutoModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "pedido_produtos_seq")
-    @SequenceGenerator(name = "pedido_produtos_seq", sequenceName = "pedido_produtos_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private Float valor;
     private Integer quantidade;
@@ -26,6 +25,5 @@ public class PedidoProdutoModel {
     private CategoriaEnum categoria;
     private UUID produtoUuid;
     private UUID pedidoUuid;
-
 
 }

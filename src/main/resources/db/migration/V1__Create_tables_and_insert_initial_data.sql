@@ -15,11 +15,11 @@ INSERT INTO clientes (uuid, nome, cpf, email) VALUES
 CREATE TABLE IF NOT EXISTS produtos (
                                         uuid UUID PRIMARY KEY,
                                         nome VARCHAR(255) NOT NULL,
-    valor DECIMAL(10, 2) NOT NULL,
-    descricao TEXT NOT NULL,
-    categoria VARCHAR(255) NOT NULL,
-    quantidade INT NOT NULL
-    );
+                                        valor DECIMAL(10, 2) NOT NULL,
+                                        descricao TEXT NOT NULL,
+                                        categoria VARCHAR(255) NOT NULL,
+                                        quantidade INT NOT NULL
+);
 
 INSERT INTO produtos (uuid, nome, valor, descricao, categoria, quantidade) VALUES
                                                                                ('123e4567-e89b-12d3-a456-426614174005', 'Produto 1', 10, 'Descricao 1', 'LANCHE', 100),
@@ -30,6 +30,7 @@ INSERT INTO produtos (uuid, nome, valor, descricao, categoria, quantidade) VALUE
 
 CREATE TABLE IF NOT EXISTS pedidos (
                                        uuid UUID PRIMARY KEY,
+                                       numeroPedido BIGINT,
                                        clienteid UUID NOT NULL,
                                        dataCriacao TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
                                        statusPedido VARCHAR(255) NOT NULL,
@@ -38,30 +39,30 @@ CREATE TABLE IF NOT EXISTS pedidos (
                                        FOREIGN KEY (clienteid) REFERENCES clientes(uuid)
 );
 
-INSERT INTO pedidos (uuid, clienteid, statusPedido, statusPagamento, valorTotal, dataCriacao) VALUES
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174000', 'RECEBIDO', 'NAO_PAGO', 10, '2022-12-21 00:00:00'),
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174001', 'RECEBIDO', 'NAO_PAGO', 20, '2022-12-21 00:00:00'),
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 'NAO_PAGO', 30, '2022-12-21 00:00:00'),
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174003', 'RECEBIDO', 'NAO_PAGO', 40, '2022-12-21 00:00:00'),
-                                                                                                  ('123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174004', 'RECEBIDO', 'NAO_PAGO', 50, '2022-12-21 00:00:00');
+INSERT INTO pedidos (uuid, numeroPedido, clienteid, statusPedido, statusPagamento, valorTotal, dataCriacao) VALUES
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174010', 1, '123e4567-e89b-12d3-a456-426614174000', 'RECEBIDO', 'NAO_PAGO', 10, '2022-12-21 00:00:00'),
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174011', 2, '123e4567-e89b-12d3-a456-426614174001', 'RECEBIDO', 'NAO_PAGO', 20, '2022-12-21 00:00:00'),
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174012', 3, '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 'NAO_PAGO', 30, '2022-12-21 00:00:00'),
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174013', 4, '123e4567-e89b-12d3-a456-426614174003', 'RECEBIDO', 'NAO_PAGO', 40, '2022-12-21 00:00:00'),
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174014', 5, '123e4567-e89b-12d3-a456-426614174004', 'RECEBIDO', 'NAO_PAGO', 50, '2022-12-21 00:00:00');
 
 CREATE SEQUENCE IF NOT EXISTS pedido_produtos_seq START WITH 1 INCREMENT BY 1;
 
 CREATE TABLE IF NOT EXISTS pedido_produtos (
-                                                id BIGINT DEFAULT nextval('pedido_produtos_seq') PRIMARY KEY,
-                                                pedido_uuid UUID NOT NULL,
-                                                produto_uuid UUID NOT NULL,
-                                                valor DECIMAL(10, 2) NOT NULL,
-                                                quantidade INT NOT NULL,
-                                                categoria VARCHAR(255) NOT NULL,
-                                                FOREIGN KEY (pedido_uuid) REFERENCES pedidos(uuid),
-                                                FOREIGN KEY (produto_uuid) REFERENCES produtos(uuid)
+                                               id BIGINT DEFAULT nextval('pedido_produtos_seq') PRIMARY KEY,
+                                               pedido_uuid UUID NOT NULL,
+                                               produto_uuid UUID NOT NULL,
+                                               valor DECIMAL(10, 2) NOT NULL,
+                                               quantidade INT NOT NULL,
+                                               categoria VARCHAR(255) NOT NULL,
+                                               numeroPedido BIGINT,
+                                               FOREIGN KEY (pedido_uuid) REFERENCES pedidos(uuid),
+                                               FOREIGN KEY (produto_uuid) REFERENCES produtos(uuid)
 );
 
-
-INSERT INTO pedido_produtos (id, pedido_uuid, produto_uuid, valor, quantidade, categoria) VALUES
-                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005', 10, 1, 'LANCHE'),
-                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006', 20, 1, 'BEBIDA'),
-                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007', 30, 1, 'ACOMPANHAMENTO'),
-                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008', 40, 1, 'SOBREMESA'),
-                                                                                              (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009', 50, 1, 'SOBREMESA');
+INSERT INTO pedido_produtos (id, pedido_uuid, produto_uuid, valor, quantidade, categoria, numeroPedido) VALUES
+                                                                                                            (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174010', '123e4567-e89b-12d3-a456-426614174005', 10, 1, 'LANCHE', 1),
+                                                                                                            (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174011', '123e4567-e89b-12d3-a456-426614174006', 20, 1, 'BEBIDA', 2),
+                                                                                                            (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174012', '123e4567-e89b-12d3-a456-426614174007', 30, 1, 'ACOMPANHAMENTO', 3),
+                                                                                                            (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174013', '123e4567-e89b-12d3-a456-426614174008', 40, 1, 'SOBREMESA', 4),
+                                                                                                            (nextval('pedido_produtos_seq'), '123e4567-e89b-12d3-a456-426614174014', '123e4567-e89b-12d3-a456-426614174009', 50, 1, 'SOBREMESA', 5);

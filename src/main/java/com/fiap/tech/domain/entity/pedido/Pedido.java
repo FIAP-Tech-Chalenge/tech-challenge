@@ -17,6 +17,7 @@ import java.util.UUID;
 public class Pedido {
         private UUID uuid;
         private final UUID clienteUuid;
+        private Long numeroPedido;
         @Enumerated(EnumType.STRING)
         private StatusPedido statusPedido;
         @Enumerated(EnumType.STRING)
@@ -58,7 +59,7 @@ public class Pedido {
 
     }
 
-    public float valorTotalDoPeido()
+    public float valorTotalDoPedido()
     {
         float total = (float) 0;
         for (Produto produto : produtos) {

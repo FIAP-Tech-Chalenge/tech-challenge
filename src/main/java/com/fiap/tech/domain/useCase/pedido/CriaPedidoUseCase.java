@@ -36,9 +36,11 @@ public class CriaPedidoUseCase {
         try {
             Cliente clienteEntity = clienteInterface.buscaClientePorUuid(criarPedidoInput.clienteUuid());
             Pedido pedidoEntity = new Pedido(clienteEntity.getUuid());
+            pedidoEntity.setNumeroPedido(criarPedidoInput.numeroPedido());
             pedidoEntity.setStatusPedido(StatusPedido.RECEBIDO);
             pedidoEntity.setStatusPagamento(StatusPagamento.NAO_PAGO);
             pedidoEntity.setProdutos(new ArrayList<>());
+
 
             for ( ProdutoPedidoInput produto : criarPedidoInput.produtoList()) {
                 var prod = produtoInterface.encontraProdutoPorUuid(produto.uuid());

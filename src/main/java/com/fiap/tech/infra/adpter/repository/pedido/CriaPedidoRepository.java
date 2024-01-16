@@ -25,7 +25,9 @@ public class CriaPedidoRepository implements PedidoInterface {
     public Pedido criaPedido(Pedido pedido) throws ProdutoNaoEncontradoException {
         PedidoModel pedidoModel = new PedidoModel();
         pedidoModel.setUuid(pedido.getUuid());
-        pedidoModel.setValorTotal(pedido.valorTotalDoPeido());
+        Long newNumeroPedido = pedidoRepository.findMaxNumeroPedido() + 1;
+        pedidoModel.setNumeroPedido(newNumeroPedido);
+        pedidoModel.setValorTotal(pedido.valorTotalDoPedido());
         pedidoModel.setClienteId(pedido.getClienteUuid());
         pedidoModel.setStatusPedido(pedido.getStatusPedido());
         pedidoModel.setStatusPagamento(pedido.getStatusPagamento());
@@ -49,13 +51,13 @@ public class CriaPedidoRepository implements PedidoInterface {
                 pedidoProduto.setValor(produto.getValor());
                 pedidoProduto.setCategoria(produto.getCategoria());
                 pedidoProdutoRepository.save(pedidoProduto);
-
                 produtoRepository.save(produtoModel);
             }
         }
 
         pedido.setUuid(pedidoModel.getUuid());
         pedido.setTotal(pedidoModel.getValorTotal());
+        pedido.setNumeroPedido(pedidoModel.getNumeroPedido());
         return pedido;
     }
 }

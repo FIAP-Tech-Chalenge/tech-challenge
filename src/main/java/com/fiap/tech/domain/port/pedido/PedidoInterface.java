@@ -5,4 +5,5 @@ import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 
 public interface PedidoInterface {
     Pedido criaPedido(Pedido pedido) throws ProdutoNaoEncontradoException;
+
 }

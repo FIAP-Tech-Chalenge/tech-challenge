@@ -43,6 +43,7 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
             pedidoEntity.setProdutos(produtosList);
 
             pedidoEntity.setUuid(pedidoModel.getUuid());
+            pedidoEntity.setNumeroPedido(pedidoModel.getNumeroPedido());
             pedidosEntities.add(pedidoEntity);
         }
         return pedidosEntities;
@@ -69,7 +70,7 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
         );
         pedidoEntity.setProdutos(produtosList);
         pedidoEntity.setUuid(pedidoModel.getUuid());
-
+        pedidoEntity.setNumeroPedido(pedidoModel.getNumeroPedido());
         return pedidoEntity;
     }
 }
