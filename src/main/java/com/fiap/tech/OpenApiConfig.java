@@ -1,3 +1,4 @@
+package com.fiap.tech;
 
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.servers.Server;
