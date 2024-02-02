@@ -14,7 +14,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/mydatabase
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: my-secret-pw
-      SPRING_PROFILES_ACTIVE: prod
+      SPRING_PROFILES_ACTIVE: hom
 
   postgres:
     image: postgres:latest
