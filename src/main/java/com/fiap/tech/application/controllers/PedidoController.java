@@ -45,7 +45,7 @@ public class PedidoController {
         OutputInterface outputInterface = useCase.getCriaPedidoOutput();
         return new GenericResponse().response(outputInterface);
     }
-
+    @CrossOrigin(origins = "https://fiap-production.up.railway.app/")
     @GetMapping
     public ResponseEntity<Object> getAllPedidos(){
         BuscaTodosPedidosUseCase useCase = new BuscaTodosPedidosUseCase(new BuscarPedidoRepository(pedidoRepository, pedidoProdutoRepository));
