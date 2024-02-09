@@ -9,6 +9,7 @@
 ## Links Úteis
 - Miro Board: [Miro - Fluxo de Eventos](https://miro.com)
 - Swagger UI: [Localhost Swagger](http://localhost:8080/swagger-ui/)
+- Swagger subindo aplicação com Kubernetes: [Localhost Swagger Kubernetes](http://localhost:30000/swagger-ui/)
 - Swagger UI: [Railway Swagger](https://fiap-production.up.railway.app/swagger-ui/index.html#/)
 
 ## Sobre o Projeto
