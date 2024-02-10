@@ -46,7 +46,7 @@ app:
       periodSeconds: 30
 postgres:
   name: postgres
-  replicaCount: 2
+  replicaCount: 1
   image:
     repository: postgres
     tag: latest
