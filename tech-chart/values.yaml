@@ -23,7 +23,7 @@ app:
     maxReplicas: 10
     targetCPUUtilizationPercentage: 50
   ingress:
-    enabled: false
+    enabled: true
     annotations: {}
     hosts:
       - host: localhost
