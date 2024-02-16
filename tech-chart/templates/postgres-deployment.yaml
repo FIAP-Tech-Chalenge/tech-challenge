@@ -24,3 +24,10 @@ spec:
               value: {{ .Values.postgres.env.db }}
           ports:
             - containerPort: {{ .Values.postgres.service.port }}
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-storage
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.postgres.pvc.name }}

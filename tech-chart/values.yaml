@@ -56,3 +56,5 @@ postgres:
     db: mydatabase
   service:
     port: 5432
+  pvc:
+    name: postgres-pvc
