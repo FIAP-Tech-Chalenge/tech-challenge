@@ -44,7 +44,7 @@ INSERT INTO pedidos (uuid, numeroPedido, clienteid, statusPedido, statusPagament
                                                                                                                 ('123e4567-e89b-12d3-a456-426614174011', 2, '123e4567-e89b-12d3-a456-426614174001', 'EM_PREPARACAO', 'PAGO', 20, '2022-12-21 00:00:00'),
                                                                                                                 ('123e4567-e89b-12d3-a456-426614174012', 3, '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 'PAGO', 30, '2022-12-21 00:00:00'),
                                                                                                                 ('123e4567-e89b-12d3-a456-426614174013', 4, '123e4567-e89b-12d3-a456-426614174003', 'EM_PREPARACAO', 'PAGO', 40, '2022-12-21 00:00:00'),
-                                                                                                                ('123e4567-e89b-12d3-a456-426614174014', 5, '123e4567-e89b-12d3-a456-426614174004', 'PRONTO', 'PAGO', 50, '2022-12-21 00:00:00');
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174014', 5, '123e4567-e89b-12d3-a456-426614174004', 'FINALIZADO', 'PAGO', 50, '2022-12-21 00:00:00');
 
 CREATE SEQUENCE IF NOT EXISTS pedido_produtos_seq START WITH 1 INCREMENT BY 1;
 

@@ -1,6 +1,7 @@
 package com.fiap.tech.infra.repository;
 
 import com.fiap.tech.infra.model.PedidoModel;
+import org.springframework.lang.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -12,14 +13,16 @@ public interface PedidoRepository extends JpaRepository<PedidoModel, UUID> {
 
     PedidoModel findByUuid(UUID uuid);
 
-    //List<PedidoModel> findAll();
-
-    @Query("SELECT p FROM PedidoModel p ORDER BY CASE p.statusPedido " +
-            "WHEN 'RECEBIDO' THEN 0 " +
-            "WHEN 'EM_PREPARACAO' THEN 1 " +
-            "WHEN 'PRONTO' THEN 2 " +
-            "ELSE 3 END")
     List<PedidoModel> findAll();
+
+    @NonNull
+    @Query("SELECT p FROM PedidoModel p WHERE p.statusPedido != com.fiap.tech.domain.enums.pedido.StatusPedido.FINALIZADO " +
+            "ORDER BY CASE p.statusPedido " +
+            "WHEN com.fiap.tech.domain.enums.pedido.StatusPedido.RECEBIDO THEN 0 " +
+            "WHEN com.fiap.tech.domain.enums.pedido.StatusPedido.EM_PREPARACAO THEN 1 " +
+            "WHEN com.fiap.tech.domain.enums.pedido.StatusPedido.PRONTO THEN 2 " +
+            "ELSE 3 END")
+    List<PedidoModel> findListaPedido();
 
 
     @Query("SELECT COALESCE(MAX(p.numeroPedido), 0) FROM PedidoModel p")

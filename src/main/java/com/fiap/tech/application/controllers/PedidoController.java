@@ -4,11 +4,13 @@ import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.domain.genic.output.OutputInterface;
 import com.fiap.tech.domain.input.pedido.CriarPedidoInput;
 import com.fiap.tech.domain.useCase.checkout.ProcessaCheckoutUseCase;
+import com.fiap.tech.domain.useCase.pedido.BuscaListaPedidosUseCase;
 import com.fiap.tech.domain.useCase.pedido.BuscaPedidoPorUuidUseCase;
 import com.fiap.tech.domain.useCase.pedido.BuscaTodosPedidosUseCase;
 import com.fiap.tech.domain.useCase.pedido.CriaPedidoUseCase;
 import com.fiap.tech.infra.adpter.repository.checkout.CheckoutAdapter;
 import com.fiap.tech.infra.adpter.repository.cliente.ClienteEntityRepository;
+import com.fiap.tech.infra.adpter.repository.pedido.BuscarListaPedidoRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.BuscarPedidoRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.CriaPedidoRepository;
 import com.fiap.tech.infra.adpter.repository.produto.BuscarProdutoRepository;
@@ -49,6 +51,14 @@ public class PedidoController {
     @GetMapping
     public ResponseEntity<Object> getAllPedidos(){
         BuscaTodosPedidosUseCase useCase = new BuscaTodosPedidosUseCase(new BuscarPedidoRepository(pedidoRepository, pedidoProdutoRepository));
+        useCase.execute();
+        OutputInterface outputInterface = useCase.getBuscaProdutoOutput();
+        return new GenericResponse().response(outputInterface);
+    }
+
+    @GetMapping("/listaPedido")
+    public ResponseEntity<Object> getAllListaPedidos(){
+        BuscaListaPedidosUseCase  useCase = new BuscaListaPedidosUseCase(new BuscarListaPedidoRepository(pedidoRepository, pedidoProdutoRepository));
         useCase.execute();
         OutputInterface outputInterface = useCase.getBuscaProdutoOutput();
         return new GenericResponse().response(outputInterface);
