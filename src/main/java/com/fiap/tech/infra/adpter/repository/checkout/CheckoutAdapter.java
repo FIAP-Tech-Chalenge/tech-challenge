@@ -19,7 +19,7 @@ public class CheckoutAdapter implements CheckoutProcessorInterface {
     @Override
     public Checkout processarCheckout(Pedido pedido) {
         PedidoModel pedidoModel = pedidoRepository.findByUuid(pedido.getUuid());
-        pedidoModel.setStatusPedido(StatusPedido.EMPREPARACAO);
+        pedidoModel.setStatusPedido(StatusPedido.EM_PREPARACAO);
         pedidoModel.setStatusPagamento(StatusPagamento.PAGO);
         pedidoRepository.save(pedidoModel);
         return new Checkout(pedido.getUuid(), StatusPagamento.PAGO);
