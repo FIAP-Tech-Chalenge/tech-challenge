@@ -3,7 +3,7 @@ app:
   replicaCount: 3
   image:
     repository: wolwer/tech-app
-    tag: v2.0
+    tag: latest
     pullPolicy: IfNotPresent
   service:
     type: NodePort
