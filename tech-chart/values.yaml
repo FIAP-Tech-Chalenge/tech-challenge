@@ -44,6 +44,11 @@ app:
         port: 8080
       initialDelaySeconds: 380
       periodSeconds: 30
+hpa:
+  name: tech-app-hpa
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 90
 postgres:
   name: postgres
   replicaCount: 1

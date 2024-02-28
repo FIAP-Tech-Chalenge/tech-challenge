@@ -14,18 +14,35 @@ spec:
     spec:
       containers:
         - name: tech-app
-          image: wolwer/tech-app:latest
+          image: wolwer/tech-app:v2.0
           ports:
             - containerPort: 8080
           env:
-            - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres:5432/mydatabase
-            - name: SPRING_DATASOURCE_USERNAME
-              value: postgres
-            - name: SPRING_DATASOURCE_PASSWORD
-              value: my-secret-pw
-            - name: SPRING_PROFILES_ACTIVE
-              value: prod
+            - name: DATA_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: DATA_HOST
+            - name: DATA_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: DATA_USERNAME
+            - name: DATA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: DATA_PASSWORD
+            - name: DATA_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: DATA_PORT
+            - name: DATA_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: DATA_DATABASE
           resources:
             requests:
               cpu: "100m"

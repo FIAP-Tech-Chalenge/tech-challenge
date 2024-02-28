@@ -17,11 +17,20 @@ spec:
           image: "{{ .Values.postgres.image.repository }}:{{ .Values.postgres.image.tag }}"
           env:
             - name: POSTGRES_USER
-              value: {{ .Values.postgres.env.user }}
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: DATA_USERNAME
             - name: POSTGRES_PASSWORD
-              value: {{ .Values.postgres.env.password }}
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: DATA_PASSWORD
             - name: POSTGRES_DB
-              value: {{ .Values.postgres.env.db }}
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: DATA_DATABASE
           ports:
             - containerPort: {{ .Values.postgres.service.port }}
           volumeMounts:
