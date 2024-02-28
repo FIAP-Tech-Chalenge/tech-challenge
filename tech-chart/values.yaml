@@ -12,8 +12,14 @@ app:
     nodePort: 30000
   database:
     url: jdbc:postgresql://postgres:5432/mydatabase
-    username: postgres
-    password: my-secret-pw
+    username:
+      secretKeyRef:
+        name: my-secret
+        key: DATA_USERNAME
+    password:
+      secretKeyRef:
+        name: my-secret
+        key: DATA_PASSWORD
   springProfilesActive: prod
   resources:
     requests:
@@ -56,9 +62,18 @@ postgres:
     repository: postgres
     tag: latest
   env:
-    user: postgres
-    password: my-secret-pw
-    db: mydatabase
+    user:
+      secretKeyRef:
+        name: my-secret
+        key: DATA_USERNAME
+    password:
+      secretKeyRef:
+        name: my-secret
+        key: DATA_PASSWORD
+    db:
+      configMapKeyRef:
+        name: my-configmap
+        key: DATA_DATABASE
   service:
     port: 5432
   pvc:
