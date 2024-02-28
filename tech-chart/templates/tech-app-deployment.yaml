@@ -19,10 +19,7 @@ spec:
             - containerPort: {{ .Values.app.service.port }}
           env:
             - name: SPRING_DATASOURCE_URL
-              valueFrom:
-                configMapKeyRef:
-                  name: my-configmap
-                  key: DATA_HOST
+              value: {{ .Values.app.database.url }}
             - name: SPRING_DATASOURCE_USERNAME
               valueFrom:
                 secretKeyRef:
