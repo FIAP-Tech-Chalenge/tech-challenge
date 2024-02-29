@@ -17,13 +17,13 @@ import java.util.UUID;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/webhook/status-pagamento")
+@RequestMapping("/webhook/statusPagamento")
 public class WebhookPagamentoController {
     private final PedidoRepository pedidoRepository;
     private final PedidoProdutoRepository pedidoProdutoRepository;
     private final ProdutoRepository produtoRepository;
-    @PostMapping("/{pedido_uuid}/pagamento/aprovado")
-    public ResponseEntity<Object> pagamentoAprovado(@PathVariable UUID pedido_uuid) {
+    @PostMapping("/{uuid}/pagamento/aprovado")
+    public ResponseEntity<Object> pagamentoAprovado(@PathVariable UUID uuid) {
         MudaStatusPagamentoUseCase statusPagamentoUseCase = new MudaStatusPagamentoUseCase(
             new BuscarPedidoRepository(
                 this.pedidoRepository,
@@ -35,14 +35,14 @@ public class WebhookPagamentoController {
                 this.pedidoProdutoRepository
             )
         );
-        statusPagamentoUseCase.execute(pedido_uuid, StatusPagamento.PAGO);
+        statusPagamentoUseCase.execute(uuid, StatusPagamento.PAGO);
         OutputInterface outputInterface = statusPagamentoUseCase.getBuscaPedidoOutput();
 
         return new GenericResponse().response(outputInterface);
     }
 
-    @PostMapping("/{pedido_uuid}/pagamento/reprovado")
-    public ResponseEntity<Object> pagamentoReprovado(@PathVariable UUID pedido_uuid) {
+    @PostMapping("/{uuid}/pagamento/reprovado")
+    public ResponseEntity<Object> pagamentoReprovado(@PathVariable UUID uuid) {
         MudaStatusPagamentoUseCase statusPagamentoUseCase = new MudaStatusPagamentoUseCase(
                 new BuscarPedidoRepository(
                         this.pedidoRepository,
@@ -54,14 +54,14 @@ public class WebhookPagamentoController {
                         this.pedidoProdutoRepository
                 )
         );
-        statusPagamentoUseCase.execute(pedido_uuid, StatusPagamento.NAO_PAGO);
+        statusPagamentoUseCase.execute(uuid, StatusPagamento.NAO_PAGO);
         OutputInterface outputInterface = statusPagamentoUseCase.getBuscaPedidoOutput();
 
         return new GenericResponse().response(outputInterface);
     }
 
-    @PostMapping("/{pedido_uuid}/pagamento/aguardando")
-    public ResponseEntity<Object> pagamentoAguardandoPagamento(@PathVariable UUID pedido_uuid) {
+    @PostMapping("/{uuid}/pagamento/aguardando")
+    public ResponseEntity<Object> pagamentoAguardandoPagamento(@PathVariable UUID uuid) {
         MudaStatusPagamentoUseCase statusPagamentoUseCase = new MudaStatusPagamentoUseCase(
             new BuscarPedidoRepository(
                 this.pedidoRepository,
@@ -73,7 +73,7 @@ public class WebhookPagamentoController {
                 this.pedidoProdutoRepository
             )
         );
-        statusPagamentoUseCase.execute(pedido_uuid, StatusPagamento.AGUARDANDO_PAGAMENTO);
+        statusPagamentoUseCase.execute(uuid, StatusPagamento.AGUARDANDO_PAGAMENTO);
         OutputInterface outputInterface = statusPagamentoUseCase.getBuscaPedidoOutput();
 
         return new GenericResponse().response(outputInterface);

@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 public interface PedidoProdutoRepository extends JpaRepository<PedidoProdutoModel, Long> {
-    List<PedidoProdutoModel> findPedidoProdutoModelsByPedidoUuid(UUID pedido_uuid);
+    List<PedidoProdutoModel> findPedidoProdutoModelsByPedidoUuid(UUID pedidoUuid);
 }
