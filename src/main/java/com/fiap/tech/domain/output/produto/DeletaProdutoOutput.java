@@ -1,7 +1,7 @@
 package com.fiap.tech.domain.output.produto;
 import com.fiap.tech.domain.entity.produto.Produto;
-import com.fiap.tech.domain.genic.output.OutputInterface;
-import com.fiap.tech.domain.genic.output.OutputStatus;
+import com.fiap.tech.domain.generic.output.OutputInterface;
+import com.fiap.tech.domain.generic.output.OutputStatus;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import lombok.Getter;

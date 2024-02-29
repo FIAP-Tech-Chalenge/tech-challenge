@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.genic.output;
+package com.fiap.tech.domain.generic.output;
 
 import lombok.Getter;
 

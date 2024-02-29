@@ -3,9 +3,9 @@ package com.fiap.tech.domain.useCase.produto;
 
 import com.fiap.tech.domain.entity.produto.Produto;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
-import com.fiap.tech.domain.genic.output.OutputError;
-import com.fiap.tech.domain.genic.output.OutputInterface;
-import com.fiap.tech.domain.genic.output.OutputStatus;
+import com.fiap.tech.domain.generic.output.OutputError;
+import com.fiap.tech.domain.generic.output.OutputInterface;
+import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.output.produto.BuscaProdutoOutput;
 import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
 import lombok.Getter;

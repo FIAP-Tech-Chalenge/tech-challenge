@@ -1,7 +1,7 @@
 package com.fiap.tech.application.controllers;
 
 import com.fiap.tech.application.response.GenericResponse;
-import com.fiap.tech.domain.genic.output.OutputInterface;
+import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.pedido.CriarPedidoInput;
 import com.fiap.tech.domain.useCase.checkout.ProcessaCheckoutUseCase;
 import com.fiap.tech.domain.useCase.pedido.BuscaListaPedidosUseCase;
@@ -69,17 +69,6 @@ public class PedidoController {
         BuscaPedidoPorUuidUseCase useCase = new BuscaPedidoPorUuidUseCase(new BuscarPedidoRepository(pedidoRepository, pedidoProdutoRepository));
         useCase.execute(uuid);
         OutputInterface outputInterface = useCase.getBuscaPedidoOutput();
-        return new GenericResponse().response(outputInterface);
-    }
-
-    @PostMapping("/{uuid}/checkout")
-    public ResponseEntity<Object> processarCheckout(@PathVariable UUID uuid) {
-        ProcessaCheckoutUseCase processaCheckoutUseCase = new ProcessaCheckoutUseCase(
-            new BuscarPedidoRepository(pedidoRepository, pedidoProdutoRepository),
-            new CheckoutAdapter(pedidoRepository)
-        );
-        processaCheckoutUseCase.execute(uuid);
-        OutputInterface outputInterface = processaCheckoutUseCase.getCheckoutOutput();
         return new GenericResponse().response(outputInterface);
     }
 }

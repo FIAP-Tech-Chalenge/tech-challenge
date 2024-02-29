@@ -2,7 +2,7 @@ package com.fiap.tech.application.controllers;
 
 
 import com.fiap.tech.application.response.GenericResponse;
-import com.fiap.tech.domain.genic.output.OutputInterface;
+import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.cliente.IdentificaClienteInput;
 import com.fiap.tech.domain.useCase.cliente.IdentificarClienteUseCase;
 import com.fiap.tech.infra.adpter.repository.cliente.IdentificarClienteRepository;

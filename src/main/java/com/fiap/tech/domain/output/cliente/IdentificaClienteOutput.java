@@ -1,8 +1,8 @@
 package com.fiap.tech.domain.output.cliente;
 
 import com.fiap.tech.domain.entity.cliente.Cliente;
-import com.fiap.tech.domain.genic.output.OutputInterface;
-import com.fiap.tech.domain.genic.output.OutputStatus;
+import com.fiap.tech.domain.generic.output.OutputInterface;
+import com.fiap.tech.domain.generic.output.OutputStatus;
 import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

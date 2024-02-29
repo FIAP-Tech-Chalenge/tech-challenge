@@ -1,6 +1,6 @@
 package com.fiap.tech.application.response;
 
-import com.fiap.tech.domain.genic.output.OutputInterface;
+import com.fiap.tech.domain.generic.output.OutputInterface;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 

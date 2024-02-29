@@ -2,9 +2,9 @@ package com.fiap.tech.domain.useCase.pedido;
 
 import com.fiap.tech.domain.entity.pedido.Pedido;
 import com.fiap.tech.domain.exception.pedido.PedidoNaoEncontradoException;
-import com.fiap.tech.domain.genic.output.OutputError;
-import com.fiap.tech.domain.genic.output.OutputInterface;
-import com.fiap.tech.domain.genic.output.OutputStatus;
+import com.fiap.tech.domain.generic.output.OutputError;
+import com.fiap.tech.domain.generic.output.OutputInterface;
+import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.output.pedido.BuscaPedidoOutput;
 import com.fiap.tech.domain.port.pedido.BuscaPedidoInterface;
 import lombok.Getter;

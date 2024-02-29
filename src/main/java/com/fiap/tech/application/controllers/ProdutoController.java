@@ -2,7 +2,7 @@ package com.fiap.tech.application.controllers;
 
 
 import com.fiap.tech.application.response.GenericResponse;
-import com.fiap.tech.domain.genic.output.OutputInterface;
+import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.produto.CriarProdutoInput;
 import com.fiap.tech.domain.input.produto.EditaProdutoInput;
 import com.fiap.tech.domain.useCase.produto.*;
