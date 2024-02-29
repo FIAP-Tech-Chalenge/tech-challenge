@@ -1,6 +1,7 @@
 package com.fiap.tech.infra.adpter.repository.pedido;
 
 import com.fiap.tech.domain.entity.pedido.Pedido;
+import com.fiap.tech.domain.enums.pedido.StatusPagamento;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
 import com.fiap.tech.domain.port.pedido.PedidoInterface;
 import com.fiap.tech.infra.model.PedidoModel;
@@ -58,6 +59,15 @@ public class CriaPedidoRepository implements PedidoInterface {
         pedido.setUuid(pedidoModel.getUuid());
         pedido.setTotal(pedidoModel.getValorTotal());
         pedido.setNumeroPedido(pedidoModel.getNumeroPedido());
+        return pedido;
+    }
+
+    @Override
+    public Pedido atualizaPagamento(Pedido pedido, StatusPagamento statusPagamento) {
+        PedidoModel pedidoModel = this.pedidoRepository.findByUuid(pedido.getUuid());
+        pedidoModel.setStatusPagamento(statusPagamento);
+        this.pedidoRepository.save(pedidoModel);
+        pedido.setStatusPagamento(statusPagamento);
         return pedido;
     }
 }

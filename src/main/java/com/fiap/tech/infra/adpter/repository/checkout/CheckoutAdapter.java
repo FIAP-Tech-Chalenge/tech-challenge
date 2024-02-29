@@ -20,8 +20,8 @@ public class CheckoutAdapter implements CheckoutProcessorInterface {
     public Checkout processarCheckout(Pedido pedido) {
         PedidoModel pedidoModel = pedidoRepository.findByUuid(pedido.getUuid());
         pedidoModel.setStatusPedido(StatusPedido.EM_PREPARACAO);
-        pedidoModel.setStatusPagamento(StatusPagamento.PAGO);
+        pedidoModel.setStatusPagamento(StatusPagamento.AGUARDANDO_PAGAMENTO);
         pedidoRepository.save(pedidoModel);
-        return new Checkout(pedido.getUuid(), StatusPagamento.PAGO);
+        return new Checkout(pedido.getUuid(), StatusPagamento.AGUARDANDO_PAGAMENTO);
     }
 }
