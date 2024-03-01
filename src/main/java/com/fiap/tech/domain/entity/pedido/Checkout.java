@@ -10,7 +10,7 @@ import java.util.UUID;
 public class Checkout {
     private final StatusPagamento statusPagamento;
     private final UUID uuidPedido;
-    private String qrCodeBase64;
+    private String qrCode;
 
     public Checkout(UUID uuidPedido, StatusPagamento statusPagamento) {
         this.uuidPedido = uuidPedido;

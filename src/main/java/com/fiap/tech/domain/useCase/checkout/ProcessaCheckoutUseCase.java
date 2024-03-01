@@ -33,7 +33,7 @@ public class ProcessaCheckoutUseCase {
 
             Checkout checkout = checkoutProcessor.processarCheckout(pedido);
             GatewayQrCode gatewayQrCode = this.pagamentoQrCodeInterface.geraQrCodePagamento(pedidoUuid, pedido.getTotal());
-            checkout.setQrCodeBase64(gatewayQrCode.getQrData());
+            checkout.setQrCode(gatewayQrCode.getQrData());
             checkoutOutput = new CheckOutOutput(
                 checkout,
                 new OutputStatus(200, "Ok", "Checkout realizado com sucesso")
