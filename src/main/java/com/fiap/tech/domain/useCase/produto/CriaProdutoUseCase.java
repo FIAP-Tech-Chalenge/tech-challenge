@@ -8,7 +8,7 @@ import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.input.produto.CriarProdutoInput;
 import com.fiap.tech.domain.output.produto.CriaProdutoOutput;
-import com.fiap.tech.domain.port.produto.CriarProdutoInterface;
+import com.fiap.tech.domain.gateway.produto.CriarProdutoInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

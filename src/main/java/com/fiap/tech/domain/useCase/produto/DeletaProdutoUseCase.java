@@ -7,8 +7,8 @@ import com.fiap.tech.domain.generic.output.OutputError;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.output.produto.DeletaProdutoOutput;
-import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
-import com.fiap.tech.domain.port.produto.DeletarProdutoInterface;
+import com.fiap.tech.domain.gateway.produto.BuscaProdutoInterface;
+import com.fiap.tech.domain.gateway.produto.DeletarProdutoInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

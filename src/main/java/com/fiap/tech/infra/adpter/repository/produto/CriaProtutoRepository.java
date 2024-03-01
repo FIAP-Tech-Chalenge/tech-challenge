@@ -1,7 +1,7 @@
 package com.fiap.tech.infra.adpter.repository.produto;
 
 import com.fiap.tech.domain.entity.produto.Produto;
-import com.fiap.tech.domain.port.produto.CriarProdutoInterface;
+import com.fiap.tech.domain.gateway.produto.CriarProdutoInterface;
 import com.fiap.tech.infra.model.ProdutoModel;
 import com.fiap.tech.infra.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;

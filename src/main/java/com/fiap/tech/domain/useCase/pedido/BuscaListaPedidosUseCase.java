@@ -5,7 +5,7 @@ import com.fiap.tech.domain.generic.output.OutputError;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.output.pedido.BuscaTodosPedidoOutput;
-import com.fiap.tech.domain.port.pedido.BuscaListaPedidoInterface;
+import com.fiap.tech.domain.gateway.pedido.BuscaListaPedidoInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

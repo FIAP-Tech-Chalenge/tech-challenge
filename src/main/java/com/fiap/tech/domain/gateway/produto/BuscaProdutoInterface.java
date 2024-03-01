@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.port.produto;
+package com.fiap.tech.domain.gateway.produto;
 
 import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 import com.fiap.tech.domain.entity.produto.Produto;

@@ -10,7 +10,7 @@ import com.fiap.tech.domain.generic.output.OutputError;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.output.produto.BuscaTodosProdutoOutput;
-import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
+import com.fiap.tech.domain.gateway.produto.BuscaProdutoInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

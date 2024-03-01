@@ -15,9 +15,9 @@ import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.input.pedido.CriarPedidoInput;
 import com.fiap.tech.domain.input.pedido.ProdutoPedidoInput;
 import com.fiap.tech.domain.output.pedido.CriaPedidoOutput;
-import com.fiap.tech.domain.port.cliente.ClienteInterface;
-import com.fiap.tech.domain.port.pedido.PedidoInterface;
-import com.fiap.tech.domain.port.produto.BuscaProdutoInterface;
+import com.fiap.tech.domain.gateway.cliente.ClienteInterface;
+import com.fiap.tech.domain.gateway.pedido.PedidoInterface;
+import com.fiap.tech.domain.gateway.produto.BuscaProdutoInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

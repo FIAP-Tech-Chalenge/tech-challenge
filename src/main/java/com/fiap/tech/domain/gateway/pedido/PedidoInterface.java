@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.port.pedido;
+package com.fiap.tech.domain.gateway.pedido;
 
 import com.fiap.tech.domain.entity.pedido.Pedido;
 import com.fiap.tech.domain.enums.pedido.StatusPagamento;

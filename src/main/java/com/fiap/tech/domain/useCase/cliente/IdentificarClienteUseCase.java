@@ -9,7 +9,7 @@ import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.input.cliente.IdentificaClienteInput;
 import com.fiap.tech.domain.output.cliente.IdentificaClienteOutput;
-import com.fiap.tech.domain.port.cliente.IdentificarClienteInterface;
+import com.fiap.tech.domain.gateway.cliente.IdentificarClienteInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 

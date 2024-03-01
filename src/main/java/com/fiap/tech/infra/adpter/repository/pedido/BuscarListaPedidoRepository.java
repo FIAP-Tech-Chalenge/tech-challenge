@@ -2,7 +2,7 @@ package com.fiap.tech.infra.adpter.repository.pedido;
 
 import com.fiap.tech.domain.entity.pedido.Pedido;
 import com.fiap.tech.domain.entity.pedido.Produto;
-import com.fiap.tech.domain.port.pedido.BuscaListaPedidoInterface;
+import com.fiap.tech.domain.gateway.pedido.BuscaListaPedidoInterface;
 import com.fiap.tech.infra.model.PedidoModel;
 import com.fiap.tech.infra.model.PedidoProdutoModel;
 import com.fiap.tech.infra.repository.PedidoProdutoRepository;

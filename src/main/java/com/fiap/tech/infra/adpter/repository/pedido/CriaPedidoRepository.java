@@ -3,7 +3,7 @@ package com.fiap.tech.infra.adpter.repository.pedido;
 import com.fiap.tech.domain.entity.pedido.Pedido;
 import com.fiap.tech.domain.enums.pedido.StatusPagamento;
 import com.fiap.tech.domain.exception.produto.ProdutoNaoEncontradoException;
-import com.fiap.tech.domain.port.pedido.PedidoInterface;
+import com.fiap.tech.domain.gateway.pedido.PedidoInterface;
 import com.fiap.tech.infra.model.PedidoModel;
 import com.fiap.tech.infra.model.PedidoProdutoModel;
 import com.fiap.tech.infra.model.ProdutoModel;

@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.port.cliente;
+package com.fiap.tech.domain.gateway.cliente;
 
 import com.fiap.tech.domain.entity.pedido.Cliente;
 import com.fiap.tech.domain.exception.pedido.ClienteNaoEncontradoException;

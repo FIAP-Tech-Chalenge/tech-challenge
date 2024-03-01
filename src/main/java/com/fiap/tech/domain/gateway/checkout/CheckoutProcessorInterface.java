@@ -1,4 +1,4 @@
-package com.fiap.tech.domain.port.checkout;
+package com.fiap.tech.domain.gateway.checkout;
 import com.fiap.tech.domain.entity.pedido.Checkout;
 import com.fiap.tech.domain.entity.pedido.Pedido;
 

@@ -2,7 +2,7 @@ package com.fiap.tech.infra.adpter.repository.cliente;
 
 import com.fiap.tech.domain.entity.pedido.Cliente;
 import com.fiap.tech.domain.exception.pedido.ClienteNaoEncontradoException;
-import com.fiap.tech.domain.port.cliente.ClienteInterface;
+import com.fiap.tech.domain.gateway.cliente.ClienteInterface;
 import com.fiap.tech.infra.model.ClienteModel;
 import com.fiap.tech.infra.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;

@@ -1,6 +1,6 @@
 package com.fiap.tech.infra.adpter.repository.produto;
 
-import com.fiap.tech.domain.port.produto.DeletarProdutoInterface;
+import com.fiap.tech.domain.gateway.produto.DeletarProdutoInterface;
 import com.fiap.tech.infra.model.ProdutoModel;
 import com.fiap.tech.infra.repository.ProdutoRepository;
 import lombok.RequiredArgsConstructor;

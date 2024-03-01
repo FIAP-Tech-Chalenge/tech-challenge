@@ -7,8 +7,8 @@ import com.fiap.tech.domain.generic.output.OutputError;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.output.pagamento.StatusPagamentoOutput;
-import com.fiap.tech.domain.port.pedido.BuscaPedidoInterface;
-import com.fiap.tech.domain.port.pedido.PedidoInterface;
+import com.fiap.tech.domain.gateway.pedido.BuscaPedidoInterface;
+import com.fiap.tech.domain.gateway.pedido.PedidoInterface;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
