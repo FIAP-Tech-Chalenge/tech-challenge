@@ -6,6 +6,7 @@ import com.fiap.tech.domain.entity.pagamento.GatewayQrCode;
 import com.fiap.tech.domain.entity.pedido.Checkout;
 import com.fiap.tech.domain.entity.pedido.Pedido;
 import com.fiap.tech.domain.exception.checkout.PedidoNaoEncontradoException;
+import com.fiap.tech.domain.gateway.dependency.HttpAdapterInterface;
 import com.fiap.tech.domain.gateway.pagamento.PagamentoQrCodeInterface;
 import com.fiap.tech.domain.generic.output.OutputError;
 import com.fiap.tech.domain.generic.output.OutputInterface;

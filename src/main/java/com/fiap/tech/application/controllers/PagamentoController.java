@@ -3,9 +3,10 @@ package com.fiap.tech.application.controllers;
 import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.useCase.checkout.ProcessaCheckoutUseCase;
-import com.fiap.tech.infra.adpter.integration.pagamento.qrCode.MercadoPagoIntegration;
+import com.fiap.tech.infra.adpter.mock.pagamento.qrCode.MercadoPagoIntegrationMock;
 import com.fiap.tech.infra.adpter.repository.checkout.CheckoutRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.BuscarPedidoRepository;
+import com.fiap.tech.infra.dependecy.HttpAdapter;
 import com.fiap.tech.infra.repository.PedidoProdutoRepository;
 import com.fiap.tech.infra.repository.PedidoRepository;
 import lombok.RequiredArgsConstructor;
@@ -30,7 +31,7 @@ public class PagamentoController {
         ProcessaCheckoutUseCase processaCheckoutUseCase = new ProcessaCheckoutUseCase(
             new BuscarPedidoRepository(pedidoRepository, pedidoProdutoRepository),
             new CheckoutRepository(pedidoRepository),
-            new MercadoPagoIntegration()
+            new MercadoPagoIntegrationMock(new HttpAdapter())
         );
         processaCheckoutUseCase.execute(uuid);
         OutputInterface outputInterface = processaCheckoutUseCase.getCheckoutOutput();
