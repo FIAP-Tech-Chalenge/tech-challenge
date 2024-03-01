@@ -20,6 +20,28 @@ Base da criação da arquitetura do projeto foi baseada na forma clássica de ca
 
 ## Arquitetura de infra do Kubernets
 
+Este projeto Kubernetes utiliza uma arquitetura de implantação para um aplicativo chamado tech-app. A implantação é configurada para manter três réplicas do aplicativo em execução.  
+O aplicativo é encapsulado em um contêiner, cuja imagem é wolwer/tech-app. O contêiner expõe a porta 8080 e utiliza várias variáveis de ambiente para configuração, 
+que são obtidas de um ConfigMap (my-configmap) e um Secret (my-secret).  
+O aplicativo também possui sondas de prontidão e de vida, que verificam o endpoint /actuator/health para determinar a saúde do aplicativo. 
+As sondas começam após um atraso inicial de 180 segundos e são executadas a cada 30 segundos.  Os recursos do contêiner são limitados a 100 milicore de CPU.
+Este projeto Kubernetes também utiliza um serviço NodePort e um banco de dados Postgres com armazenamento persistente.  
+O serviço NodePort é usado para expor o aplicativo tech-app para acesso externo. Ele mapeia a porta 8080 do contêiner para uma porta alta (acima de 30000) no nó do Kubernetes, 
+permitindo que o aplicativo seja acessado fora do cluster.  O banco de dados Postgres é executado como um Deployment com uma única réplica. 
+O contêiner Postgres expõe a porta 5432 e utiliza variáveis de ambiente para configuração, que são obtidas de um Secret (my-secret) e um ConfigMap (my-configmap).  O armazenamento persistente para o banco de dados Postgres é fornecido por um PersistentVolumeClaim chamado postgres-pvc, que solicita 1Gi de armazenamento. Este volume é montado no contêiner Postgres no caminho /var/lib/postgresql/data, garantindo que os dados do banco de dados persistam além do ciclo de vida do contêiner.
+Este projeto Kubernetes também implementa o Horizontal Pod Autoscaler (HPA) e a pilha EFK (Elasticsearch, Fluentd, Kibana).  
+O HPA é configurado para monitorar a utilização da CPU do aplicativo tech-app. Quando a utilização da CPU excede 90%, o HPA automaticamente escala o número de réplicas do 
+aplicativo para lidar com a carga adicional. Quando a utilização da CPU cai abaixo de um determinado limite, o HPA reduz o número de réplicas.  
+A pilha EFK é usada para coleta, armazenamento e visualização de logs. O Elasticsearch é configurado como um StatefulSet com uma única réplica. 
+O Elasticsearch armazena os logs coletados e fornece capacidades de pesquisa. Ele é exposto na porta 9200 e utiliza um PersistentVolumeClaim chamado data para armazenamento persistente.  O Fluentd é configurado para coletar logs do aplicativo e encaminhá-los para o Elasticsearch.
+E o Kibana é usado para visualizar os logs armazenados no Elasticsearch.
+Este projeto Kubernetes também é compatível com o Helm, que é um gerenciador de pacotes para Kubernetes. 
+O Helm permite que você empacote suas configurações do Kubernetes em um gráfico que pode ser versionado, compartilhado e publicado.  Os gráficos do Helm são organizados 
+em um diretório com uma estrutura específica que inclui templates de seus recursos do Kubernetes, um arquivo Chart.yaml que contém metadados sobre o gráfico e um 
+arquivo values.yaml que especifica valores padrão para suas configurações.  Para usar este projeto com o Helm, você precisaria organizar suas configurações do Kubernetes 
+em um gráfico do Helm. Uma vez que o gráfico é criado, você pode instalar o gráfico em seu cluster Kubernetes com o comando helm install.  
+Por exemplo, se você tivesse um gráfico do Helm para este projeto chamado tech-app, você poderia instalar o gráfico com o seguinte comando:
+“helm install tech-app ./tech-app”
 
 --------------------------------------------------------
 # Tech Challenge Fase 1 - Grupo 15
