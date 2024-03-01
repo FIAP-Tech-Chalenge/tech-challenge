@@ -1,10 +1,28 @@
-
-# Tech Challenge Fase 1 - Grupo 15
-
-## Grupo 15
+# Grupo 15
 - Matheus Nunes Almeida Werneck Telles
 - Lucas Gelhen Rigon
 - Ricardo Luis Machado
+-------------------------------------------------------
+
+# Tech Challenge Fase 2 - Grupo 15
+
+Base da criação da arquitetura do projeto foi baseada na forma clássica de camadas da clean arch
+![Clean arch](imagens/clean-arch.png)
+
+## Diagrama de arquitetura aplicado no projeto
+![Diagrama da arquitetura (Clean - hexagonal)](imagens/CleanDiagrama.jpg)
+### Camada de Frameworks e Drivers
+* Aplicação web
+* Command
+* Jobs e crons
+
+
+
+## Arquitetura de infra do Kubernets
+
+
+--------------------------------------------------------
+# Tech Challenge Fase 1 - Grupo 15
 
 ## Links Úteis
 - Miro Board: [Miro - Fluxo de Eventos](https://miro.com)
@@ -36,3 +54,4 @@ Este documento apresenta o fluxo do Tech Challenge realizado como parte da pós-
 
 #### Contexto: Listagem de Pedidos
 - **Lista de Pedidos**: Lista todos os pedidos na fila.
+-----------------------------------------------------------------------
