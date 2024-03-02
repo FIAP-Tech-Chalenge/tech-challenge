@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: tech-app
-          image: wolwer/tech-app:v2.0
+          image: wolwer/tech-app:v3.0
           ports:
             - containerPort: 8080
           env:
