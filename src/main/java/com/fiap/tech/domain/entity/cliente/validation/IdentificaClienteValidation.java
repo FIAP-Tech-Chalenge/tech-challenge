@@ -8,7 +8,6 @@ import com.fiap.tech.domain.valuesObject.CpfValueObject;
 
 public class IdentificaClienteValidation {
 
-    //chain of responsability
     public Cliente validaEntidade(Cliente cliente) throws Exception{
         if (cliente.getCpf().isEmpty()) {
             return cliente;
