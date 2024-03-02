@@ -16,12 +16,10 @@ public class IdentificaClienteValidation {
         new CpfValueObject(cliente.getCpf()).isValid();
 
         if (cliente.getNome().isEmpty()) {
-            //adicionar mensagem personalizada: Nome não pode ser nulo
             throw new NomeNaoPodeSerNuloException("Nome é obrigatório");
         }
 
         if (cliente.getEmail().isEmpty()) {
-            //adicionar mensagem personalizada: Email não pode ser nulo
             throw new EmailNaoPodeSerNuloException("Email é obrigatório");
         }
 
