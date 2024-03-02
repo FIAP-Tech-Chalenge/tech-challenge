@@ -15,7 +15,34 @@ Base da criação da arquitetura do projeto foi baseada na forma clássica de ca
 * Aplicação web
 * Command
 * Jobs e crons
+* DB - Repository - ORM
 
+### Camada de interfaces de adapters
+* Gateway
+  * Localizado no **core** da aplicação em **domain/gateway** estão todas as portas (interfaces) para comunicação entre **core application** e componentes externos.
+    * Alguns exemplos: Banco de dados e integrações de API's
+
+### Camada de use cases
+* Inputs
+  * Camada que transforma os dados vindos de camadas externas em dados conhecidos para o usecase
+* Use Cases
+  * Manipulação dos dados recebidos nos inputs
+  * Orquestração das entidades, gatways e oturas regras que podem ser aplicadas
+  * Retorna um output com dados pertinentes às camadas superiores
+* Outputs
+  * Este dado pode ser usado por si só
+  * Já vem tratato e com o resultado final que o use case deve realizar
+  * Outputs podem ser utilizados para criar um **presenter** para N formas de saídas.
+    * Exemplo de uso do output com um presenter:
+      * Uma lista no output pode ganhar muitas saídas como: **array**, **collection**, **json**, **csv** e etc
+
+### Camda de entidades ou core business application
+* Entities
+  * Contém todas as principais regras de negócio relacionadas às entidades.
+  * São manipuladas pelas camadas superiores
+  * Nesta camada podem haver outras classes que resolvem problemas específicos de cada entidade
+    * Exemplo: [IdentificaClienteValidation.java](src%2Fmain%2Fjava%2Fcom%2Ffiap%2Ftech%2Fdomain%2Fentity%2Fcliente%2Fvalidation%2FIdentificaClienteValidation.java) é uma classe que encapsula a decisão de identificar o cliente de acordo com as informações fornecidas pelas camadas superiores
+    * Neste caso é possível alterar a regra apenas em um local
 
 
 ## Arquitetura de infra do Kubernets
