@@ -70,6 +70,10 @@ em um gráfico do Helm. Uma vez que o gráfico é criado, você pode instalar o 
 Por exemplo, se você tivesse um gráfico do Helm para este projeto chamado tech-app, você poderia instalar o gráfico com o seguinte comando:
 “helm install tech-app ./tech-app”
 
+Desenho da arquitetura do Kubernetes:
+
+![Arquitetura do Kubernetes](imagens/kube.jpg)
+
 --------------------------------------------------------
 # Tech Challenge Fase 1 - Grupo 15
 
