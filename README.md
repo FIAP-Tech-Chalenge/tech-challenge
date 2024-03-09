@@ -67,8 +67,17 @@ O Helm permite que você empacote suas configurações do Kubernetes em um gráf
 em um diretório com uma estrutura específica que inclui templates de seus recursos do Kubernetes, um arquivo Chart.yaml que contém metadados sobre o gráfico e um 
 arquivo values.yaml que especifica valores padrão para suas configurações.  Para usar este projeto com o Helm, você precisaria organizar suas configurações do Kubernetes 
 em um gráfico do Helm. Uma vez que o gráfico é criado, você pode instalar o gráfico em seu cluster Kubernetes com o comando helm install.  
-Por exemplo, se você tivesse um gráfico do Helm para este projeto chamado tech-app, você poderia instalar o gráfico com o seguinte comando:
+Por exemplo, se você tivesse um gráfico do Helm para este projeto chamado tech-app, você pode instalar o gráfico com o seguinte comando:
 “helm install tech-app ./tech-app”
+
+Passos para executar o projeto com Kubernetes:
+
+1. Subir as secrets e configmaps que estão no arquivo `kubectl apply -f Kubernetes`;
+2. Subir o banco de dados com o comando `kubectl apply -f Kubernetes/banco_dados`;
+3. Subir o aplicativo com o comando `kubectl apply -f Kubernetes/API`;
+4. Subir o EFK com o comando `kubectl apply -f Kubernetes/EFK`;
+5. Liberar uma porta para o aplicativo com o comando `minikube service tech-app-service` assim que abrir o browser, inserir no final o caminho para o Swagger. Exemplo:`http://127.0.0.1:suaPorta/swagger-ui/index.html#/`.
+
 
 Desenho da arquitetura do Kubernetes:
 
