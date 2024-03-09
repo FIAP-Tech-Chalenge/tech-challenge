@@ -75,13 +75,14 @@ Desenho da arquitetura do Kubernetes:
 ![Arquitetura do Kubernetes](imagens/kube.jpg)
 
 --------------------------------------------------------
-# Tech Challenge Fase 1 - Grupo 15
+# Tech Challenge Fase 2 - Grupo 15
 
 ## Links Úteis
 - Miro Board: [Miro - Fluxo de Eventos](https://miro.com)
 - Swagger UI: [Localhost Swagger](http://localhost:8080/swagger-ui/)
 - Swagger subindo aplicação com Kubernetes: [Localhost Swagger Kubernetes](http://localhost:30000/swagger-ui/)
 - Swagger UI: [Railway Swagger](https://fiap-production.up.railway.app/swagger-ui/index.html#/)
+- Explicando a Arquitetura: [Youtube](https://www.youtube.com/watch?v=hH9XF7n7WQo)
 
 ## Sobre o Projeto
 Este documento apresenta o fluxo do Tech Challenge realizado como parte da pós-graduação. O desafio envolveu a criação de um sistema de backend para uma lanchonete.
