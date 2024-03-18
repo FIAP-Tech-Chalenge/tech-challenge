@@ -1,7 +1,7 @@
 # Grupo 15
-- Matheus Nunes Almeida Werneck Telles
-- Lucas Gelhen Rigon
-- Ricardo Luis Machado
+- Matheus Nunes Almeida Werneck Telles - RM 352550
+- Lucas Gelhen Rigon - RM 353080
+- Ricardo Luis Machado - RM 352986
 -------------------------------------------------------
 
 # Tech Challenge Fase 2 - Grupo 15
