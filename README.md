@@ -117,4 +117,4 @@ Este documento apresenta o fluxo do Tech Challenge realizado como parte da pós-
 
 #### Contexto: Listagem de Pedidos
 - **Lista de Pedidos**: Lista todos os pedidos na fila.
------------------------------------------------------------------------
+---------------------------------------------------------------------------
