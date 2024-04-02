@@ -1,0 +1,80 @@
+app:
+  name: tech-app
+  replicaCount: 3
+  image:
+    repository: wolwer/tech-app
+    tag: v3.0
+    pullPolicy: IfNotPresent
+  service:
+    type: NodePort
+    port: 8080
+    targetPort: 8080
+    nodePort: 30000
+  database:
+    url: jdbc:postgresql://postgres:5432/mydatabase
+    username:
+      secretKeyRef:
+        name: my-secret
+        key: DATA_USERNAME
+    password:
+      secretKeyRef:
+        name: my-secret
+        key: DATA_PASSWORD
+  springProfilesActive: prod
+  resources:
+    requests:
+      cpu: "100m"
+  autoscaling:
+    minReplicas: 1
+    maxReplicas: 10
+    targetCPUUtilizationPercentage: 50
+  ingress:
+    enabled: true
+    annotations: {}
+    hosts:
+      - host: localhost
+        paths:
+          - path: /
+            pathType: ImplementationSpecific
+    tls: []
+  probes:
+    livenessProbe:
+      httpGet:
+        path: /actuator/health
+        port: 8080
+      initialDelaySeconds: 380
+      periodSeconds: 30
+    readinessProbe:
+      httpGet:
+        path: /actuator/health
+        port: 8080
+      initialDelaySeconds: 380
+      periodSeconds: 30
+hpa:
+  name: tech-app-hpa
+  minReplicas: 1
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 90
+postgres:
+  name: postgres
+  replicaCount: 1
+  image:
+    repository: postgres
+    tag: latest
+  env:
+    user:
+      secretKeyRef:
+        name: my-secret
+        key: DATA_USERNAME
+    password:
+      secretKeyRef:
+        name: my-secret
+        key: DATA_PASSWORD
+    db:
+      configMapKeyRef:
+        name: my-configmap
+        key: DATA_DATABASE
+  service:
+    port: 5432
+  pvc:
+    name: postgres-pvc

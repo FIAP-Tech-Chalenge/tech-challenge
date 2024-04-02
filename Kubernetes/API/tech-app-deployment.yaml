@@ -1,0 +1,60 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tech-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tech-app
+  template:
+    metadata:
+      labels:
+        app: tech-app
+    spec:
+      containers:
+        - name: tech-app
+          image: wolwer/tech-app:v3.0
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATA_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: DATA_HOST
+            - name: DATA_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: DATA_USERNAME
+            - name: DATA_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: my-secret
+                  key: DATA_PASSWORD
+            - name: DATA_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: DATA_PORT
+            - name: DATA_DATABASE
+              valueFrom:
+                configMapKeyRef:
+                  name: my-configmap
+                  key: DATA_DATABASE
+          resources:
+            requests:
+              cpu: "100m"
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 180
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8080
+            initialDelaySeconds: 180
+            periodSeconds: 30
