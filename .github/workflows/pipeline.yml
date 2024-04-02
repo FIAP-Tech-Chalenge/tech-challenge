@@ -66,4 +66,4 @@ jobs:
           distribution: 'temurin'
 
       - name: SonarCloud analysis
-        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=wolwerr_fiap -Dsonar.organization=wolwerr -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+        run: mvn -B verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=FIAP-Tech-Chalenge_tech-challenge -Dsonar.organization=fiap-tech-chalenge -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=${{ secrets.SONAR_TOKEN }}
