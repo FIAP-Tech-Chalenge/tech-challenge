@@ -22,7 +22,7 @@ public class IdentificaClienteOutput implements OutputInterface {
     }
 
     @Override
-    public Cliente getBody() {
+    public Object getBody() {
         return this.cliente;
     }
 }

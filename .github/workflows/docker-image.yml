@@ -9,20 +9,17 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      IMAGE_TAG: ${{ github.run_id }}
     steps:
-    - uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-    - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag wolwer/app-tech:${IMAGE_TAG}
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag wolwer/app-tech:latest
 
-    - name: Login to Docker Hub
-      uses: docker/login-action@v1
-      with:
-        username: ${{ secrets.DOCKER_USERNAME }}
-        password: ${{ secrets.DOCKER_TOKEN }}
+      - name: Login to Docker Hub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_TOKEN }}
 
-    - name: Push Image to Docker Hub
-      run: docker push wolwer/app-tech:${IMAGE_TAG}
-
+      - name: Push Image to Docker Hub
+        run: docker push wolwer/app-tech:latest
