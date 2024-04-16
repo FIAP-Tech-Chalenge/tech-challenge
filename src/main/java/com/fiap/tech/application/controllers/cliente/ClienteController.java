@@ -1,6 +1,7 @@
 package com.fiap.tech.application.controllers.cliente;
 
 
+import com.fiap.tech.application.controllers.cliente.requests.IdentificaClienteRequest;
 import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.cliente.IdentificaClienteInput;
@@ -25,8 +26,13 @@ public class ClienteController {
 
     @PostMapping
     @Operation(tags = {"cliente"})
-    public ResponseEntity<Object> identificaCliente(@RequestBody IdentificaClienteInput identificaClienteInput) throws Exception {
+    public ResponseEntity<Object> identificaCliente(@RequestBody IdentificaClienteRequest identificaClienteRequest) throws Exception {
 
+        IdentificaClienteInput identificaClienteInput = new IdentificaClienteInput(
+                identificaClienteRequest.nome(),
+                identificaClienteRequest.cpf(),
+                identificaClienteRequest.email()
+        );
         IdentificarClienteUseCase useCase = new IdentificarClienteUseCase(new IdentificarClienteRepository(clienteRepository));
         useCase.execute(identificaClienteInput);
 

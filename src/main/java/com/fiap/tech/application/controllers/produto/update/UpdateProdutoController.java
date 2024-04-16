@@ -1,6 +1,7 @@
 package com.fiap.tech.application.controllers.produto.update;
 
 
+import com.fiap.tech.application.controllers.produto.update.requests.UpdateProdutoRequest;
 import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.produto.EditaProdutoInput;
@@ -23,7 +24,15 @@ public class UpdateProdutoController {
 
     @PutMapping("/{uuid}")
     @Operation(tags = {"produto"})
-    public ResponseEntity<Object> editaProduto(@PathVariable UUID uuid, @RequestBody EditaProdutoInput produtoInput) {
+    public ResponseEntity<Object> editaProduto(@PathVariable UUID uuid, @RequestBody UpdateProdutoRequest produtoRequest) {
+        EditaProdutoInput produtoInput = new EditaProdutoInput(
+                produtoRequest.nome(),
+                produtoRequest.valor(),
+                produtoRequest.descricao(),
+                produtoRequest.categoria(),
+                produtoRequest.quantidade(),
+                produtoRequest.dataCriacao()
+        );
         EditaProdutoUseCase useCase = new EditaProdutoUseCase(
                 new EditaProdutoRepository(produtoRepository),
                 new BuscarProdutoRepository(produtoRepository)

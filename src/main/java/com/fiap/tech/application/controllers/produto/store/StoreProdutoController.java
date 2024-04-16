@@ -1,6 +1,7 @@
 package com.fiap.tech.application.controllers.produto.store;
 
 
+import com.fiap.tech.application.controllers.produto.store.requests.StoreProdutoRequest;
 import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.produto.CriarProdutoInput;
@@ -23,8 +24,15 @@ public class StoreProdutoController {
 
     @PostMapping
     @Operation(tags = {"produto"})
-    public ResponseEntity<Object> criaProduto(@RequestBody CriarProdutoInput criarProdutoInput) {
-
+    public ResponseEntity<Object> criaProduto(@RequestBody StoreProdutoRequest criarProdutoRequest) {
+        CriarProdutoInput criarProdutoInput = new CriarProdutoInput(
+                criarProdutoRequest.nome(),
+                criarProdutoRequest.valor(),
+                criarProdutoRequest.descricao(),
+                criarProdutoRequest.categoria(),
+                criarProdutoRequest.quantidade(),
+                criarProdutoRequest.dataCriacao()
+        );
         CriaProdutoUseCase useCase = new CriaProdutoUseCase(new CriaProtutoRepository(produtoRepository));
         useCase.execute(criarProdutoInput);
         OutputInterface outputInterface = useCase.getCriaProdutoOutput();
