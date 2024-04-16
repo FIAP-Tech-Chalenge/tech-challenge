@@ -3,8 +3,11 @@ package com.fiap.tech.application.controllers.produto.update;
 
 import com.fiap.tech.application.controllers.produto.update.requests.UpdateProdutoRequest;
 import com.fiap.tech.application.response.GenericResponse;
+import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.produto.EditaProdutoInput;
+import com.fiap.tech.domain.output.produto.EditaProdutoOutput;
+import com.fiap.tech.domain.presenters.cliente.produto.UpdateProdutoPresenter;
 import com.fiap.tech.domain.useCase.produto.EditaProdutoUseCase;
 import com.fiap.tech.infra.adpter.repository.produto.BuscarProdutoRepository;
 import com.fiap.tech.infra.adpter.repository.produto.EditaProdutoRepository;
@@ -39,6 +42,11 @@ public class UpdateProdutoController {
         );
         useCase.execute(produtoInput, uuid);
         OutputInterface outputInterface = useCase.getEditaProdutoOutput();
-        return new GenericResponse().response(outputInterface);
+        if (outputInterface.getOutputStatus().getCode() != 201) {
+            return new GenericResponse().response(outputInterface);
+        }
+
+        UpdateProdutoPresenter presenter = new UpdateProdutoPresenter((EditaProdutoOutput) outputInterface);
+        return new PresenterResponse().response(presenter);
     }
 }

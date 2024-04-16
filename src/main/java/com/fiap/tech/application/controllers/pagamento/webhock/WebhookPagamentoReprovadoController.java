@@ -1,5 +1,6 @@
 package com.fiap.tech.application.controllers.pagamento.webhock;
 
+import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.enums.pedido.StatusPagamento;
 import com.fiap.tech.domain.generic.output.OutputInterface;
@@ -45,6 +46,10 @@ public class WebhookPagamentoReprovadoController {
         );
         statusPagamentoUseCase.execute(uuid, StatusPagamento.NAO_PAGO);
         OutputInterface outputInterface = statusPagamentoUseCase.getBuscaPedidoOutput();
+
+        if (outputInterface.getOutputStatus().getCode() != 200) {
+            return new GenericResponse().response(outputInterface);
+        }
 
         StatusPagamentoPresenter presenter = new StatusPagamentoPresenter((StatusPagamentoOutput) outputInterface);
 

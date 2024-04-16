@@ -1,5 +1,6 @@
 package com.fiap.tech.application.controllers.pagamento;
 
+import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.output.pedido.CheckOutOutput;
@@ -39,6 +40,10 @@ public class ProcessarPagamentoController {
         );
         processaCheckoutUseCase.execute(uuid);
         OutputInterface outputInterface = processaCheckoutUseCase.getCheckoutOutput();
+
+        if (outputInterface.getOutputStatus().getCode() != 200) {
+            return new GenericResponse().response(outputInterface);
+        }
 
         ProcessarPagamentoPresenter presenter = new ProcessarPagamentoPresenter((CheckOutOutput) outputInterface);
 

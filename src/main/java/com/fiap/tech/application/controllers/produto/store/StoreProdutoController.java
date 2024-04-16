@@ -3,8 +3,11 @@ package com.fiap.tech.application.controllers.produto.store;
 
 import com.fiap.tech.application.controllers.produto.store.requests.StoreProdutoRequest;
 import com.fiap.tech.application.response.GenericResponse;
+import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.produto.CriarProdutoInput;
+import com.fiap.tech.domain.output.produto.CriaProdutoOutput;
+import com.fiap.tech.domain.presenters.cliente.produto.StoreProdutoPresenter;
 import com.fiap.tech.domain.useCase.produto.CriaProdutoUseCase;
 import com.fiap.tech.infra.adpter.repository.produto.CriaProtutoRepository;
 import com.fiap.tech.infra.repository.ProdutoRepository;
@@ -36,6 +39,11 @@ public class StoreProdutoController {
         CriaProdutoUseCase useCase = new CriaProdutoUseCase(new CriaProtutoRepository(produtoRepository));
         useCase.execute(criarProdutoInput);
         OutputInterface outputInterface = useCase.getCriaProdutoOutput();
-        return new GenericResponse().response(outputInterface);
+        if (outputInterface.getOutputStatus().getCode() != 201) {
+            return new GenericResponse().response(outputInterface);
+        }
+
+        StoreProdutoPresenter presenter = new StoreProdutoPresenter((CriaProdutoOutput) outputInterface);
+        return new PresenterResponse().response(presenter);
     }
 }

@@ -1,7 +1,10 @@
 package com.fiap.tech.application.controllers.pedido.get;
 
 import com.fiap.tech.application.response.GenericResponse;
+import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
+import com.fiap.tech.domain.output.pedido.BuscaPedidoOutput;
+import com.fiap.tech.domain.presenters.cliente.pedido.GetPedidoPresenter;
 import com.fiap.tech.domain.useCase.pedido.BuscaPedidoPorUuidUseCase;
 import com.fiap.tech.infra.adpter.repository.pedido.BuscarPedidoRepository;
 import com.fiap.tech.infra.repository.PedidoProdutoRepository;
@@ -31,7 +34,12 @@ public class GetPedidoController {
         BuscaPedidoPorUuidUseCase useCase = new BuscaPedidoPorUuidUseCase(new BuscarPedidoRepository(pedidoRepository, pedidoProdutoRepository));
         useCase.execute(uuid);
         OutputInterface outputInterface = useCase.getBuscaPedidoOutput();
-        return new GenericResponse().response(outputInterface);
+        if (outputInterface.getOutputStatus().getCode() != 200) {
+            return new GenericResponse().response(outputInterface);
+        }
+        
+        GetPedidoPresenter presenter = new GetPedidoPresenter((BuscaPedidoOutput) outputInterface);
+        return new PresenterResponse().response(presenter);
     }
 }
 

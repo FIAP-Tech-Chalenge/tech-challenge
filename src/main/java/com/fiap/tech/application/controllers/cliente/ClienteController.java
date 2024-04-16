@@ -2,6 +2,7 @@ package com.fiap.tech.application.controllers.cliente;
 
 
 import com.fiap.tech.application.controllers.cliente.requests.IdentificaClienteRequest;
+import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.cliente.IdentificaClienteInput;
@@ -39,6 +40,11 @@ public class ClienteController {
         useCase.execute(identificaClienteInput);
 
         OutputInterface outputInterface = useCase.getIdentificaClienteOutput();
+
+        if (outputInterface.getOutputStatus().getCode() != 200) {
+            return new GenericResponse().response(outputInterface);
+        }
+        
         IdentificaClientePresenter presenter = new IdentificaClientePresenter((IdentificaClienteOutput) outputInterface);
 
         return new PresenterResponse().response(presenter);

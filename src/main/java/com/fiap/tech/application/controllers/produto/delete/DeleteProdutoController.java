@@ -2,7 +2,10 @@ package com.fiap.tech.application.controllers.produto.delete;
 
 
 import com.fiap.tech.application.response.GenericResponse;
+import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
+import com.fiap.tech.domain.output.produto.DeletaProdutoOutput;
+import com.fiap.tech.domain.presenters.cliente.produto.DeleteProdutoPresenter;
 import com.fiap.tech.domain.useCase.produto.DeletaProdutoUseCase;
 import com.fiap.tech.infra.adpter.repository.produto.BuscarProdutoRepository;
 import com.fiap.tech.infra.adpter.repository.produto.DeletaProdutoRepository;
@@ -32,6 +35,11 @@ public class DeleteProdutoController {
         );
         useCase.execute(uuid);
         OutputInterface outputInterface = useCase.getDeletaProdutoOutput();
-        return new GenericResponse().response(outputInterface);
+        if (outputInterface.getOutputStatus().getCode() != 204) {
+            return new GenericResponse().response(outputInterface);
+        }
+
+        DeleteProdutoPresenter presenter = new DeleteProdutoPresenter((DeletaProdutoOutput) outputInterface);
+        return new PresenterResponse().response(presenter);
     }
 }

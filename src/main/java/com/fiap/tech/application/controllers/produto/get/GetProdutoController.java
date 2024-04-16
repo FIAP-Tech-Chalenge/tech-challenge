@@ -2,7 +2,10 @@ package com.fiap.tech.application.controllers.produto.get;
 
 
 import com.fiap.tech.application.response.GenericResponse;
+import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
+import com.fiap.tech.domain.output.produto.BuscaProdutoOutput;
+import com.fiap.tech.domain.presenters.cliente.produto.GetProdutoPresenter;
 import com.fiap.tech.domain.useCase.produto.BuscaProdutoPorUuidUseCase;
 import com.fiap.tech.infra.adpter.repository.produto.BuscarProdutoRepository;
 import com.fiap.tech.infra.repository.ProdutoRepository;
@@ -28,6 +31,11 @@ public class GetProdutoController {
         BuscaProdutoPorUuidUseCase useCase = new BuscaProdutoPorUuidUseCase(new BuscarProdutoRepository(produtoRepository));
         useCase.execute(uuid);
         OutputInterface outputInterface = useCase.getBuscaProdutoOutput();
-        return new GenericResponse().response(outputInterface);
+        if (outputInterface.getOutputStatus().getCode() != 200) {
+            return new GenericResponse().response(outputInterface);
+        }
+
+        GetProdutoPresenter presenter = new GetProdutoPresenter((BuscaProdutoOutput) outputInterface);
+        return new PresenterResponse().response(presenter);
     }
 }
