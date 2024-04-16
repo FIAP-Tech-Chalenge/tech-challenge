@@ -5,6 +5,11 @@ CREATE TABLE IF NOT EXISTS clientes (
                                         email VARCHAR(255) NOT NULL
 );
 
+DELETE FROM pedido_produtos;
+DELETE FROM pedidos;
+DELETE FROM produtos;
+DELETE FROM clientes;
+
 INSERT INTO clientes (uuid, nome, cpf, email) VALUES
                                                   ('123e4567-e89b-12d3-a456-426614174000', 'Cliente 1', '88256176660', 'cliente1@email.com'),
                                                   ('123e4567-e89b-12d3-a456-426614174001', 'Cliente 2', '87223666447', 'cliente2@email.com'),
