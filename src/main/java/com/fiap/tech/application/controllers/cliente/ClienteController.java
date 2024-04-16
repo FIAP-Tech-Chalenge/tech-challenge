@@ -2,9 +2,11 @@ package com.fiap.tech.application.controllers.cliente;
 
 
 import com.fiap.tech.application.controllers.cliente.requests.IdentificaClienteRequest;
-import com.fiap.tech.application.response.GenericResponse;
+import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.input.cliente.IdentificaClienteInput;
+import com.fiap.tech.domain.output.cliente.IdentificaClienteOutput;
+import com.fiap.tech.domain.presenters.cliente.identifica.IdentificaClientePresenter;
 import com.fiap.tech.domain.useCase.cliente.IdentificarClienteUseCase;
 import com.fiap.tech.infra.adpter.repository.cliente.IdentificarClienteRepository;
 import com.fiap.tech.infra.repository.ClienteRepository;
@@ -37,8 +39,9 @@ public class ClienteController {
         useCase.execute(identificaClienteInput);
 
         OutputInterface outputInterface = useCase.getIdentificaClienteOutput();
+        IdentificaClientePresenter presenter = new IdentificaClientePresenter((IdentificaClienteOutput) outputInterface);
 
-        return new GenericResponse().response(outputInterface);
+        return new PresenterResponse().response(presenter);
     }
 
 }
