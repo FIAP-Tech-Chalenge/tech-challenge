@@ -1,7 +1,9 @@
 package com.fiap.tech.application.controllers.pagamento;
 
-import com.fiap.tech.application.response.GenericResponse;
+import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.generic.output.OutputInterface;
+import com.fiap.tech.domain.output.pedido.CheckOutOutput;
+import com.fiap.tech.domain.presenters.cliente.pagamento.ProcessarPagamentoPresenter;
 import com.fiap.tech.domain.useCase.checkout.ProcessaCheckoutUseCase;
 import com.fiap.tech.infra.adpter.mock.pagamento.qrCode.MercadoPagoIntegrationMock;
 import com.fiap.tech.infra.adpter.repository.checkout.CheckoutRepository;
@@ -37,6 +39,9 @@ public class ProcessarPagamentoController {
         );
         processaCheckoutUseCase.execute(uuid);
         OutputInterface outputInterface = processaCheckoutUseCase.getCheckoutOutput();
-        return new GenericResponse().response(outputInterface);
+
+        ProcessarPagamentoPresenter presenter = new ProcessarPagamentoPresenter((CheckOutOutput) outputInterface);
+
+        return new PresenterResponse().response(presenter);
     }
 }

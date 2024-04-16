@@ -1,8 +1,10 @@
 package com.fiap.tech.application.controllers.pagamento.webhock;
 
-import com.fiap.tech.application.response.GenericResponse;
+import com.fiap.tech.application.response.PresenterResponse;
 import com.fiap.tech.domain.enums.pedido.StatusPagamento;
 import com.fiap.tech.domain.generic.output.OutputInterface;
+import com.fiap.tech.domain.output.pagamento.StatusPagamentoOutput;
+import com.fiap.tech.domain.presenters.cliente.pagamento.StatusPagamentoPresenter;
 import com.fiap.tech.domain.useCase.pagamento.MudaStatusPagamentoUseCase;
 import com.fiap.tech.infra.adpter.repository.pedido.BuscarPedidoRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.CriaPedidoRepository;
@@ -44,6 +46,8 @@ public class WebhookPagamentoAprovadoController {
         statusPagamentoUseCase.execute(uuid, StatusPagamento.PAGO);
         OutputInterface outputInterface = statusPagamentoUseCase.getBuscaPedidoOutput();
 
-        return new GenericResponse().response(outputInterface);
+        StatusPagamentoPresenter presenter = new StatusPagamentoPresenter((StatusPagamentoOutput) outputInterface);
+
+        return new PresenterResponse().response(presenter);
     }
 }
