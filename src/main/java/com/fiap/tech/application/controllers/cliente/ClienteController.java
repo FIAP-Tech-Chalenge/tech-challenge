@@ -1,4 +1,4 @@
-package com.fiap.tech.application.controllers;
+package com.fiap.tech.application.controllers.cliente;
 
 
 import com.fiap.tech.application.response.GenericResponse;
@@ -7,6 +7,7 @@ import com.fiap.tech.domain.input.cliente.IdentificaClienteInput;
 import com.fiap.tech.domain.useCase.cliente.IdentificarClienteUseCase;
 import com.fiap.tech.infra.adpter.repository.cliente.IdentificarClienteRepository;
 import com.fiap.tech.infra.repository.ClienteRepository;
+import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -23,6 +24,7 @@ public class ClienteController {
     private final ClienteRepository clienteRepository;
 
     @PostMapping
+    @Operation(tags = {"cliente"})
     public ResponseEntity<Object> identificaCliente(@RequestBody IdentificaClienteInput identificaClienteInput) throws Exception {
 
         IdentificarClienteUseCase useCase = new IdentificarClienteUseCase(new IdentificarClienteRepository(clienteRepository));
