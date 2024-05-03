@@ -4,7 +4,8 @@ import com.fiap.tech.domain.enums.pedido.StatusPagamento;
 import com.fiap.tech.domain.enums.pedido.StatusPedido;
 import com.fiap.tech.domain.exception.pedido.PedidoVazioException;
 import com.fiap.tech.domain.exception.pedido.ProdutoDoPedidoSemQuantidadeException;
-import jakarta.persistence.*;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,25 +13,28 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
+
 @Getter
 @Setter
 public class Pedido {
-        private UUID uuid;
-        private final UUID clienteUuid;
-        private Long numeroPedido;
-        @Enumerated(EnumType.STRING)
-        private StatusPedido statusPedido;
-        @Enumerated(EnumType.STRING)
-        private StatusPagamento statusPagamento;
-        private List<Produto> produtos;
-        private Float total;
+    private final UUID clienteUuid;
+    private UUID pedidoId;
+    private UUID uuid;
+    private Long numeroPedido;
+    @Enumerated(EnumType.STRING)
+    private StatusPedido statusPedido;
+    @Enumerated(EnumType.STRING)
+    private StatusPagamento statusPagamento;
+    private List<Produto> produtos;
+    private Float total;
 
-        public Pedido(UUID clienteUuid) {
-            this.clienteUuid = clienteUuid;
-            this.produtos = new ArrayList<>();
-        }
+    public Pedido(UUID clienteUuid) {
+        this.clienteUuid = clienteUuid;
+        this.produtos = new ArrayList<>();
+    }
 
-    public Pedido(UUID clienteId, StatusPedido statusPedido, StatusPagamento statusPagamento, Float valorTotal) {
+    public Pedido(UUID pedidoId, UUID clienteId, StatusPedido statusPedido, StatusPagamento statusPagamento, Float valorTotal) {
+        this.pedidoId = pedidoId;
         this.clienteUuid = clienteId;
         this.statusPedido = statusPedido;
         this.statusPagamento = statusPagamento;
@@ -54,13 +58,11 @@ public class Pedido {
         }
     }
 
-    public void gerarCombo()
-    {
+    public void gerarCombo() {
 
     }
 
-    public float valorTotalDoPedido()
-    {
+    public float valorTotalDoPedido() {
         float total = (float) 0;
         for (Produto produto : produtos) {
             total += produto.getValor() * produto.getQuantidade();

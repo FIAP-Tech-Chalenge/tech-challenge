@@ -9,7 +9,6 @@ import com.fiap.tech.infra.repository.PedidoProdutoRepository;
 import com.fiap.tech.infra.repository.PedidoRepository;
 import lombok.RequiredArgsConstructor;
 
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -27,6 +26,7 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
 
         for (PedidoModel pedidoModel : pedidosModels) {
             Pedido pedidoEntity = new Pedido(
+                    pedidoModel.getUuid(),
                     pedidoModel.getClienteId(),
                     pedidoModel.getStatusPedido(),
                     pedidoModel.getStatusPagamento(),
@@ -63,6 +63,7 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
             produtosList.add(produtoEntity);
         }
         Pedido pedidoEntity = new Pedido(
+                pedidoModel.getUuid(),
                 pedidoModel.getClienteId(),
                 pedidoModel.getStatusPedido(),
                 pedidoModel.getStatusPagamento(),

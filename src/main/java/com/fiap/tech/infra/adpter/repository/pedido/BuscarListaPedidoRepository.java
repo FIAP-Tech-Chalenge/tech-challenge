@@ -25,6 +25,7 @@ public class BuscarListaPedidoRepository implements BuscaListaPedidoInterface {
 
         for (PedidoModel pedidoModel : pedidosModels) {
             Pedido pedidoEntity = new Pedido(
+                    pedidoModel.getUuid(),
                     pedidoModel.getClienteId(),
                     pedidoModel.getStatusPedido(),
                     pedidoModel.getStatusPagamento(),
