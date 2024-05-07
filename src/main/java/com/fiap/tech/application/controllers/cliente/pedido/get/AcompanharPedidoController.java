@@ -23,7 +23,7 @@ import java.util.UUID;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("cliente/pedido")
-public class GetPedidoController {
+public class AcompanharPedidoController {
 
     private final PedidoRepository pedidoRepository;
     private final PedidoProdutoRepository pedidoProdutoRepository;

@@ -7,6 +7,8 @@ import com.fiap.tech.infra.model.ClienteModel;
 import com.fiap.tech.infra.repository.ClienteRepository;
 import lombok.RequiredArgsConstructor;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -20,10 +22,26 @@ public class ClienteEntityRepository implements ClienteInterface {
             throw new ClienteNaoEncontradoException("Cliente não encontrado");
         }
         return new Cliente(
-            clienteModel.getNome(),
-            clienteModel.getCpf(),
-            clienteModel.getEmail(),
-            clienteModel.getUuid()
+                clienteModel.getNome(),
+                clienteModel.getCpf(),
+                clienteModel.getEmail(),
+                clienteModel.getUuid()
         );
+    }
+
+    @Override
+    public List<com.fiap.tech.domain.entity.cliente.Cliente> buscarClientes() {
+        List<ClienteModel> clientesModels = clienteRepository.findAll();
+        List<com.fiap.tech.domain.entity.cliente.Cliente> clienteList = new ArrayList<>();
+        for (ClienteModel clienteModel : clientesModels) {
+            com.fiap.tech.domain.entity.cliente.Cliente pedidoEntity = new com.fiap.tech.domain.entity.cliente.Cliente(
+                    clienteModel.getNome(),
+                    clienteModel.getCpf(),
+                    clienteModel.getEmail(),
+                    clienteModel.getUuid()
+            );
+            clienteList.add(pedidoEntity);
+        }
+        return clienteList;
     }
 }

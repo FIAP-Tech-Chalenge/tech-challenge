@@ -1,4 +1,4 @@
-package com.fiap.tech.application.controllers.admin.pedidos.all;
+package com.fiap.tech.application.controllers.admin.pedidos;
 
 import com.fiap.tech.application.response.GenericResponse;
 import com.fiap.tech.application.response.PresenterResponse;
