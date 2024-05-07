@@ -12,4 +12,6 @@ public interface ClienteInterface {
     Cliente buscaClientePorUuid(UUID uuid) throws ClienteNaoEncontradoException;
 
     List<com.fiap.tech.domain.entity.cliente.Cliente> buscarClientes();
+
+    com.fiap.tech.domain.entity.cliente.Cliente getClienteByUuid(UUID uuid);
 }

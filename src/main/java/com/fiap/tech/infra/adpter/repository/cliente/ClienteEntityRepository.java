@@ -44,4 +44,18 @@ public class ClienteEntityRepository implements ClienteInterface {
         }
         return clienteList;
     }
+
+    @Override
+    public com.fiap.tech.domain.entity.cliente.Cliente getClienteByUuid(UUID uuid) {
+        ClienteModel clienteModel = clienteRepository.findByUuid(uuid);
+        if (clienteModel == null) {
+            return null;
+        }
+        return new com.fiap.tech.domain.entity.cliente.Cliente(
+                clienteModel.getNome(),
+                clienteModel.getCpf(),
+                clienteModel.getEmail(),
+                clienteModel.getUuid()
+        );
+    }
 }
