@@ -11,6 +11,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 
@@ -25,7 +26,7 @@ public class Produto {
     @Enumerated(EnumType.STRING)
     private CategoriaEnum categoria;
     private Integer quantidade;
-
+    private List<Imagem> imagens;
 
     public Produto(String nome, Float valor, String descricao, CategoriaEnum categoria, Integer quantidade) {
         this.nome = nome;

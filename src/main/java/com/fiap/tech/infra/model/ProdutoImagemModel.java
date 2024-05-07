@@ -1,6 +1,5 @@
 package com.fiap.tech.infra.model;
 
-import com.fiap.tech.domain.enums.produto.CategoriaEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,15 +13,12 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "pedido_produtos")
-public class PedidoProdutoModel {
+@Table(name = "produto_imagens")
+public class ProdutoImagemModel {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Float valor;
-    private Integer quantidade;
-    @Enumerated(EnumType.STRING)
-    private CategoriaEnum categoria;
+    private String nome;
+    private String url;
     private UUID produtoUuid;
-    private UUID pedidoUuid;
 }

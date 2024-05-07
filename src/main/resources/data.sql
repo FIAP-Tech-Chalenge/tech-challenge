@@ -5,8 +5,19 @@ CREATE TABLE IF NOT EXISTS clientes (
                                         email VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS produto_imagens (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    produto_uuid VARCHAR(36) NOT NULL,
+    nome text NOT NULL,
+    url text NOT NULL,
+
+    FOREIGN KEY (produto_uuid) REFERENCES produtos(uuid)
+);
+CREATE SEQUENCE PRODUTO_IMAGENS_SEQ;
+
 DELETE FROM pedido_produtos;
 DELETE FROM pedidos;
+DELETE FROM produto_imagens;
 DELETE FROM produtos;
 DELETE FROM clientes;
 
