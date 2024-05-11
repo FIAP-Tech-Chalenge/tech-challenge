@@ -11,17 +11,24 @@ import com.fiap.tech.domain.useCase.pedido.CriaPedidoUseCase;
 import com.fiap.tech.infra.adpter.repository.cliente.ClienteEntityRepository;
 import com.fiap.tech.infra.adpter.repository.pedido.CriaPedidoRepository;
 import com.fiap.tech.infra.adpter.repository.produto.BuscarProdutoRepository;
+import com.fiap.tech.infra.dependecy.StringValidatorsAdapter;
+import com.fiap.tech.infra.dependecy.resolvers.RequestClienteResolver;
 import com.fiap.tech.infra.repository.ClienteRepository;
 import com.fiap.tech.infra.repository.PedidoProdutoRepository;
 import com.fiap.tech.infra.repository.PedidoRepository;
 import com.fiap.tech.infra.repository.ProdutoRepository;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.UUID;
 
 
 @RestController
@@ -35,10 +42,28 @@ public class StorePedidoController {
     private final PedidoProdutoRepository pedidoProdutoRepository;
 
     @PostMapping
-    @Operation(tags = {"cliente"})
-    ResponseEntity<Object> criaPedido(@RequestBody StorePedidoRequest criarProdutoRequest) {
+    @Operation(
+            tags = {"cliente"},
+            parameters = {
+                    @Parameter(name = "Bearer", description = "Authorization header", in = ParameterIn.HEADER)
+            }
+    )
+    ResponseEntity<Object> criaPedido(
+            @RequestBody StorePedidoRequest criarProdutoRequest,
+            HttpServletRequest request
+    ) throws Exception {
+        String authorizationHeader = request.getHeader("Bearer");
+        String uuidClientResolvedString = RequestClienteResolver.resolve(
+                authorizationHeader,
+                criarProdutoRequest.clienteUuid()
+        );
+        if (!StringValidatorsAdapter.isValidUUID(uuidClientResolvedString)) {
+            throw new Exception("Token de identificação do cliente não encontrado");
+        }
+        UUID uuidClientResolved = StringValidatorsAdapter.toUUID(uuidClientResolvedString);
+
         CriarPedidoInput criaPedidoInput = new CriarPedidoInput(
-                criarProdutoRequest.clienteUuid(),
+                uuidClientResolved,
                 criarProdutoRequest.produtoList(),
                 criarProdutoRequest.numeroPedido()
         );

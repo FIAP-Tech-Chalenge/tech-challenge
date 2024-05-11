@@ -22,7 +22,7 @@ DELETE FROM produtos;
 DELETE FROM clientes;
 
 INSERT INTO clientes (uuid, nome, cpf, email) VALUES
-                                                  ('123e4567-e89b-12d3-a456-426614174000', 'Cliente 1', '88256176660', 'cliente1@email.com'),
+                                                  ('74d8c418-4001-7004-a6a8-8265b4a2c496', 'Cliente 1', '88256176660', 'cliente1@email.com'),
                                                   ('123e4567-e89b-12d3-a456-426614174001', 'Cliente 2', '87223666447', 'cliente2@email.com'),
                                                   ('123e4567-e89b-12d3-a456-426614174002', 'Cliente 3', '32267558386', 'cliente3@email.com'),
                                                   ('123e4567-e89b-12d3-a456-426614174003', 'Cliente 4', '52846686858', 'cliente4@email.com'),
@@ -56,7 +56,7 @@ CREATE TABLE IF NOT EXISTS pedidos (
 );
 
 INSERT INTO pedidos (uuid, numeroPedido, clienteid, statusPedido, statusPagamento, valorTotal, dataCriacao) VALUES
-                                                                                                                ('123e4567-e89b-12d3-a456-426614174010', 1, '123e4567-e89b-12d3-a456-426614174000', 'PRONTO', 'NAO_PAGO', 10, '2022-12-21 00:00:00'),
+                                                                                                                ('123e4567-e89b-12d3-a456-426614174010', 1, '74d8c418-4001-7004-a6a8-8265b4a2c496', 'PRONTO', 'NAO_PAGO', 10, '2022-12-21 00:00:00'),
                                                                                                                 ('123e4567-e89b-12d3-a456-426614174011', 2, '123e4567-e89b-12d3-a456-426614174001', 'EM_PREPARACAO', 'AGUARDANDO_PAGAMENTO', 20, '2022-12-21 00:00:00'),
                                                                                                                 ('123e4567-e89b-12d3-a456-426614174012', 3, '123e4567-e89b-12d3-a456-426614174002', 'RECEBIDO', 'PAGO', 30, '2022-12-21 00:00:00'),
                                                                                                                 ('123e4567-e89b-12d3-a456-426614174013', 4, '123e4567-e89b-12d3-a456-426614174003', 'EM_PREPARACAO', 'PAGO', 40, '2022-12-21 00:00:00'),

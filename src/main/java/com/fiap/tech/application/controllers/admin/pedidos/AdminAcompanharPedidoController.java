@@ -32,7 +32,7 @@ public class AdminAcompanharPedidoController {
     @Operation(tags = {"admin"})
     public ResponseEntity<Object> getPedido(@PathVariable UUID uuid) {
         BuscaPedidoPorUuidUseCase useCase = new BuscaPedidoPorUuidUseCase(new BuscarPedidoRepository(pedidoRepository, pedidoProdutoRepository));
-        useCase.execute(uuid);
+        useCase.execute(uuid, null);
         OutputInterface outputInterface = useCase.getBuscaPedidoOutput();
         if (outputInterface.getOutputStatus().getCode() != 200) {
             return new GenericResponse().response(outputInterface);

@@ -50,9 +50,12 @@ public class BuscarPedidoRepository implements BuscaPedidoInterface {
     }
 
     @Override
-    public Pedido encontraPedidoPorUuid(UUID uuid) {
-        PedidoModel pedidoModel = pedidoRepository.findByUuid(uuid);
+    public Pedido encontraPedidoPorUuid(UUID pedidoUuid, UUID clienteUuid) {
+        PedidoModel pedidoModel = pedidoRepository.findByUuid(pedidoUuid);
         if (pedidoModel == null) {
+            return null;
+        }
+        if (!pedidoModel.getClienteId().equals(clienteUuid)) {
             return null;
         }
         List<PedidoProdutoModel> pedidosDoProduto = pedidoProdutoRepository.findPedidoProdutoModelsByPedidoUuid(pedidoModel.getUuid());
