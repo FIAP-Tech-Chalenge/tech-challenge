@@ -7,6 +7,7 @@ import com.fiap.tech.domain.generic.output.OutputError;
 import com.fiap.tech.domain.generic.output.OutputInterface;
 import com.fiap.tech.domain.generic.output.OutputStatus;
 import com.fiap.tech.domain.output.pedido.BuscaPedidoOutput;
+import com.fiap.tech.domain.outputerror.BuscarPedidoOutputError;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
@@ -22,6 +23,13 @@ public class BuscaPedidoPorUuidUseCase {
     public void execute(UUID pedidoUuid, UUID clienteUuid) {
         try {
             Pedido pedidoEntity = this.buscaPedido.encontraPedidoPorUuid(pedidoUuid, clienteUuid);
+
+            if (pedidoEntity == null) {
+                this.buscaPedidoOutput = new BuscarPedidoOutputError(
+                        new OutputStatus(404, "Not found", "Pedido não encontrado")
+                );
+                return;
+            }
 
             this.buscaPedidoOutput = new BuscaPedidoOutput(
                     pedidoEntity,
