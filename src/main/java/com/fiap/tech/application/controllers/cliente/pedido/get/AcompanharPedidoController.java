@@ -8,7 +8,7 @@ import com.fiap.tech.domain.presenters.cliente.pedido.GetPedidoPresenter;
 import com.fiap.tech.domain.useCase.pedido.BuscaPedidoPorUuidUseCase;
 import com.fiap.tech.infra.adpter.repository.pedido.BuscarPedidoRepository;
 import com.fiap.tech.infra.dependecy.StringValidatorsAdapter;
-import com.fiap.tech.infra.dependecy.jwt.JWTDecodeAdapter;
+import com.fiap.tech.infra.dependecy.resolvers.RequestClienteResolver;
 import com.fiap.tech.infra.repository.PedidoProdutoRepository;
 import com.fiap.tech.infra.repository.PedidoRepository;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,17 +30,6 @@ public class AcompanharPedidoController {
     private final PedidoRepository pedidoRepository;
     private final PedidoProdutoRepository pedidoProdutoRepository;
 
-    private static String resolveClienteAtual(String authorizationHeader, UUID clienteUuid) throws Exception {
-        if (authorizationHeader != null) {
-            return new JWTDecodeAdapter().claimClienteUuid(authorizationHeader);
-        }
-        if (clienteUuid != null) {
-            return clienteUuid.toString();
-        }
-
-        return null;
-    }
-
     @GetMapping("/{pedidoUuid}")
     @Operation(tags = {"cliente"}, parameters = {
             @Parameter(name = "Bearer", description = "Authorization header", in = ParameterIn.HEADER)
@@ -50,10 +39,9 @@ public class AcompanharPedidoController {
             @RequestParam(name = "cliente_uuid", required = false) UUID queryParamClientUuid,
             HttpServletRequest request
     ) throws Exception {
-        //HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.getRequestAttributes()).getRequest();
         String authorizationHeader = request.getHeader("Bearer");
 
-        String uuidClientResolved = resolveClienteAtual(authorizationHeader, queryParamClientUuid);
+        String uuidClientResolved = RequestClienteResolver.resolve(authorizationHeader, queryParamClientUuid);
         if (!StringValidatorsAdapter.isValidUUID(uuidClientResolved)) {
             throw new Exception("Token de identificação do cliente não encontrado");
         }

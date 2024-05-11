@@ -14,4 +14,12 @@ public class StringValidatorsAdapter {
             return false;
         }
     }
+
+    public static UUID toUUID(String uuidString) {
+        try {
+            return UUID.fromString(uuidString);
+        } catch (IllegalArgumentException e) {
+            return null;
+        }
+    }
 }
