@@ -2,6 +2,7 @@
 - Matheus Nunes Almeida Werneck Telles - RM 352550
 - Lucas Gelhen Rigon - RM 353080
 - Ricardo Luis Machado - RM 352986
+- Otávio Reis Perkles - RM 352963
 -------------------------------------------------------
 
 # Tech Challenge Fase 2 - Grupo 15
